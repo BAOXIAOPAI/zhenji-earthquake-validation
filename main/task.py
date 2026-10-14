@@ -1,4 +1,4 @@
-"""Immutable task snapshots (G0-1).
+"""Immutable task snapshots.
 
 A task is what the user actually asked for, frozen before any model or network
 action. The task_id is opaque and random: it must not encode the answer, because
@@ -29,7 +29,7 @@ TASKS = ROOT / "main/tasks"
 SCHEMA = "seismic-review-task/v1"
 DEFAULT_BAND_HZ = [1.0, 12.0]
 # 固定方法频带。与 core.METHOD_BAND 必须一致；测试会断言两者相同，因此这里是
-# 记录而不是第二处真相。用户问的频带是 target_band_hz，两者不可混为一谈（P0-3）。
+# 记录而不是第二处真相。用户问的频带是 target_band_hz，两者不可混为一谈。
 METHOD_BAND_HZ = [1.0, 8.0]
 DEFAULT_GOAL = "three_component_pick"
 DEFAULT_ALLOWED = ["discover", "acquire", "onset_check", "read_evidence"]
@@ -47,10 +47,10 @@ INJECTION_NOTE = (
 MODEL_VISIBLE_TASK_FIELDS = (
     "task_id", "user_question", "window_start", "window_end",
     "region", "target_band_hz", "method_goal", "allowed_actions",
-    # review-5 指南 §2.2：三站/三秒这类操作标准是公开合同，不是隐藏参考
+    # 指南 §2.2：三站/三秒这类操作标准是公开合同，不是隐藏参考
     # 答案——三组（含默认 open 的 A）都必须拿到同一份。
     "operational_standard",
-    # 本轮 O1 新增：请求条件里模型必须知道、也必须被 validator 按同一份核对
+    # 本轮 新增：请求条件里模型必须知道、也必须被 validator 按同一份核对
     # 的项。它们都是用户提出的要求或公开事实，不含任何答案标签。
     "question_id", "scope", "diagnostic_bands_hz", "acquisition_allowed",
     "excluded_candidate_ids", "max_unique_candidates_episode",
@@ -102,7 +102,7 @@ def make_task(*, user_question, window_start, window_end, region=None,
         "operational_standard": (str(operational_standard).strip()
                                  if operational_standard else None),
         "budget_cny": TOTAL_BUDGET_CNY if budget_cny is None else float(budget_cny),
-        # ---- O1 请求条件：与目标频带分开，三者互不替代 -------------------
+        # ---- 请求条件：与目标频带分开，三者互不替代 -------------------
         "question_id": question_id or None,
         "scope": scope,
         "diagnostic_bands_hz": _diagnostic_bands(diagnostic_bands_hz),
@@ -160,24 +160,17 @@ def model_view(task: dict) -> dict:
 
 
 def task_from_state_view(state: dict) -> dict:
-    """Rebuild the frozen task's contract from a run state, in ONE place.
+    """Rebuild the frozen task from the declared model-visible fields.
 
-    The prompt builder, the MCP tools (current evidence, exclude before/after
-    snapshots), the recomputation path and the final validator must all read the
-    same frozen contract. The review-4 A2 defect was a hand-listed field table in
-    the MCP server that silently dropped `method_goal`, so the exclude tool
-    answered against the default three-component goal while the final validator
-    answered against the frozen vertical goal. Building from the declared
-    model-visible field list means a field can never be dropped by one entry
-    point again.
-    """
+Prompt construction, MCP tools, recomputation and validation use this same
+contract, including the method goal."""
     task = {k: state.get(k) for k in MODEL_VISIBLE_TASK_FIELDS}
     task["method_band_hz"] = list(state.get("method_band_hz") or METHOD_BAND_HZ)
     if task.get("method_goal") not in ("three_component_pick", "vertical_onset"):
         task["method_goal"] = DEFAULT_GOAL
     if not task.get("target_band_hz"):
         task["target_band_hz"] = list(DEFAULT_BAND_HZ)
-    # O1 fields: defaulted here, never invented downstream. A state written before
+    # fields: defaulted here, never invented downstream. A state written before
     # the field existed carries an explicit null, so `default=` alone is not enough
     # — `bool(None)` would silently turn "unknown" into "acquisition forbidden".
     task["diagnostic_bands_hz"] = _diagnostic_bands(task.get("diagnostic_bands_hz"))
@@ -249,7 +242,7 @@ def task_from_case(case, *, user_question=None, question_id=None, target_band_hz
 
 def task_from_spec(spec, *, user_question=None, region=None,
                    demo_injection=False):
-    """Build a task from a user-written spec (G1 4.1) rather than a preset case.
+    """Build a task from a user-written spec  rather than a preset case.
 
     `spec` is the `structured` block from `main/task_input.py`. The window, region
     and target band come from the user; nothing is defaulted to a preset event.
@@ -283,7 +276,7 @@ def task_from_spec(spec, *, user_question=None, region=None,
         method_goal=spec.get("method_goal") or "three_component_pick",
         acceptance=acceptance,
         demo_case_ref=demo,
-        # O1: the question's own criterion and the user's requested diagnostic
+        # the question's own criterion and the user's requested diagnostic
         # grid ride into the frozen task; the scope is resolved against the real
         # candidate list at prepare time (candidate ids do not exist before
         # discovery).

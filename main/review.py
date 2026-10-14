@@ -2,7 +2,7 @@
 
 Every review — deterministic or model-driven — gets its own run id, its own task
 snapshot and its own record. Nothing is keyed by case name, so a new question
-never inherits an old run's result (evaluation P0-1).
+never inherits an old run's result.
 
 Modes:
   question  read the free-text question, decide what would answer it, stop there
@@ -23,7 +23,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "main"))
-sys.path.insert(0, str(ROOT / "explore/probes"))
+sys.path.insert(0, str(ROOT / "analysis"))
 
 import core  # noqa: E402
 import fdsn  # noqa: E402
@@ -73,7 +73,7 @@ def _conditions(frozen, records, parent_run_id=None):
     The interface needs this to show the user which parent and which physical
     conditions a feedback round will inherit. Without it a chained feedback turn
     looks like it continues from the latest run while it silently re-derives from
-    the first one (the third review's P1-1).
+    the first one ().
     """
     active = core.active_records(records)
     goal = frozen.get("method_goal")
@@ -372,7 +372,7 @@ def _resolve_record(state, change):
     return feedback.resolve_record(state, change)
 
 
-# O1: normalisation and application live in one thin module so `prepare_agent` can
+# normalisation and application live in one thin module so `prepare_agent` can
 # apply a user's explicit change before the child's state is written, without a
 # review<->prepare import cycle. These names stay as the public surface the
 # interface, the historical runner and the tests already use.
@@ -587,8 +587,7 @@ def _agent(case_id, question, emit, user_task=None):
     """Run one real AGH session in-process, so failure is *this* run's failure.
 
     The old implementation shelled out and then read whichever record happened to
-    be on disk for the case, so a failed new question could display an old success
-    (evaluation P0-1). Here the outcome, the cost and the evidence all come from
+    be on disk for the case, so a failed new question could display an old success. Here the outcome, the cost and the evidence all come from
     the run id this call created.
     """
     import run_agent_arm
@@ -647,7 +646,7 @@ def _agent(case_id, question, emit, user_task=None):
         "agreement": row.get("agreement"),
         # `verdict` is the label; the asked field's value lives in `field_value`.
         # The old code put `delivered.value` here, so a boolean channel flag could be
-        # shown as the conclusion (evaluation P1-1).
+        # shown as the conclusion.
         "verdict": (row.get("delivered") or {}).get("verdict"),
         "field_value": (row.get("delivered") or {}).get("field_value"),
         "task_completed": (row.get("delivered") or {}).get("task_completed"),

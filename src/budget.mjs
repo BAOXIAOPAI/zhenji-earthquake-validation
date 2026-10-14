@@ -48,8 +48,8 @@ export class Budget {
   if(provider==='agnes'&&prior.length>=2)throw Error('Agnes probe limit');
   if(prior.filter(e=>e.case_id===caseId).length>=this.config.max_requests_per_case)throw Error('Case request limit');
   const reserve=provider==='deepseek'?(this.config.input_token_reservation*this.config.input_million_peak+this.config.max_output_tokens*this.config.output_million_peak)/1e6:0;
-  // Guard against the user-authorized limit. `normal_stop` was a prototype-internal line
-  // and is kept only as history; see prototype/model-budget.json budget_history.
+  // Apply the authorized limit; retain normal_stop as the legacy fallback when
+  // guard_limit_cny is absent from an older configuration.
   const guard=this.config.guard_limit_cny??Math.min(this.config.total_limit,this.config.normal_stop);
   if(this.total()+reserve>guard)throw Error('Budget exhausted');
   this.state.entries.push({id,provider,case_id:caseId,status:'pending',reserved_cny:reserve});this.save();

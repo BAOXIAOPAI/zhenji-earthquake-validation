@@ -155,9 +155,9 @@ def test_http_guide_has_explicit_availability(monkeypatch, status, code):
     assert responses == [(code, guide)]
 
 
-def test_saved_accepted_example_form_is_currently_parseable():
-    if not server.runlog.run_dir(server.EXAMPLE_INITIAL_RUN).exists():
-        pytest.skip("此环境未附带可回放示例")
+def test_saved_accepted_example_form_is_currently_parseable(monkeypatch):
+    monkeypatch.setattr(server.runlog, "RUNLOG", ROOT / "replay/runlog")
+    assert server.runlog.run_dir(server.EXAMPLE_INITIAL_RUN).is_dir()
     guide = server.demo_guide()
     assert guide["status"] == "ok", guide["missing"]
     assert server.task_input.build(guide["form"])["ready"] is True

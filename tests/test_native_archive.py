@@ -9,7 +9,7 @@ archived an empty database. The product now snapshots through
 Choice of probe: the archive helper is an ESM module that the driver imports, so
 this test shells out to ``node tests/native_archive_probe.mjs`` rather than
 reimplementing the snapshot in Python — exactly the pattern
-``tests/test_g0_acceptance.py`` uses for ``tsx``. The WAL database itself is
+``tests/test_model_delivery.py`` uses for ``tsx``. The WAL database itself is
 created in Python and its writer connection is left open (committed but never
 closed or checkpointed), so the rows the assertion looks for exist only in the
 WAL at snapshot time.

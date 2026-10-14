@@ -1,0 +1,46 @@
+{
+  "captured_at": "2026-10-14T02:39:19.093Z",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "source": "已保存的真实智能核查记录",
+  "captures": [
+    {
+      "file": "01-workbench-conclusion-waveform.png",
+      "url": "http://127.0.0.1:8791/?view=workbench&run=r-e2e8419bf299785d",
+      "purpose": "首次核查结论与已保存观测波形",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "e2c26e94bd87cfbf0c2677a4e3ac50a61e48bbedc611fadd811a4b55e64183c8",
+      "bytes": 238722
+    },
+    {
+      "file": "02-agh-tools-evidence.png",
+      "url": "http://127.0.0.1:8791/?view=workbench&run=r-e2e8419bf299785d",
+      "purpose": "首次核查的分析过程与证据",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "5deda98a201ca164ccec9369590bee44f0381ad8736578e27d71729968be3fcb",
+      "bytes": 127857
+    },
+    {
+      "file": "03-evidence-details.png",
+      "url": "http://127.0.0.1:8791/?view=workbench&run=r-e2e8419bf299785d",
+      "purpose": "首次核查的证据详情与数据来源",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "292af3e565264884e0daf037976ab706c8f8edbd20ae3bb56cf859b2fc53793b",
+      "bytes": 170821
+    },
+    {
+      "file": "04-condition-compare.png",
+      "url": "http://127.0.0.1:8791/?view=workbench&run=r-3ae9c6948c2f8967",
+      "purpose": "更改到时检查频带后两次核查的条件对比",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "14a1afa7ee20690f7e65887217e4d76d48518a95ade36529be6e4886387f8743",
+      "bytes": 139795
+    }
+  ]
+}

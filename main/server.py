@@ -16,7 +16,7 @@ import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "main"))
-sys.path.insert(0, str(ROOT / "explore/probes"))
+sys.path.insert(0, str(ROOT / "analysis"))
 
 import core  # noqa: E402
 import review
@@ -51,7 +51,7 @@ def model_readiness(cfg=None, ledger=None):
         return {"model_available": False,
                 "model_unavailable_reason": "本机模型运行依赖不完整，请按 README 完成 Python、Node 与 AGH 安装。"}
     try:
-        cfg = cfg if cfg is not None else json.loads((ROOT / "prototype/model-budget.json").read_text())
+        cfg = cfg if cfg is not None else json.loads((ROOT / "analysis/model-budget.json").read_text())
         ledger = ledger if ledger is not None else json.loads((ROOT / "runs/model-budget-ledger.json").read_text())
         entries = ledger["entries"] if isinstance(ledger, dict) else ledger
         total = sum(e.get("cost_upper_cny") if e.get("cost_upper_cny") is not None
@@ -79,14 +79,12 @@ def health():
     except (OSError, ValueError, KeyError, TypeError, AttributeError):
         ledger, total = None, None
     try:
-        cfg = json.loads((ROOT / "prototype/model-budget.json").read_text())
+        cfg = json.loads((ROOT / "analysis/model-budget.json").read_text())
         if not isinstance(cfg, dict):
             cfg = {}
     except (OSError, ValueError):
         cfg = {}
-    # `normal_stop` was the prototype-internal line. The guard now follows the
-    # user-authorized limit, so reporting the old number as if it were the cap
-    # would misstate how much budget actually remains.
+    # Report the configured request guard separately from compatibility fields.
     guard = cfg.get("guard_limit_cny", cfg.get("total_limit"))
     strict_offline = (os.environ.get("EQ_STRICT_OFFLINE") or "").strip() not in ("", "0")
     readiness = (model_readiness(cfg, ledger) if ledger is not None and cfg else {
@@ -106,37 +104,9 @@ def health():
             "observation_offline": strict_offline,
             **readiness,
             "model_preflight_scope": "local_only",
-            "budget_note": ("守卫线为用户授权上限；normal_stop 是早期原型内部线，"
-                            "仅作历史记录保留"),
+            "budget_note": "模型请求按预算上限预留费用；费用缺失时暂停新请求。",
             "model": "DeepSeek Flash / AGH（仅 agent 模式）",
             "data_source": "EarthScope FDSN（真实公开数据）"}
-
-
-ARM_LABELS = {
-    "full_evidence": "取满全部台站",
-    "fixed_pipeline": "固定取 3 个台站",
-    "adaptive_rule": "按传播判据停止（不看问题）",
-    "adaptive_question": "按问题停止（问题类型已知）",
-}
-
-
-def baseline(case_id):
-    """Frozen rule-arm records for one case, for the comparison panel."""
-    path = ROOT / "delivery/next/RESULTS.json"
-    if not path.exists():
-        return []
-    rows = json.loads(path.read_text())["rule_arm_rows"]
-    out = []
-    for row in rows:
-        if row["case_id"] != case_id:
-            continue
-        out.append({"arm": row["arm"], "label": ARM_LABELS.get(row["arm"], row["arm"]),
-                    "verdict": row.get("verdict"),
-                    "requests_to_verdict": row.get("requests_to_verdict"),
-                    "stations_acquired": row.get("stations_acquired"),
-                    "correct": row.get("correct")})
-    order = list(ARM_LABELS)
-    return sorted(out, key=lambda r: order.index(r["arm"]) if r["arm"] in order else 99)
 
 
 def work(run_id, case_id, question, mode, user_task=None):
@@ -151,7 +121,7 @@ def work(run_id, case_id, question, mode, user_task=None):
                                    user_task=user_task)
         entry["result"] = result
         # A job that completed is not the same as a review that succeeded. A
-        # failed AGH session must surface as a failed review (evaluation P0-1),
+        # failed AGH session must surface as a failed review,
         # never as a completed one.
         review_status = result.get("status", "succeeded")
         entry["status"] = "done" if review_status == "succeeded" else "failed"
@@ -579,7 +549,7 @@ def evidence(run_id):
             "channel_integrity_flags": r.get("channel_integrity_flags"),
             "excluded": r.get("excluded"),
             # The onset-grid condition actually in force for this record
-            # (review-4 B2/B3): a follow-up round can narrow the declared grid,
+            #: a follow-up round can narrow the declared grid,
             # and the record's own executed grid must stay inspectable.
             "stability_bands_hz": r.get("stability_bands_hz"),
             "stability": (r.get("stability") or {}).get("stability")
@@ -959,9 +929,6 @@ class Handler(BaseHTTPRequestHandler):
                 if len(parts) != 4:
                     return self.send(400, {"error": "波形接口需要 run 与候选编号"})
                 return self.send(200, waveform(parts[2], parts[3]))
-            if path == "/api/baseline":
-                case_id = parse_qs(urlparse(self.path).query).get("case_id", [""])[0]
-                return self.send(200, {"case_id": case_id, "arms": baseline(case_id)})
             self.send(404, {"error": "Not found"})
         except PermissionError as exc:
             self.send(403, {"error": str(exc)})

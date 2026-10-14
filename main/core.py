@@ -17,8 +17,7 @@ from pathlib import Path
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "explore/probes"))
-sys.path.insert(0, str(ROOT / "prototype"))
+sys.path.insert(0, str(ROOT / "analysis"))
 
 import fdsn  # noqa: E402
 import quality  # noqa: E402
@@ -46,7 +45,7 @@ def stability_summary(stream, *, bands_hz=None, target_band_hz=None) -> dict:
             "statement", "next_step", "reason", "bands_evaluated", "full_grid",
             "target_band_hz", "n_configurations_error",
             "n_configurations_not_applicable", "n_configurations_no_pick",
-            # P1-4: per-algorithm bands/counts, the component-alignment check and
+            # per-algorithm bands/counts, the component-alignment check and
             # the unit of every onset. Without these the interface can only show
             # the STA/LTA band and cannot explain a refused three-component pick.
             "detectors", "alignment", "onset_reference")
@@ -94,7 +93,7 @@ INPUT_REASON_TEXT = {
 }
 
 # One channel's own health checks, named so a limitation can point at the exact
-# channel and problem instead of saying "missing" for everything (review-4 A1).
+# channel and problem instead of saying "missing" for everything.
 CHANNEL_PROBLEM_TEXT = {
     "non_finite": "含非有限值",
     "constant": "常值",
@@ -156,7 +155,7 @@ CASES = [
      "expect": "instrument_artifact", "injected": True,
      "injection": "第一个取得台站的 E 通道被替换为恒定值（人工注入，非自然观测）；置于安静时窗，"
                   "使伪迹成为主导解释而不是叠加在真实事件上"},
-    # C 批次 T1（review-5 指南 §3）：同一真实事件窗的坏 E 派生副本，注入固定
+    # 三分量通道演示：同一真实事件窗的坏 E 派生副本，注入固定
     # 到 OLGA，使 R/M/A 三组对照使用同一份派生副本（“同一真实保存波形的
     # 坏E派生副本”）。开发材料，不作独立科学发现。
     {"case_id": "C1_T1_orcas_badE", "kind": "artifact", "split": "development",
@@ -343,7 +342,7 @@ def _count(state, **deltas):
 
 
 def channel_problems(row) -> list:
-    """One channel's own health problems, each named (review-4 A1).
+    """One channel's own health problems, each named.
 
     The checks are exactly the per-channel conditions `quality.inspect` measures;
     a channel with no listed problem is healthy. "Z exists" and "Z is usable
@@ -435,7 +434,7 @@ def acquire(case, candidate, state, *, analysis_level=None) -> dict:
     hash plus the parent raw hash are recorded. That makes the source chain
     checkable instead of resting on a note that says the hash changed on purpose.
 
-    `analysis_level` selects the thin split (O2): `"full"` (default, unchanged)
+    `analysis_level` selects the thin split (): `"full"` (default, unchanged)
     computes the onset and the stability grid during acquisition; `"quality_only"`
     stops after the input-condition checks so the onset and the grid are genuinely
     computed only when a later tool asks for them. When the caller passes None the
@@ -509,7 +508,7 @@ def acquire(case, candidate, state, *, analysis_level=None) -> dict:
                   raw_waveform_sha256=sha_w, raw_metadata_sha256=sha_m,
                   waveform_sha256=sha_w, metadata_sha256=sha_m)
     analysis_wave = raw_wave
-    # C 批次 T1：inject_station 把注入固定到指定台站——R/M/A 三组对照必须
+    # 三分量通道演示：inject_station 把注入固定到指定台站——R/M/A 三组对照必须
     # 用同一份派生坏通道副本，否则“同一真实保存波形的坏E派生副本”不成立。
     # inject_first（第一个取得台站）保持不变，供 A1 演示案例沿用。
     pin = state.get("inject_station")
@@ -577,7 +576,7 @@ def _analyse(candidate, state, record, waveform_path, metadata_path,
              *, analysis_level="full") -> dict:
     """Compute every derived field for one acquisition. One place, one pass.
 
-    `analysis_level="quality_only"` is the O2 thin split: it downloads, hashes and
+    `analysis_level="quality_only"` is the thin split: it downloads, hashes and
     checks the input conditions (channels, health, band support, per-goal
     applicability) but does NOT run the onset detector or the stability grid. The
     book requires this to be a real computation split rather than merely dropping
@@ -635,7 +634,7 @@ def _analyse(candidate, state, record, waveform_path, metadata_path,
 
 
 def compute_onset(record, waveform_path) -> dict:
-    """Actually run the STA/LTA onset detector for one stored observation (O2).
+    """Actually run the STA/LTA onset detector for one stored observation ().
 
     Returns `computed=True` only when the detector ran. A missing waveform or a
     missing Z channel is reported as such, never as "no onset".
@@ -756,7 +755,7 @@ def _derive_flat_channel(state, candidate_id, parent_path, parent_sha):
 
 
 def inject_flat_channel(run_id, candidate_id):
-    """Retired: this rewrote raw evidence in place (evaluation P0-5).
+    """Retired: this rewrote raw evidence in place.
 
     It now raises instead of mutating a stored observation. Use
     `state['inject_first']`, which routes the transform to derived/.
@@ -1189,7 +1188,7 @@ def stability_layer(records):
 
 def layers(records, task, *, question_id=None, robustness=None,
            validation=None) -> dict:
-    """The eight separated layers (G0-3). Meanings are never merged.
+    """The eight separated layers. Meanings are never merged.
 
     Two of them are *historical facts about what happened* and therefore keep
     reporting excluded observations: excluding a station decides which evidence to
@@ -1318,7 +1317,7 @@ def _unanswered(question_id, field, base, detail):
 
     `base` is the frozen propagation rule's result, so its label is a propagation
     label. Replacing it with the asked question's own unknown label is what keeps a
-    band question from being answered with `not_decidable` (review P0-2).
+    band question from being answered with `not_decidable` (review ).
     """
     return {**base, "answered_question": question_id,
             "verdict": UNKNOWN_LABELS.get(question_id, base.get("verdict")),

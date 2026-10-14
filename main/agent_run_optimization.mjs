@@ -27,7 +27,7 @@ if(!RUN)throw Error('Usage: node main/agent_run_optimization.mjs <run_id> <A0|A1
 const model=process.argv[4]??process.env.AGENT_MODEL??'deepseek-flash';
 const runlogRoot=process.env.RUNLOG_DIR?resolve(process.env.RUNLOG_DIR):join(project,'main/runlog');
 const cacheRoot=process.env.EQ_CACHE_DIR?resolve(process.env.EQ_CACHE_DIR):join(project,'main/cache');
-const outRoot=process.env.EQ_OUTPUT_DIR?resolve(process.env.EQ_OUTPUT_DIR):join(project,'delivery/agent-optimization-2026-10-11');
+const outRoot=process.env.EQ_OUTPUT_DIR?resolve(process.env.EQ_OUTPUT_DIR):join(project,'runtime/output');
 const offline=process.env.EQ_STRICT_OFFLINE&&process.env.EQ_STRICT_OFFLINE!=='0';
 const serverId='seismic-review',slug='seismic-review';
 const toolPrefix=mcpLocalToolPrefix(slug);

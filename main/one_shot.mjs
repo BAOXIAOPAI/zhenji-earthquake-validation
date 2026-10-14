@@ -44,7 +44,7 @@ const evidence=(state.acquired||[]).map(pick);
 const derived=state.derived_evidence??null;
 const question=state.user_question??'';
 const followUp=state.follow_up??null;
-// 公开操作标准（review-5 §2.2）：三站/三秒这类判据必须给到所有组，
+// 公开操作标准：三站/三秒这类判据提供给所有模型入口，
 // 不是隐藏参考答案。缺省时该段整体省略。
 const standard=state.operational_standard??null;
 
@@ -102,7 +102,7 @@ if(process.env.ONE_SHOT_DRY_RUN==='1'){
 }
 
 // ---- 预算与密钥：与 A 臂同一套台账，同一套上限 ----
-const cfg=JSON.parse(await readFile(join(project,'prototype/model-budget.json'),'utf8'));
+const cfg=JSON.parse(await readFile(join(project,'analysis/model-budget.json'),'utf8'));
 const keyText=await readFile(join(project,'..',process.env.PROVIDER_KEY_FILE||'deepseek_model.txt'),'utf8');
 const keyMatch=keyText.match(/(?:Key|key)\s*[:：]\s*(\S+)/);
 if(!keyMatch)throw Error('Key field unavailable');

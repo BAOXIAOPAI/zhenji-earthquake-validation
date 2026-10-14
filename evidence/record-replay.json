@@ -1,0 +1,118 @@
+{
+  "project": "震迹",
+  "verified_at_utc": "2026-10-14T09:26:55.663424+00:00",
+  "environment": {
+    "python": "3.12.14",
+    "dependencies": "已安装的 Python 依赖"
+  },
+  "checks": {
+    "module_isolation": {
+      "ok": true,
+      "modules": {
+        "server": "main/server.py",
+        "core": "main/core.py",
+        "review": "main/review.py",
+        "task": "main/task.py",
+        "runlog": "main/runlog.py",
+        "fdsn": "analysis/fdsn.py"
+      }
+    },
+    "health": {
+      "ok": true,
+      "model_available": false,
+      "cumulative_cost_upper_cny": null,
+      "ledger_created": false
+    },
+    "demo_guide": {
+      "ok": true,
+      "status": "ok"
+    },
+    "recent_runs": {
+      "ok": true,
+      "count": 5,
+      "run_ids": [
+        "r-2365883191ac74a8",
+        "r-3ae9c6948c2f8967",
+        "r-8c01734ee9f1903a",
+        "r-8f2eb7e2a2e7333f",
+        "r-e2e8419bf299785d"
+      ]
+    },
+    "samples": {
+      "ok": true,
+      "names": [
+        "event",
+        "failure",
+        "quiet"
+      ],
+      "event_evidence": "evidence/real-event-window.json"
+    },
+    "r-e2e8419bf299785d": {
+      "ok": true,
+      "channels": 3,
+      "source": "raw",
+      "status": "succeeded",
+      "model_claim_accepted": true,
+      "parent_run_id": null,
+      "native_referenced_files": {
+        "native_sessions_db": true,
+        "native_host_audit": true
+      }
+    },
+    "r-3ae9c6948c2f8967": {
+      "ok": true,
+      "channels": 3,
+      "source": "raw",
+      "status": "succeeded",
+      "model_claim_accepted": true,
+      "parent_run_id": "r-e2e8419bf299785d",
+      "native_referenced_files": {
+        "native_sessions_db": true,
+        "native_host_audit": true
+      }
+    },
+    "build_source_files": {
+      "ok": true,
+      "missing": []
+    },
+    "installation_artifacts_excluded": {
+      "ok": true
+    },
+    "static_files": {
+      "ok": true,
+      "files": {
+        "index.html": {
+          "present": true,
+          "sha256": "80da875d4e0ca03367c26e50e02a38445963564163e54ec0c9e784c6b82e7c2b"
+        },
+        "app.js": {
+          "present": true,
+          "sha256": "e35bc814bc94b185bf495657482572271212a6d3a45811cccba7005fb3635923"
+        },
+        "style.css": {
+          "present": true,
+          "sha256": "c7616e1e9f34ab4043b04016b61c405ff611e5a252fc98de038b08adf24d85a1"
+        }
+      }
+    },
+    "screenshot_sources": {
+      "ok": true,
+      "files": {
+        "01-workbench-conclusion-waveform.png": true,
+        "02-agh-tools-evidence.png": true,
+        "03-evidence-details.png": true,
+        "04-condition-compare.png": true
+      }
+    }
+  },
+  "network_requests": 0,
+  "model_calls": 0,
+  "credential_reads": 0,
+  "scope": "保存记录的离线读取、观测回放与源码完整性；使用已有依赖。",
+  "excluded_operations": [
+    "新环境依赖安装",
+    "AGH 重建",
+    "新模型任务"
+  ],
+  "passed": true
+}

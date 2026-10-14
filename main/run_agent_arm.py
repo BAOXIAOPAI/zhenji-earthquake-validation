@@ -2,7 +2,7 @@
 
 Each invocation allocates a fresh run id, freezes a task from the case plus the
 caller's question, runs the AGH session against that run, and then records three
-SEPARATE things (evaluation P0-2):
+SEPARATE things:
 
   acquisition   what the model chose to acquire, and whether that was enough
   model_claim   the conclusion the model stated in its own words
@@ -14,7 +14,7 @@ failed and keeps whatever evidence and cost it incurred.
 
 Usage:
   run_agent_arm.py <case_id> [question...]
-  AGENT_VARIANT=stated run_agent_arm.py ...
+  AGENT_VARIANT=stated run_agent_arm.py...
 """
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "main"))
-sys.path.insert(0, str(ROOT / "explore/probes"))
+sys.path.insert(0, str(ROOT / "analysis"))
 
 import core  # noqa: E402
 import evidence_state  # noqa: E402
@@ -39,12 +39,9 @@ import runlog  # noqa: E402
 VARIANT = os.environ.get("AGENT_VARIANT", "open")
 OUT = ROOT / "main/out"
 
-# The product's own Agent strategy. The optimisation experiment selected A1 from a
-# set of candidates; for the submitted product the point is that the *same* frozen
-# driver, prompt template and output contract serve the ordinary web entry, not
-# that A1 out-scored anything. `quality_only` is the thin preparation split: the
-# observation is fetched and hashed, and the waveform diagnostics are left to the
-# agent's own tool calls instead of being pre-computed.
+# The web entry uses one frozen driver, prompt template and output contract.
+# Quality-only preparation fetches and hashes observations; the agent performs
+# waveform diagnostics through its own tool calls.
 PRODUCT_PROFILE = (os.environ.get("AGENT_PRODUCT_PROFILE") or "A1").upper()
 PRODUCT_DRIVER = "agent_run_optimization.mjs"
 PRODUCT_ANALYSIS_LEVEL = "quality_only"
@@ -70,8 +67,7 @@ def _tool_activity(run_id):
     previous records merged the two and then read the result as "the model chose
     not to gather evidence".
 
-    Recovery is judged from the EVENT ORDER, per tool and per operated object
-    (review-4 A4): cumulative counts like {start:2, ok:1, error:1} cannot
+    Recovery is judged from the EVENT ORDER, per tool and per operated object: cumulative counts like {start:2, ok:1, error:1} cannot
     distinguish error→ok (recovered) from ok→error (NOT recovered). An error is
     recovered only by a LATER ok of the same tool on the same target; a success
     on another candidate settles nothing about the failed one by itself — whether
@@ -93,7 +89,7 @@ def _tool_activity(run_id):
         phase = entry.get("phase")
         if tool and phase:
             counts = attempts.setdefault(tool, {"start": 0, "ok": 0, "error": 0})
-            # A5 three-way consistency: every tool reports all three phases
+            # Tool-event consistency: every tool reports all three phases
             # (zeros included), so the validation record's shape equals the
             # persisted state's shape instead of silently dropping `error: 0`.
             counts[phase] = counts.get(phase, 0) + 1
@@ -226,7 +222,7 @@ def _followup_config(parent_run_id) -> dict:
 def validate(run_id, case_id, task, records, driver, question_id):
     """Split acquisition, model claim and delivered result; never merge them.
 
-    O6: acceptance now checks the model's WHOLE structured delivery, not only
+    acceptance now checks the model's WHOLE structured delivery, not only
     `conclusion`:
       * the asked field must be the one the model names;
       * the model's `condition_id` must be this run's served condition;
@@ -341,7 +337,7 @@ def validate(run_id, case_id, task, records, driver, question_id):
             "tools_with_errors": tool_activity["tools_with_errors"],
             "interface_failure": tool_activity["tool_errors"] > 0,
             "tool_attempts": tool_activity["attempts"],
-            # Event-order recovery per tool+operated object (review-4 A4).
+            # Event-order recovery per tool+operated object.
             # `_interface_outcome` reads this; cumulative counts alone can no
             # longer claim "其后恢复".
             "recovery": tool_activity.get("recovery"),
@@ -351,7 +347,7 @@ def validate(run_id, case_id, task, records, driver, question_id):
                               "statement": verdict["statement"],
                               # Carried through so the interface can show the
                               # Chinese boundary line for agent runs too, not only
-                              # for the deterministic ones (review 3.3).
+                              # for the deterministic ones.
                               "statement_zh": verdict.get("statement_zh"),
                               "terminated_by": verdict.get("terminated_by"),
                               # The counting basis itself, so a safety check does not
@@ -364,7 +360,7 @@ def validate(run_id, case_id, task, records, driver, question_id):
                               "field": answered.get("field")},
         "agreement": agrees,
         "delivered": {
-            # Four separate things, never merged (evaluation P1-1):
+            # Four separate things, never merged:
             #   verdict         the answer label for the question that was asked
             #   field/field_value  the asked field and its value
             #   task_completed  whether that field was actually settled
@@ -555,33 +551,12 @@ def _scope_report(declared, state, requested):
 
 
 def _interface_outcome(validation, failure_kind):
-    """Is the run failed because the interface blocked it, or only under-evidenced?
+    """Classify operational failure separately from insufficient scientific evidence.
 
-    The third review's P0-3 probe: a tool raised `RuntimeError`, the driver exited
-    normally, and the run still ended as `succeeded` with `tool_errors=1`. A run
-    whose acquisition tool could not be used and whose tool was never successfully
-    used afterwards did not fail scientifically — it failed operationally, and the
-    user must see that.
-
-    Recovery is judged from the event ORDER per tool and per operated object
-    (review-4 A4), never from cumulative counts: {start:2, ok:1, error:1} can be
-    error→ok (recovered) or ok→error (not recovered) and the code must be able
-    to tell the two apart. When only aggregate counts are available the safe
-    reading is "recovery unproven", not "其后恢复".
-
-    The four terminal shapes (review-4 guide §2.2):
-      1. key acquisition error, no valid supplement, clean driver exit
-                                                   -> failed, interface reason visible
-      2. error later followed by a valid ok on the same tool+target, field
-         settled by evidence                       -> succeeded, history kept
-      3. ok followed by a later key error, task still unsettled
-                                                   -> failed; never "其后恢复"
-      4. an unrecovered tool error but independently sufficient evidence
-                                                   -> succeeded; completion and the
-                                                      exception reported separately
-
-    Returns (status, failure_kind, detail).
-    """
+Recovery requires a later success on the same tool and target. Aggregate
+counts cannot establish event order. Independently sufficient evidence may
+settle the task while an unrelated tool exception remains disclosed.
+Returns (status, failure_kind, detail)."""
     if failure_kind is not None:
         return "failed", failure_kind, None
     acquisition = validation.get("acquisition") or {}
@@ -689,7 +664,7 @@ def _execute(case_id, prepared, question_id, question, driver_script="agent_run.
 
     tsx = ROOT / "vendor/agnes-harness/node_modules/.bin/tsx"
     # AGENT_MODEL selects the model version so a comparison can be tied to one
-    # version (G2), and so a deliberate invalid model can exercise the failure path.
+    # version, and so a deliberate invalid model can exercise the failure path.
     model = os.environ.get("AGENT_MODEL", "deepseek-flash")
     level = (analysis_level or prepared.get("analysis_level") or "full")
     # The execution configuration is a recorded fact of THIS run, written before the
@@ -820,7 +795,7 @@ def _execute(case_id, prepared, question_id, question, driver_script="agent_run.
     return {
         "run_id": run_id,
         # The row must state its own parent, so a feedback chain is readable from the
-        # result record and not only from the run directory (review 3 §2.2).
+        # result record and not only from the run directory.
         "parent_run_id": row_parent(run_folder),
         "case_id": case_id,
         "arm": arm_label,
@@ -872,19 +847,10 @@ def _execute(case_id, prepared, question_id, question, driver_script="agent_run.
 
 def run_one(case_id, question=None, method_goal=None,
             operational_standard=None):
-    """One fresh adaptive session on a demo case.
+    """Run a fresh adaptive session with the user's question and public standard.
 
-    The validator is bound to the question the user actually asked; using the
-    case's preset question would answer something the user did not ask.
-
-    `operational_standard` is the公开判据（review-5 §2.2：三站/三秒必须
-    给默认 open 的 A，不能当隐藏参考答案）。
-
-    The ordinary product first round now runs the SAME frozen driver, prompt
-    template and output contract as the experiment arm, with the thin
-    `quality_only` preparation: an agent that never computes a diagnostic itself
-    cannot pass on work the preparation did for it.
-    """
+The frozen driver and output contract use quality-only preparation; waveform
+diagnostics must be computed through the agent's tool calls."""
     case = core.case_by_id(case_id)
     prepared = prepare_agent.prepare(case_id, question=question,
                                      arm=f"adaptive_agent_{PRODUCT_PROFILE.lower()}",
@@ -898,15 +864,11 @@ def run_one(case_id, question=None, method_goal=None,
 
 
 def derived_evidence(folder, records, requested=None) -> dict:
-    """本地派生证据：coincidence + 逐站完整诊断（M 臂的公平材料）。
+    """Derive coincidence and complete station diagnostics from current conditions.
 
-    review-5 §2.2 要求 M 获得“完整专业证据，包括逐站簇、detectors、
-    alignment 和限制”。这里与 A 通过工具能取到的本地计算结果同源、同量：
-    一次实现，两个入口（M 首轮与 M 反馈轮）共用，避免再次分叉。
-
-    O1：诊断网格来自本轮的实际条件。旧版固定调用 `stability(path)`，所以“按
-    3–12 Hz 重算”的反馈对 M 无效——模型的 derived_evidence 又回到默认整网格。
-    """
+Both initial and feedback model tasks receive clusters, detector outcomes,
+alignment and limitations from the same calculation path. The diagnostic
+grid follows requested diagnostic bands."""
     import diagnostics as _diag  # noqa: PLC0415
     requested = requested or {}
     bands = requested.get("diagnostic_bands_hz")
@@ -1039,7 +1001,7 @@ def run_followup(parent_run_id, instruction, method_goal=None, change=None,
                 profile=None, analysis_level=None, acquisition_allowed=None):
     """The user's feedback turn: same observations, a new request, a new run id.
 
-    The parent run's record is never touched. This is the G1 "one real feedback
+    The parent run's record is never touched. This is the "one real feedback
     adjustment" step: the model is told the earlier observations are already in
     hand, so it can answer without any new fetch.
 

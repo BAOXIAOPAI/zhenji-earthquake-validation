@@ -1,34 +1,10 @@
-"""The one execution-condition object shared by A, M, R, feedback and scoring (§4.1).
+"""Execution conditions shared by acquisition, model validation and feedback.
 
-The round's P0 defect was that the *requested* condition and the *executed* one
-were two different things with no shared record: a feedback asked for 3–12 Hz and
-for EQUIL to be excluded, and the run still computed the default 12-configuration
-grid over an unexcluded station while being scored as complete. Nothing in the
-system could compare "what was asked" with "what was actually run".
-
-This module defines that comparison:
-
-  requested_conditions   derived from the frozen task plus the user's structured
-                         change. Immutable for the run.
-  actual_conditions      derived from this run's own state and real tool events.
-                         Never a copy of the request — a copied request would be
-                         an assertion, not evidence.
-
-Three band-like quantities are kept apart on purpose and may never stand in for
-one another:
-
-  target_band_hz          the band the USER asked about ("1–12 Hz")
-  onset_method_band_hz    the band the STA/LTA onset method actually runs in
-  diagnostic_bands_hz     the finite grid this round's stability check evaluates
-
-A stability-grid change updates `diagnostic_bands_hz` only. It must not rewrite
-`target_band_hz`, because a diagnostic running on a narrowed band does not change
-what the user asked about.
-
-Everything here is pure: no network, no model, no run-directory writes. The
-`condition_application` event is produced by the caller so the actor
-(`deterministic_guard` vs `agent`) is explicit.
-"""
+Requested conditions are frozen from the task and structured change; actual
+conditions are reconstructed from observations and tool events. Target band,
+onset method band and diagnostic band grid retain separate meanings.
+A diagnostic-grid change does not change the user's target band.
+This module performs no network, model or run-directory operations."""
 from __future__ import annotations
 
 import hashlib

@@ -1338,50 +1338,6 @@ async function showDemoSection(section) {
   card.focus({preventScroll: true});
 }
 
-/* --------------------------------------------- 历史实验资料（次级，只读） */
-let legacyLoaded = false;
-async function loadLegacyCases() {
-  if (legacyLoaded) return;
-  legacyLoaded = true;
-  try {
-    const data = await api('/api/cases');
-    const box = $('case-list');
-    box.innerHTML = '';
-    for (const c of data.cases) {
-      const b = document.createElement('button');
-      b.className = 'ghost';
-      b.style.margin = '2px 4px 2px 0';
-      b.textContent = (c.case_id.startsWith('E') ? '事件窗口' :
-        c.case_id.startsWith('Q') ? '静默窗口' : '诊断窗口') +
-        ' ' + (data.cases.indexOf(c) + 1) + (c.split === 'locked' ? '（锁定集）' : '');
-      b.onclick = () => loadLegacyCompare(c.case_id);
-      box.appendChild(b);
-    }
-    if (data.cases.length) loadLegacyCompare(data.cases[0].case_id);
-  } catch (e) {
-    $('compare').innerHTML = '<p class="hint">历史对照不可用。</p>';
-  }
-}
-
-async function loadLegacyCompare(caseId) {
-  try {
-    const data = await api('/api/baseline?case_id=' + encodeURIComponent(caseId));
-    const box = $('compare');
-    if (!data.arms.length) {
-      box.innerHTML = '<p class="hint">该时窗没有冻结记录。</p>';
-      return;
-    }
-    const max = Math.max(...data.arms.map(a => a.requests_to_verdict || 0), 1);
-    box.innerHTML = '<p class="hint">时窗 ' + escapeHtml(caseId) + '</p>' +
-      data.arms.map(a => '<div class="cmprow">' + escapeHtml(a.label) + '：' +
-        (a.requests_to_verdict == null ? '—' : a.requests_to_verdict) + ' 次请求' +
-        '<span class="chip">' + Math.round(100 * (a.requests_to_verdict || 0) / max) +
-        '%</span></div>').join('');
-  } catch (e) {
-    $('compare').innerHTML = '<p class="hint">历史对照不可用。</p>';
-  }
-}
-
 /* --------------------------------------------------------------- 视图 */
 function setView(name, {historyMode = 'push'} = {}) {
   closeTerm();

@@ -1,9 +1,0 @@
-{
- "version":"secondary-diagnostic-v1","date":"2026-10-04","timing":"Added after frozen onset/model comparison, do not merge its outcome into the earlier primary results",
- "algorithm":"ObsPy ar_pick AR-AIC plus STA/LTA, fixed native-rate three-component inputs",
- "parameters":{"f1":1.0,"f2":12.0,"lta_p":1.0,"sta_p":0.1,"lta_s":4.0,"sta_s":1.0,"m_p":2,"m_s":8,"l_p":0.1,"l_s":0.2,"s_pick":true},
- "alignment_tolerance_fraction_of_sample":0.001,
- "alignment":"Require equal sample count and rate and start spread <= tolerance; use Z start as time origin and disclose bounded timing discrepancy; no interpolation",
- "evaluation":"P/S residuals against withheld current PNW picks, no parameter tuning on these known cases; 2-second diagnostic tolerance",
- "failure_policy":"Missing component or invalid orientation prevents AR picker execution; keep valid Z-only transient result; no missing component synthesis"
-}

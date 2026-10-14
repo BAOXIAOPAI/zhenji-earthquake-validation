@@ -4,7 +4,7 @@ test_coincidence_ignores_earlier_onsets is the regression for a real bug: the
 first version tested only `t - t0 <= window`, so every onset earlier than the
 last one counted as a negative difference and the statistic was inflated.
 
-Field names here follow the G0 split: there is no global `usable` any more, and
+Field names here follow the task field contract: there is no global `usable` any more, and
 band support is judged against the band the user asked about.
 """
 import sys
@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "main"))
-sys.path.insert(0, str(ROOT / "explore/probes"))
+sys.path.insert(0, str(ROOT / "analysis"))
 
 import core  # noqa: E402
 
@@ -69,7 +69,7 @@ def test_instrument_artifact_requires_flag_and_low_coincidence():
         coherent, task={"target_band_hz": list(TARGET)})["verdict"] == "coherent_multistation"
 
 
-# --------------------------------------------------- G0-3 band / unknown semantics
+# --------------------------------------------------- band / unknown semantics
 def test_twenty_hz_cannot_support_one_to_twelve_hz():
     """Nyquist 10 Hz < 12 Hz: 20 Hz data must NOT count as supporting 1-12 Hz."""
     support = core.band_support(20.0, (1.0, 12.0))
@@ -130,7 +130,7 @@ def test_bad_horizontal_channel_leaves_vertical_onset_applicable():
 
 
 def test_early_stop_does_not_become_a_regional_negative():
-    """P1-2: stopping at three stations is not a global lower bound.
+    """stopping at three stations is not a global lower bound.
 
     With three stations and no clustering the rule reports a negative. Adding
     three more stations that DO cluster flips it to a positive, so the negative
@@ -171,7 +171,7 @@ def test_question_mapping_addresses_the_asked_field():
     assert propagating["answered"]["field"] == "verdict"
 
 
-# ------------------------------------------- P0-2 question-specific answer fields
+# ------------------------------------------- question-specific answer fields
 TASK = {"target_band_hz": list(TARGET)}
 
 
@@ -360,7 +360,7 @@ def test_no_locked_case_is_used_for_development():
 
 
 def test_retired_inject_helper_raises_instead_of_rewriting_evidence():
-    """P0-5: the old helper overwrote raw data in place. It must not be usable."""
+    """the old helper overwrote raw data in place. It must not be usable."""
     import pytest
     with pytest.raises(RuntimeError, match="retired"):
         core.inject_flat_channel("some-run", "some-candidate")

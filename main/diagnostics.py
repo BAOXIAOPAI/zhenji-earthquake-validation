@@ -1,6 +1,6 @@
 """Limited, pre-declared stability diagnostic for one automatic onset.
 
-The guide (G1 4.2, loop two) asks for exactly this: a **bounded, pre-specified**
+The guide  asks for exactly this: a **bounded, pre-specified**
 tool that shows when a single onset estimate cannot be trusted. It is fixed here
 and never tuned per case — the grid below is the whole menu.
 
@@ -180,12 +180,7 @@ def _alignment(traces):
 
 
 def _detector_disclosure(estimates):
-    """Per-algorithm bands and outcome counts, so a narrowed grid is not misread.
-
-    The review's P1-4: "收紧到 3–12 Hz" was really four STA/LTA configs at 3–12 Hz
-    plus one AR-AIC at 1–20 Hz, while `bands_evaluated` disclosed only the former.
-    Each algorithm now lists its own bands and its own outcome counts.
-    """
+    """Report each detector's evaluated bands and outcome counts separately."""
     out = {}
     for estimate in estimates:
         row = out.setdefault(estimate["detector"], {
@@ -256,7 +251,7 @@ def stability(stream, *, bands_hz=None, target_band_hz=None):
     """
     from obspy import read
     declared = [list(b) for b in GRID["bands_hz"]]
-    # O1: `None` means "the full declared grid"; an explicitly supplied grid is
+    # `None` means "the full declared grid"; an explicitly supplied grid is
     # validated and refused if it is empty, non-finite, reversed, duplicated or
     # outside the pre-declared menu. The previous `bands_hz or GRID[...]` made an
     # empty list fall back to the full grid, so a user who asked for a narrower
@@ -332,7 +327,7 @@ def stability(stream, *, bands_hz=None, target_band_hz=None):
                       "status": aic_status, "reason": aic_reason})
 
     valid = [e["onset_s"] for e in estimates if e["onset_s"] is not None]
-    # Kept apart on purpose (evaluation P1-2): a config that failed to execute is
+    # Kept apart on purpose: a config that failed to execute is
     # not "the algorithms disagree", and a data set the method cannot be applied to
     # is not a failed run either.
     blocked = [e for e in estimates if e["status"] == "error"]

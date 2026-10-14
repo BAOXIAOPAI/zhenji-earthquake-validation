@@ -1,4 +1,4 @@
-"""Structured-feedback normalisation and condition application (O1, §4.1).
+"""Structured-feedback normalisation and condition application (, §4.1).
 
 Extracted from `review.py` so that `prepare_agent` can apply a user's explicit
 change to a child run's observation copies BEFORE `mcp_state.initial.json` and the
@@ -80,7 +80,7 @@ def normalize_change(state, change, instruction=None):
         elif station and any(w in text for w in ("恢复", "加回", "include", "restore")):
             kind, change = "include", {"kind": "include", "station": station}
         elif any(w in text for w in ("垂直", "只看垂直", "vertical", "Z 分量", "Z分量")):
-            # C 批次 T1 的反馈形态：改问垂直目标。goal 变化走结转重判，不需要
+            # 三分量通道演示 的反馈形态：改问垂直目标。goal 变化走结转重判，不需要
             # 重新派生波形，因此与旧的 vertical_only（物理删分量）是两件事。
             kind, change = "method_goal", {"kind": "method_goal",
                                            "method_goal": "vertical_onset"}
@@ -91,7 +91,7 @@ def normalize_change(state, change, instruction=None):
                                                "three_component_pick"}
         elif len(numbers) >= 2:
             # The target band and the onset diagnostic grid are two different
-            # conditions (review-4 B-presentation). Free text naming the grid
+            # conditions. Free text naming the grid
             # ("把到时网格收紧到 3–12") must not silently rewrite the target band;
             # naming both is ambiguous and asks for a choice instead.
             gridish = any(w in text for w in ("网格", "到时"))
@@ -139,7 +139,7 @@ def normalize_change(state, change, instruction=None):
                     f"网格频带本来就是 {declared}；请改用更窄的频带，"
                     "或直接接受完整网格的不稳定结论")
             change["target_band_hz"] = EC.normalize_band(band)
-        # O1: the one validator decides what a legal grid is.
+        # the one validator decides what a legal grid is.
         change["bands_hz"] = EC.normalize_diagnostic_bands(bands, allowed=declared,
                                                            field="bands_hz")
     elif kind == "method_goal":

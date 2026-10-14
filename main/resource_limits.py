@@ -1,12 +1,12 @@
 """One resolver for every execution resource limit (execution book §6.2, §15).
 
 The round's defect was that the same limit lived in three places and disagreed:
-`prototype/model-budget.json` said 12 model requests per case, `agent_run.mjs`
+`analysis/model-budget.json` said 12 model requests per case, `agent_run.mjs`
 handed the bridge 24, and `provider_bridge.mjs` hard-coded a separate tool-call
 ceiling of 24. A session could therefore die with an unexpected `Case request
 limit` halfway through, or a tool budget that no document described.
 
-`prototype/model-budget.json` is the single fact source. Python reads it here;
+`analysis/model-budget.json` is the single fact source. Python reads it here;
 Node reads the same file (`provider_bridge.mjs`, `agent_run_optimization.mjs`).
 Neither side invents a second number. The money guard (`guard_limit_cny`) is the
 user's 20 CNY authorisation and is NOT changed by this module.
@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-BUDGET_FILE = ROOT / "prototype/model-budget.json"
+BUDGET_FILE = ROOT / "analysis/model-budget.json"
 
 # The book's §6.2 common ceiling. These are the values written into
 # model-budget.json; the module raises if the file disagrees, so a silent edit to

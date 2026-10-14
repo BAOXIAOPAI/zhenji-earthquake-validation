@@ -1,6 +1,6 @@
 """Turn a user-written request into a structured, checkable task.
 
-The guide (G1 4.1) requires a real entry point: the user fills in or pastes a UTC
+The guide  requires a real entry point: the user fills in or pastes a UTC
 window, a region or station list, the suspicion and the analysis goal. The parsed
 task is shown back; **missing key content raises a clarification instead of
 silently falling back to a preset event**. Compound questions become separate
@@ -16,29 +16,28 @@ import re
 METHOD_BAND_HZ = [1.0, 8.0]
 DEFAULT_TARGET_BAND_HZ = [1.0, 12.0]
 
-# 命名区域。用户可以不写坐标而选一个已核验过的区域；这些框直接取自
-# development 案例，来源可查，不是新造的地理假设。锁定案例的区域不在此列出。
+# 命名区域与样例台站范围一致，用户也可直接提供坐标或台站。
 NAMED_REGIONS = {
     "orcas": {"label": "Orcas / 圣胡安群岛（华盛顿州）",
               "center_lat": 48.611, "center_lon": -122.805,
               "minlatitude": 48.011, "maxlatitude": 49.211,
               "minlongitude": -123.405, "maxlongitude": -122.205,
-              "source": "development 案例 E1_orcas_event / Q1_orcas_quiet 的复核区域"},
+              "source": "样例 E1_orcas_event / Q1_orcas_quiet 的复核区域"},
     "qgbp": {"label": "QGBP 周边（最近台站取不到元数据）",
              "center_lat": 48.73338, "center_lon": -122.66756,
              "minlatitude": 48.1334, "maxlatitude": 49.3334,
              "minlongitude": -123.2676, "maxlongitude": -122.0676,
-             "source": "development 案例 F1_qgbp_metadata_gap 的失败样例区域"},
+             "source": "样例 F1_qgbp_metadata_gap 的失败样例区域"},
     "wauna": {"label": "Wauna / 普吉特湾西侧（华盛顿州）",
               "center_lat": 47.4, "center_lon": -122.722,
               "minlatitude": 46.8, "maxlatitude": 48.0,
               "minlongitude": -123.322, "maxlongitude": -122.122,
-              "source": "development 案例 E2_wauna_event / Q2_wauna_quiet 的复核区域"},
+              "source": "样例 E2_wauna_event / Q2_wauna_quiet 的复核区域"},
     "sparse2003": {"label": "俄勒冈北部（台站稀疏，2003 年）",
                    "center_lat": 45.322, "center_lon": -121.651,
                    "minlatitude": 44.722, "maxlatitude": 45.922,
                    "minlongitude": -122.251, "maxlongitude": -121.051,
-                   "source": "development 案例 S1_sparse_2003 的复核区域"},
+                   "source": "样例 S1_sparse_2003 的复核区域"},
 }
 
 SUPPORTED_GOALS = {
@@ -303,7 +302,7 @@ def build(raw):
                 if len(concerns) > 1 else [])
     if subtasks:
         # The parser used to promise "已拆成子任务分别核查", but the actual review/run
-        # path still executes ONE classification (the third review's P1-5 probe:
+        # path still executes ONE classification (probe:
         # ready=True with two parsed concerns, only Q_instrument executed). Until
         # per-subtask execution exists, the honest contract is to ask the user to
         # choose one question instead of promising a check that will not happen.

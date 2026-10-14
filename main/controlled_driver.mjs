@@ -1,4 +1,4 @@
-// Controlled no-pay driver for terminal-state verification (review-4 guide §2.2).
+// Controlled driver for terminal-state verification without model calls.
 //
 // The guide's four terminal regressions must run through the production
 // `_execute` — the real subprocess, the real MCP tool layer, the real validator

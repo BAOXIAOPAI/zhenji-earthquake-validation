@@ -1,4 +1,4 @@
-"""Derived-evidence records with an explicit condition reference and freshness (O1).
+"""Derived-evidence records with an explicit condition reference and freshness ().
 
 The book §4.2 requires every derived item to carry at least:
 

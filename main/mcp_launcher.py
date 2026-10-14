@@ -1,4 +1,4 @@
-"""Thin stdio launcher that pins one run's isolated paths (O3, book §6.3).
+"""Thin stdio launcher that pins one run's isolated paths (, book §6.3).
 
 The driver used to launch `mcp_server.py` directly, so the MCP child inherited only
 whatever the driver happened to export. RUNLOG_DIR, the cache, the task/output
@@ -66,7 +66,7 @@ def main(argv=None) -> int:
     os.environ["EQ_RUN_ID"] = str(run_id)
     os.environ.setdefault("EQ_STRICT_OFFLINE", "0")
     sys.path.insert(0, str(root / "main"))
-    sys.path.insert(0, str(root / "explore/probes"))
+    sys.path.insert(0, str(root / "analysis"))
     import mcp_server  # noqa: PLC0415
 
     mcp_server.bind(run_id)

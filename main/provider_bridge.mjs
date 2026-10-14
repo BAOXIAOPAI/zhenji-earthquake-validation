@@ -21,10 +21,10 @@ const TOOLS=new Map(TOOLSPEC.map(t=>[t.name,t]));
 // session died with 'No run-scoped tool offered'.
 export const runScopedTools=toolPrefix=>TOOLSPEC.map(t=>toolPrefix+t.name);
 
-// The ONE resource config (prototype/model-budget.json). Python reads the same
+// The ONE resource config (analysis/model-budget.json). Python reads the same
 // file through main/resource_limits.py; neither side invents its own number.
 export const RESOURCES=JSON.parse(
-  readFileSync(join(HERE,'..','prototype','model-budget.json'),'utf8'));
+  readFileSync(join(HERE,'..','analysis','model-budget.json'),'utf8'));
 const LIMITS={
   maxRequests: RESOURCES.max_requests_per_case,
   softRequests: RESOURCES.soft_request_line,
@@ -128,10 +128,10 @@ export function restoreReasoning(messages,active,{required=false}={}){
 
 export async function startBridge({project,provider,model,toolPrefix,transport=fetch,
                                   thinking=null}={}){
- const cfg=JSON.parse(readFileSync(join(project,'prototype/model-budget.json'),'utf8'));
+ const cfg=JSON.parse(readFileSync(join(project,'analysis/model-budget.json'),'utf8'));
  const key=readKey(join(project,'..',provider==='deepseek'?'deepseek_model.txt':'key及通知.txt'));
  const base='https://api.deepseek.com';
- // D1 严格离线：模型 provider 外联被拒绝。离线下模型轨迹只能回放已记录
+ // 严格离线时拒绝模型 provider 外联。离线下模型轨迹只能回放已记录
  // 的运行（runlog），不得声称离线执行了真实模型。
  const offline=process.env.EQ_STRICT_OFFLINE&&process.env.EQ_STRICT_OFFLINE!=='0';
  // Test-only redirection so a mock-provider integration run never writes into the
@@ -139,8 +139,7 @@ export async function startBridge({project,provider,model,toolPrefix,transport=f
  const ledgerPath=process.env.EQ_BUDGET_LEDGER?resolve(process.env.EQ_BUDGET_LEDGER)
    :join(project,'runs/model-budget-ledger.json');
  const budget=new Budget(ledgerPath,cfg);
- // Matches the pre-existing prototype internal stop line; the original explicit
- // authorization of 20 CNY is unchanged and no protection is removed.
+ // Reserve each request against the configured cost limit.
  const stageGuard=cfg.guard_limit_cny??cfg.total_limit;
  // The profile decides whether thinking is enabled. `disabled` remains selectable
  // and is the default, but it is no longer forced: a disabled profile is a

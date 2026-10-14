@@ -5,7 +5,7 @@ No model is ever called here. The real Agent entry point
 ROUTING decision the HTTP layer makes: for a given parent run it must pick the
 engine the parent implies, an explicit override must be honoured, and asking for
 the Agent path on a deterministic parent must be a clear 400 rather than a
-silent model spend. The same `live_server` shape as test_g0_interface.py is used
+silent model spend. The same `live_server` shape as test_review_api.py is used
 so the real Handler, validation and run registry are exercised.
 """
 import json
@@ -20,7 +20,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "main"))
-sys.path.insert(0, str(ROOT / "explore/probes"))
+sys.path.insert(0, str(ROOT / "analysis"))
 
 import core  # noqa: E402
 import prepare_agent  # noqa: E402
@@ -84,6 +84,7 @@ def live_server(tmp_path, monkeypatch):
     monkeypatch.setattr(core, "acquire", fake_acquire)
     monkeypatch.setattr(servermod, "RUNS", {})
     monkeypatch.setattr(servermod, "LAST", {})
+    monkeypatch.setattr(servermod, "model_readiness", lambda: {"model_available": True, "model_unavailable_reason": None})
     monkeypatch.setattr(servermod, "ACTIVE", None)
 
     httpd = ThreadingHTTPServer(("127.0.0.1", 0), servermod.Handler)

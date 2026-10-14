@@ -2,8 +2,7 @@
 // to stop, for exactly one run id.
 //
 // The task comes from main/runlog/<run_id>/mcp_state.initial.json, which holds the
-// user's VERBATIM question. The previous version read a per-case manifest, so an
-// edited question never reached the model (evaluation P0-1). The prompt is written
+// user's verbatim question. The prompt is written
 // once and hashed, so the question in the prompt and in the tool state can be tied
 // to the same frozen task.
 //
@@ -20,8 +19,7 @@ import {answerMainPermission} from './permission.mjs';
 
 const project=resolve('.'),RUN=process.argv[2];
 if(!RUN)throw Error('Usage: node main/agent_run.mjs <run_id> [model]');
-// Run records live under RUNLOG_DIR so the layout is relocatable (G3 clean-env
-// reproduction) instead of being hard-coded to this checkout.
+// RUNLOG_DIR selects the record directory independently of the checkout.
 const runlogRoot=process.env.RUNLOG_DIR?resolve(process.env.RUNLOG_DIR):join(project,'main/runlog');
 const provider='deepseek',model=process.argv[3]??'deepseek-flash';
 const stated=process.env.AGENT_VARIANT==='stated';
@@ -31,7 +29,7 @@ const toolPrefix=mcpLocalToolPrefix(slug);
 const runDir=join(runlogRoot,RUN);
 const sha256=t=>createHash('sha256').update(t).digest('hex');
 // The frozen analysis goal, named explicitly so the model judges input
-// conditions against the SAME goal the final validator uses (review-4 A2).
+// conditions against the same goal the final validator uses.
 const GOAL_LABEL={'three_component_pick':'three-component P/S pick (needs three healthy components)',
   'vertical_onset':'vertical-component onset check (needs a healthy Z channel only)'};
 
@@ -52,7 +50,7 @@ const followUp=state.follow_up??null;
 const carried=state.carried_forward??[];
 const methodGoal=state.method_goal||'three_component_pick';
 const goalLabel=GOAL_LABEL[methodGoal]||methodGoal;
-// 公开操作标准（review-5 §2.2）：默认 open 的 A 也必须拿到同一份判据。
+// 模型接收与验证器相同的公开操作标准。
 const standard=state.operational_standard??null;
 
 const prompt=`SEISMIC_REVIEW_RUN=${RUN}

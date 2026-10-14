@@ -9,7 +9,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "main"))
-sys.path.insert(0, str(ROOT / "explore/probes"))
+sys.path.insert(0, str(ROOT / "analysis"))
 
 import core
 import fdsn
@@ -184,8 +184,8 @@ def test_replay_health_without_cost_material_stays_read_only(tmp_path, monkeypat
 
 def test_replay_health_missing_ledger_keeps_configured_limit(tmp_path, monkeypatch):
     monkeypatch.setattr(server, "ROOT", tmp_path)
-    (tmp_path / "prototype").mkdir()
-    (tmp_path / "prototype/model-budget.json").write_text(json.dumps({"total_limit": 20}))
+    (tmp_path / "analysis").mkdir()
+    (tmp_path / "analysis/model-budget.json").write_text(json.dumps({"total_limit": 20}))
     result = server.health()
     assert result["model_available"] is False
     assert result["cumulative_cost_upper_cny"] is None

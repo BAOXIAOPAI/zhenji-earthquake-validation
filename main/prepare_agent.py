@@ -13,7 +13,7 @@ Writes two files under `main/runlog/<run_id>/`:
 
 The split exists because the previous version put `kind`, `split` and
 `inject_first` into the same file the MCP server served from, which told the
-reasoner the answer (evaluation P0-4).
+reasoner the answer.
 
 Usage:
   prepare_agent.py <case_id> [run_id] [question...]
@@ -31,7 +31,7 @@ from urllib.error import HTTPError, URLError
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "main"))
-sys.path.insert(0, str(ROOT / "explore/probes"))
+sys.path.insert(0, str(ROOT / "analysis"))
 
 import core  # noqa: E402
 import runlog  # noqa: E402
@@ -50,7 +50,7 @@ def model_state(run_id, frozen, discovery, *, analysis_level="full") -> dict:
     """The anonymous state the MCP tools serve from.
 
     Every model-visible task field is copied from `task.model_view` rather than
-    hand-listed, so adding a requested condition (O1: `question_id`, `scope`, the
+    hand-listed, so adding a requested condition (`question_id`, `scope`, the
     diagnostic grid, `acquisition_allowed`) cannot be dropped by this one entry
     point while the prompt or the validator still sees it.
     """
@@ -61,7 +61,7 @@ def model_state(run_id, frozen, discovery, *, analysis_level="full") -> dict:
         "task_id": frozen["task_id"],
         "method_band_hz": list(core.METHOD_BAND),
         "method_applicability_goal": view.get("method_goal"),
-        # O1: the request itself, frozen and hashable, and the thin-split switch.
+        # the request itself, frozen and hashable, and the thin-split switch.
         "requested_conditions": (frozen.get("requested_conditions")
                                  or taskmod.requested_conditions_for(frozen)),
         "analysis_level": analysis_level,
@@ -89,7 +89,7 @@ def evaluator_state(frozen):
             "kind": (frozen.get("acceptance") or {}).get("kind"),
             "split": (frozen.get("acceptance") or {}).get("split"),
             "inject_first": bool((frozen.get("acceptance") or {}).get("injected")),
-            # C 批次 T1：固定台站的注入（同一派生副本给三组）。只在 evaluator
+            # 三分量通道演示：固定台站的注入（同一派生副本给三组）。只在 evaluator
             # 侧，与 inject_first 一样绝不经 MCP 提供给模型。
             "inject_station": (frozen.get("acceptance") or {}).get("inject_station"),
             "note": "evaluator-side only; never served through an MCP tool"}
@@ -405,7 +405,7 @@ def prepare_followup(parent_run_id, instruction, *,
             parent_state, {"kind": "method_goal", "method_goal": method_goal})
 
     # The physical spec comes from the CHILD's conditions, not from a copy of the
-    # parent's state. The review's P0-2 probe froze the child at 3–8 Hz while the
+    # parent's state. probe froze the child at 3–8 Hz while the
     # child's MCP state still served the parent's 1–12 Hz.
     probe = {"target_band_hz": (parent_requested.get("target_band_hz")
                                 if change_obj is None
@@ -447,7 +447,7 @@ def prepare_followup(parent_run_id, instruction, *,
         # 公开操作标准随反馈结转：子任务的判据与父任务一致。
         operational_standard=parent_task.get("operational_standard"),
         demo_case_ref=parent_task.get("demo_case_ref"),
-        # O1: the change's condition fields ride into the frozen child task.
+        # the change's condition fields ride into the frozen child task.
         question_id=child_requested["question_id"],
         scope=child_scope,
         diagnostic_bands_hz=child_requested["diagnostic_bands_hz"],

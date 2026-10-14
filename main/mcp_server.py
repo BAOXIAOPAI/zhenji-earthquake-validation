@@ -7,15 +7,14 @@ Serves exactly one run. Reads:
   evaluator.json    evaluator-side labels and the injection switch. Read ONLY to
                     decide whether to derive the injected variant. Never served.
 
-Disclosure rules (evaluation P0-4): tool returns carry measured facts — station
+Disclosure rules: tool returns carry measured facts — station
 codes, distances, sample rates, band support and channel conditions such as a
 constant channel. They never carry the case name, an event/quiet/artifact label,
 the word `injected_artifact`, the derivation record, or any reference answer.
 
 Every tool call is appended to `tool_calls.jsonl` so the prompts, the tool
 activity and the result can be tied to one run id. Each tool writes a `start`
-line before it does any work and either an `ok` or an `error` line afterwards
-(evaluation P0-1): a tool that raises used to leave no trace at all, which made
+line before it does any work and either an `ok` or an `error` line afterwards: a tool that raises used to leave no trace at all, which made
 "the model never asked" and "the interface failed" indistinguishable.
 
 The acquisition spec is built from the frozen task carried in the run state, NOT
@@ -33,8 +32,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "main"))
-sys.path.insert(0, str(ROOT / "explore/probes"))
-sys.path.insert(0, str(ROOT / "prototype"))
+sys.path.insert(0, str(ROOT / "analysis"))
 
 from mcp.server.mcpserver import MCPServer  # noqa: E402
 from mcp.types import ToolAnnotations  # noqa: E402
@@ -311,7 +309,7 @@ def _acquisition_state(state):
             "requests": 0, "http_attempts": 0, "logical_acquisitions": 0,
             "cache_hits": 0, "bytes": 0,
             "inject_first": bool(evaluator.get("inject_first")),
-            # C 批次 T1：注入可固定到指定台站，使 R/M/A 三组对照使用同一份
+            # 三分量通道演示：注入可固定到指定台站，使 R/M/A 三组对照使用同一份
             # 派生坏通道副本，而不是各自“第一个取得”的不同台站。
             "inject_station": evaluator.get("inject_station")}
     if any(record.get("injected") for record in state["acquired"]):
@@ -448,7 +446,7 @@ def acquire_station(candidate_id: str) -> dict:
             source_sha256=evidence_state.source_sha(record),
             participating=[record["candidate_id"]], check_status="ok",
             tool_event_ref=f"acquire_station:{record['candidate_id']}", actor="agent")
-    # Record what this acquisition actually computed, so the O2 free gate can read
+    # Record what this acquisition actually computed, so the free gate can read
     # a real count instead of trusting that dropping a tool name meant dropping the
     # computation.
     _mutable(state, "computation_counts", dict)
@@ -461,7 +459,7 @@ def acquire_station(candidate_id: str) -> dict:
     public = _public_acquisition(record)
     # Log BEFORE saving: `_log_event` also increments this round's persisted
     # tool_attempts counters, so saving first dropped every `ok` count from the
-    # state while the JSONL carried it (review-4 A5).
+    # state while the JSONL carried it.
     _log_event("acquire_station", {"candidate_id": candidate_id}, "ok", state=state,
                result={"station": record.get("station"), "status": record.get("status"),
                        "failed_request": record.get("failed_request"),
@@ -487,7 +485,7 @@ def run_onset_check(candidate_id: str) -> dict:
     requested = _requested(state)
     counts = _mutable(state, "computation_counts", dict)
     source = "cache"
-    # O2: the onset is genuinely computed here unless this condition's value is
+    # the onset is genuinely computed here unless this condition's value is
     # already present. The previous tool only read `record["onset_utc"]`, which had
     # been computed during acquisition — so "the agent chose to run the onset check"
     # did not correspond to any computation.
@@ -563,7 +561,7 @@ def get_evidence() -> dict:
               # goal, the asked band and the method band are three distinct,
               # disclosed numbers instead of one ambiguous "band".
               "method_band_hz": state.get("method_band_hz") or list(core.METHOD_BAND),
-              # O1: the requested and the actually-executed condition, side by side.
+              # the requested and the actually-executed condition, side by side.
               "requested_conditions": requested,
               "actual_conditions": actual,
               "conditions_match": actual.get("matches_requested"),
@@ -711,13 +709,7 @@ def _stored_waveform(candidate_id):
 
 
 def _task_from_state(state):
-    """The frozen task, rebuilt from run state so the core can be called directly.
-
-    Built by the single contract constructor (`task.task_from_state_view`): the
-    hand-listed field table here dropped `method_goal`, so a recompute inside
-    `exclude_observation` judged against the DEFAULT goal and contradicted the
-    final validator, which reads the frozen task (review-4 A2).
-    """
+    """Rebuild the frozen task through its shared contract constructor."""
     return taskmod.task_from_state_view(state)
 
 
@@ -780,7 +772,7 @@ def run_stability_check(candidate_id: str) -> dict:
         raise exc
     try:
         requested = _requested(state)
-        # O1: the requested diagnostic grid is passed through to the real
+        # the requested diagnostic grid is passed through to the real
         # computation. The pre-fix code called `diagnostics.stability(path)` with no
         # bands, so a user's "narrow the grid to 3–12 Hz" was scored as complete
         # while the default 12-configuration grid actually ran.
@@ -816,7 +808,7 @@ def run_stability_check(candidate_id: str) -> dict:
              "n_valid": result["n_valid"], "statement": result["statement"],
              "next_step": result["next_step"], "clusters": result["clusters"],
              "grid_size": result["grid_size"],
-             # O1 provenance: which condition this check belongs to, the exact
+             # provenance: which condition this check belongs to, the exact
              # parameters it used, and who ran it.
              "condition_ref": requested.get("condition_id"),
              "effective_parameters": effective,
@@ -949,7 +941,7 @@ def exclude_observation(candidate_id: str, reason: str = "") -> dict:
         raise
     # One write on the success path: the ok counter is logged into the state
     # BEFORE the single save, so JSONL, validation and the persisted
-    # tool_attempts can never disagree (review-4 A5).
+    # tool_attempts can never disagree.
     _log_event("exclude_observation", {"candidate_id": candidate_id}, "ok", state=state,
                result={"affected": sorted(affected)})
     _save(state)

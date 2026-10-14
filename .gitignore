@@ -31,6 +31,10 @@ __pycache__/
 
 # New execution records and runtime billing data
 /main/runlog/
+/main/cache/
+/main/tasks/
+/main/out/
+/main/runs/
 /runlog/
 /runs/
 /runtime/
@@ -38,7 +42,7 @@ __pycache__/
 **/model-budget-ledger.json
 **/runtime-ledger.json
 
-# Only the five vetted replay records from the source ZIP are publishable
+# Saved observation and model records
 /replay/runlog/*
 !/replay/runlog/r-2365883191ac74a8/
 !/replay/runlog/r-3ae9c6948c2f8967/

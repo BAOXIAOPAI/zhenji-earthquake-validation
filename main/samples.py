@@ -1,24 +1,15 @@
-"""Disclosed demo samples for the main display.
+"""Verified event, quiet-control and unavailable-data examples.
 
-The second review requires the main display to use a *verified real event window*
-plus a *clearly disclosed* bad-channel injection, while keeping a control without
-the injection. The samples live here, in the backend, so:
-
-  * the interface cannot drift from the verified event;
-  * a test can check the sample against the verification evidence file;
-  * the disclosure text is served by the same process that runs the review.
-
-Nothing here fetches data or calls a model. `verified` is true only for the sample
-whose event was independently checked against the catalog and the waveforms; see
-`delivery/revision-2/evidence/real-event-window.json` / `.md`.
-"""
+The event metadata is supported by evidence/real-event-window.json. Channel
+injection is disclosed separately and never alters the downloaded observation.
+This module only describes samples; it does not fetch data or call a model."""
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-EVIDENCE = ROOT / "delivery/revision-2/evidence/real-event-window.json"
+EVIDENCE = ROOT / "evidence/real-event-window.json"
 
 _INJECTION = (
     "演示用注入：本轮第一个取得台站的 E（东西）通道被替换为一个平直（恒定）副本，"
@@ -56,10 +47,8 @@ SAMPLES = {
             "事件震源时刻 2023-03-01T11:35:43.85Z 只用于说明该时刻在窗口中的位置；"
             "没有目录参考的其它自由窗口不套用任何事件结论。"),
         "offline_note": (
-            "同一窗口再跑一次会命中本地缓存：“真实外部请求”应显示 0；非 0 就说明"
-            "这次真的走了网络。缓存命中是真实计数，不是声明——把网络断开（或用死代理）"
-            "再跑，仍然会得到同样的结论。第一次下载这个窗口时是有请求的，"
-            "见 delivery/revision-2/evidence/ui-operation-trace.log。"),
+            "已有完整缓存时可复用保存的观测，不发起新的波形请求。"
+            "首次获取或缓存不完整时需要联网；实际请求数和缓存命中数见核查记录。"),
         "injection_note": _INJECTION,
     },
     "quiet": {

@@ -1,0 +1,283 @@
+{
+  "verified": true,
+  "verified_at_utc": "2026-10-09T14:45:30Z",
+  "region_name": "orcas",
+  "region_definition": {
+    "center_latitude": 48.611,
+    "center_longitude": -122.805,
+    "bbox": {
+      "minlatitude": 48.011,
+      "maxlatitude": 49.211,
+      "minlongitude": -123.405,
+      "maxlongitude": -122.205
+    }
+  },
+
+  "catalog": "USGS/ANSS ComCat (FDSN event service)",
+  "catalog_network": "uw",
+  "catalog_status": "reviewed",
+  "event_type": "earthquake",
+  "event_id": "uw61900332",
+  "catalog_url": "https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=uw61900332&format=geojson",
+  "catalog_page_url": "https://earthquake.usgs.gov/earthquakes/eventpage/uw61900332",
+  "origin_time_utc": "2023-03-01T11:35:43.850Z",
+  "origin_time_utc_rounded_to_second": "2023-03-01T11:35:44Z",
+  "origin_time_epoch_ms": 1677670543850,
+  "origin_time_source": "properties.time from the ComCat eventid query (millisecond field; .850 sub-second part)",
+  "latitude": 48.61266666666667,
+  "longitude": -123.03433333333334,
+  "depth_km": 12.82,
+  "magnitude": 2.67,
+  "magnitude_type": "ml",
+  "place": "6 km WNW of Orcas, Washington",
+
+  "window_start_utc": "2023-03-01T11:34:43.850Z",
+  "window_end_utc": "2023-03-01T11:36:43.850Z",
+  "window_length_s": 120,
+  "window_contains_origin": true,
+  "window_note": "Nominal request window = origin_time - 60 s .. origin_time + 60 s. EarthScope returned contiguous miniSEED starting at 2023-03-01T11:34:43.000Z and ending 2023-03-01T11:36:43.000Z (12001 samples/channel at 100 Hz); the origin at 11:35:43.850Z is inside it with ~60 s of pre-event noise.",
+
+  "quiet_window_start_utc": "2023-03-01T08:34:43.850Z",
+  "quiet_window_end_utc": "2023-03-01T08:36:43.850Z",
+  "quiet_window_note": "Same length as the event window, exactly 3 hours earlier, identical stations/channels/processing. Actual data span 2023-03-01T08:34:43.000Z .. 08:36:43.000Z.",
+
+  "stations": [
+    {
+      "network": "UW",
+      "station": "OLGA",
+      "channels": ["HHZ", "HHN", "HHE"],
+      "sampling_rate_hz": 100.0,
+      "latitude": 48.60493,
+      "longitude": -122.80341,
+      "elevation_m": 21.9,
+      "distance_km": 17.0,
+      "hypocentral_distance_km": 21.29,
+      "in_orcas_box": true,
+      "role": "task-specified primary station"
+    },
+    {
+      "network": "UW",
+      "station": "TURTL",
+      "channels": ["HHZ", "HHN", "HHE"],
+      "sampling_rate_hz": 100.0,
+      "latitude": 48.62279,
+      "longitude": -123.01346,
+      "elevation_m": 85.6,
+      "distance_km": 1.9,
+      "hypocentral_distance_km": 12.96,
+      "in_orcas_box": true,
+      "role": "additional 3-component station (closest)"
+    },
+    {
+      "network": "UW",
+      "station": "RNWY",
+      "channels": ["HHZ", "HHN", "HHE"],
+      "sampling_rate_hz": 100.0,
+      "latitude": 48.61206,
+      "longitude": -123.1263,
+      "elevation_m": 58.2,
+      "distance_km": 6.76,
+      "hypocentral_distance_km": 14.49,
+      "in_orcas_box": true,
+      "role": "additional 3-component station"
+    },
+    {
+      "network": "UW",
+      "station": "LOPEZ",
+      "channels": ["HHZ", "HHN", "HHE"],
+      "sampling_rate_hz": 100.0,
+      "latitude": 48.43658,
+      "longitude": -122.88702,
+      "elevation_m": 10.5,
+      "distance_km": 22.38,
+      "hypocentral_distance_km": 25.8,
+      "in_orcas_box": true,
+      "role": "additional 3-component station"
+    }
+  ],
+  "station_count": 4,
+  "station_requirement_met": "YES - UW.OLGA plus 3 additional stations (TURTL, RNWY, LOPEZ), all UW, all 3-component HH? at 100 Hz, all inside the orcas box.",
+  "channels_note": "All four stations provide HHZ/HHN/HHE at 100.0 Hz over the whole event window (FDSN station service, level=response). No BH? channels exist at these stations.",
+
+  "fdsn_station_url": "https://service.earthscope.org/fdsnws/station/1/query?net=UW&sta=OLGA,TURTL,RNWY,LOPEZ&level=response&format=xml&starttime=2023-03-01T10:00:00&endtime=2023-03-01T13:00:00",
+  "fdsn_station_url_response_bytes": 795134,
+  "fdsn_dataselect_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=TURTL,RNWY,OLGA,LOPEZ&loc=--&cha=HH?&starttime=2023-03-01T11:34:43&endtime=2023-03-01T11:36:43&format=miniseed",
+  "fdsn_dataselect_url_response": "166912 bytes, 12 traces (4 stations x HHZ/HHN/HHE)",
+  "fdsn_dataselect_quiet_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=TURTL,RNWY,OLGA,LOPEZ&loc=--&cha=HH?&starttime=2023-03-01T08:34:43&endtime=2023-03-01T08:36:43&format=miniseed",
+  "per_station_dataselect_urls": {
+    "event": {
+      "TURTL": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=TURTL&loc=--&cha=HH?&starttime=2023-03-01T11:34:43&endtime=2023-03-01T11:36:43&format=miniseed",
+      "RNWY": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=RNWY&loc=--&cha=HH?&starttime=2023-03-01T11:34:43&endtime=2023-03-01T11:36:43&format=miniseed",
+      "OLGA": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=OLGA&loc=--&cha=HH?&starttime=2023-03-01T11:34:43&endtime=2023-03-01T11:36:43&format=miniseed",
+      "LOPEZ": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=LOPEZ&loc=--&cha=HH?&starttime=2023-03-01T11:34:43&endtime=2023-03-01T11:36:43&format=miniseed"
+    },
+    "quiet": {
+      "TURTL": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=TURTL&loc=--&cha=HH?&starttime=2023-03-01T08:34:43&endtime=2023-03-01T08:36:43&format=miniseed",
+      "RNWY": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=RNWY&loc=--&cha=HH?&starttime=2023-03-01T08:34:43&endtime=2023-03-01T08:36:43&format=miniseed",
+      "OLGA": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=OLGA&loc=--&cha=HH?&starttime=2023-03-01T08:34:43&endtime=2023-03-01T08:36:43&format=miniseed",
+      "LOPEZ": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=LOPEZ&loc=--&cha=HH?&starttime=2023-03-01T08:34:43&endtime=2023-03-01T08:36:43&format=miniseed"
+    }
+  },
+
+  "signal_check": {
+    "method": "Primary metric: 1-20 Hz bandpass (Butterworth, 2 corners, zero-phase) applied to the vertical HHZ component, then max|amplitude| (raw int32 digital counts, instrument response NOT removed) compared between the 120 s event window and the 120 s quiet window 3 h earlier. Secondary metric: in-window pre-event-noise SNR on the same HHZ component with a CAUSAL 1-20 Hz bandpass = max|amplitude| over [origin-5 s, origin+55 s] divided by the RMS of [origin-50 s, origin-5 s] (and also by the max|amplitude| of that same noise segment). Tertiary metric: classic 1 s / 10 s STA-LTA on the bandpassed HHZ (peak value inside the event window vs peak value inside the quiet window).",
+    "units": "counts (dimensionless ratios)",
+    "primary_station": "UW.OLGA",
+    "primary_channel": "HHZ",
+    "quiet_metric": "UW.OLGA HHZ max|amplitude| = 10.128 counts in the quiet window 2023-03-01T08:34:44Z-08:36:44Z (1-20 Hz)",
+    "event_metric": "UW.OLGA HHZ max|amplitude| = 12996.755 counts in the event window 2023-03-01T11:34:44Z-11:36:44Z (1-20 Hz)",
+    "ratio": 1283.199029208214,
+    "ratio_definition": "event_metric / quiet_metric",
+    "verdict": "REAL, verified - the vertical component shows an unambiguous impulsive onset above the pre-event noise on all four stations. Event-window/quiet-window max-amplitude ratios are 1283x (OLGA), 1815x (RNWY), 1870x (LOPEZ) and 6987x (TURTL). In-window pre-event-noise SNR (max/rms) is 533x-2089x, or 1489x-7681x against the noise RMS. The 1 s/10 s STA-LTA rises from 2.6-3.7 in the quiet window to ~10.0 at onset. Onset times measured independently on the causal STA-LTA (ratio>5) match the analyst P picks carried in the USGS phase-data product to within 0.02 s.",
+    "stalta_ceiling_note": "The 1 s/10 s STA-LTA saturates near 10 for a short impulsive source: when all the energy in the 10 s LTA window falls inside the 1 s STA window, the mean-power ratio is exactly 10. A quiet window therefore tops out near 2.6-3.7 while the event reaches ~10.0, which is the maximum attainable value, not a bug.",
+    "per_station_hhz": [
+      {
+        "network": "UW",
+        "station": "TURTL",
+        "channel": "HHZ",
+        "distance_km": 1.9,
+        "event_max_amp_counts": 44215.1208,
+        "quiet_max_amp_counts": 6.3278,
+        "event_over_quiet_ratio": 6987.4,
+        "stalta_peak_event": 9.999989,
+        "stalta_peak_quiet": 2.737763,
+        "noise_rms_counts": 7.127881,
+        "noise_max_counts": 26.21323,
+        "signal_max_counts_causal": 54746.5865,
+        "snr_max_over_noise_rms": 7680.63,
+        "snr_max_over_noise_max": 2088.51,
+        "onset_causal_stalta_gt5_utc": "2023-03-01T11:35:46.040Z",
+        "onset_delay_after_origin_s": 2.19,
+        "analyst_p_pick_utc": "2023-03-01T11:35:46.030Z",
+        "onset_minus_analyst_pick_s": 0.01
+      },
+      {
+        "network": "UW",
+        "station": "RNWY",
+        "channel": "HHZ",
+        "distance_km": 6.76,
+        "event_max_amp_counts": 59490.1233,
+        "quiet_max_amp_counts": 32.7854,
+        "event_over_quiet_ratio": 1814.53,
+        "stalta_peak_event": 9.999966,
+        "stalta_peak_quiet": 2.558751,
+        "noise_rms_counts": 11.191401,
+        "noise_max_counts": 58.033968,
+        "signal_max_counts_causal": 64696.1895,
+        "snr_max_over_noise_rms": 5780.88,
+        "snr_max_over_noise_max": 1114.80,
+        "onset_causal_stalta_gt5_utc": "2023-03-01T11:35:46.390Z",
+        "onset_delay_after_origin_s": 2.54,
+        "analyst_p_pick_utc": "2023-03-01T11:35:46.390Z",
+        "onset_minus_analyst_pick_s": 0.0
+      },
+      {
+        "network": "UW",
+        "station": "OLGA",
+        "channel": "HHZ",
+        "distance_km": 17.0,
+        "event_max_amp_counts": 12996.7547,
+        "quiet_max_amp_counts": 10.1284,
+        "event_over_quiet_ratio": 1283.2,
+        "stalta_peak_event": 9.999493,
+        "stalta_peak_quiet": 3.706104,
+        "noise_rms_counts": 8.081974,
+        "noise_max_counts": 22.598901,
+        "signal_max_counts_causal": 12037.4824,
+        "snr_max_over_noise_rms": 1489.42,
+        "snr_max_over_noise_max": 532.66,
+        "onset_causal_stalta_gt5_utc": "2023-03-01T11:35:47.280Z",
+        "onset_delay_after_origin_s": 3.43,
+        "analyst_p_pick_utc": "2023-03-01T11:35:47.260Z",
+        "onset_minus_analyst_pick_s": 0.02
+      },
+      {
+        "network": "UW",
+        "station": "LOPEZ",
+        "channel": "HHZ",
+        "distance_km": 22.38,
+        "event_max_amp_counts": 12690.2502,
+        "quiet_max_amp_counts": 6.7847,
+        "event_over_quiet_ratio": 1870.42,
+        "stalta_peak_event": 9.999645,
+        "stalta_peak_quiet": 3.211743,
+        "noise_rms_counts": 7.914578,
+        "noise_max_counts": 26.531666,
+        "signal_max_counts_causal": 14803.4072,
+        "snr_max_over_noise_rms": 1870.40,
+        "snr_max_over_noise_max": 557.95,
+        "onset_causal_stalta_gt5_utc": "2023-03-01T11:35:47.910Z",
+        "onset_delay_after_origin_s": 4.06,
+        "analyst_p_pick_utc": "2023-03-01T11:35:47.890Z",
+        "onset_minus_analyst_pick_s": 0.02
+      }
+    ],
+    "per_station_all_components_event_over_quiet_ratio": {
+      "TURTL": {"HHZ": 6987.4, "HHN": 8065.2, "HHE": 8842.7},
+      "RNWY": {"HHZ": 1814.53, "HHN": 3358.1, "HHE": 5834.7},
+      "OLGA": {"HHZ": 1283.2, "HHN": 6327.2, "HHE": 5424.3},
+      "LOPEZ": {"HHZ": 1870.42, "HHN": 1067.4, "HHE": 1788.1}
+    }
+  },
+
+  "independent_cross_check_usgs_analyst_picks": {
+    "source": "USGS ComCat phase-data product (QuakeML) attached to event uw61900332",
+    "quakeml_url": "https://earthquake.usgs.gov/product/phase-data/uw61900332/uw/1724864520310/quakeml.xml",
+    "quakeml_bytes": 318704,
+    "total_picks_in_product": 109,
+    "picks_for_our_stations": [
+      {"station": "UW.TURTL", "channel": "HHZ", "phase": "P", "pick_time_utc": "2023-03-01T11:35:46.030Z", "delay_after_origin_s": 2.18, "time_residual_s": 0.04, "onset": "impulsive", "polarity": "positive"},
+      {"station": "UW.TURTL", "channel": "HHE", "phase": "S", "pick_time_utc": "2023-03-01T11:35:47.770Z", "delay_after_origin_s": 3.92, "time_residual_s": 0.11, "onset": "impulsive", "polarity": "undecidable"},
+      {"station": "UW.RNWY", "channel": "HHZ", "phase": "P", "pick_time_utc": "2023-03-01T11:35:46.390Z", "delay_after_origin_s": 2.54, "time_residual_s": 0.05, "onset": "impulsive", "polarity": "positive"},
+      {"station": "UW.RNWY", "channel": "HHE", "phase": "S", "pick_time_utc": "2023-03-01T11:35:48.440Z", "delay_after_origin_s": 4.59, "time_residual_s": 0.16, "onset": "impulsive", "polarity": "undecidable"},
+      {"station": "UW.OLGA", "channel": "HHZ", "phase": "P", "pick_time_utc": "2023-03-01T11:35:47.260Z", "delay_after_origin_s": 3.41, "time_residual_s": -0.13, "onset": "impulsive", "polarity": "negative"},
+      {"station": "UW.OLGA", "channel": "HHE", "phase": "S", "pick_time_utc": "2023-03-01T11:35:49.940Z", "delay_after_origin_s": 6.09, "time_residual_s": -0.21, "onset": "impulsive", "polarity": "undecidable"},
+      {"station": "UW.LOPEZ", "channel": "HHZ", "phase": "P", "pick_time_utc": "2023-03-01T11:35:47.890Z", "delay_after_origin_s": 4.04, "time_residual_s": -0.07, "onset": "impulsive", "polarity": "negative"},
+      {"station": "UW.LOPEZ", "channel": "HHE", "phase": "S", "pick_time_utc": "2023-03-01T11:35:51.030Z", "delay_after_origin_s": 7.18, "time_residual_s": -0.14, "onset": "emergent", "polarity": "undecidable"}
+    ],
+    "why_this_matters": "An independent USGS analyst picked P and S arrivals on the exact four stations and channels used here. Our own automatic onset detection on the downloaded miniSEED reproduces those P picks to 0.00-0.02 s, which rules out the possibility that we are looking at noise or an unrelated transient."
+  },
+
+  "data_completeness_check": {
+    "method": "obspy Stream.merge(method=0) then Stream.get_gaps(); also checked for all-zero or flat channels.",
+    "result": "PASS - 0 gaps on all 4 stations x 3 components in both the event window and the quiet window; no flat/dead channels; 12001 samples per channel at 100 Hz (120.01 s) with data spanning 11:34:43.000Z-11:36:43.000Z and 08:34:43.000Z-08:36:43.000Z.",
+    "max_zero_sample_fraction": 0.0021
+  },
+
+  "verification_commands": [
+    "cd /Users/baoxiaopai/Project/黑客松/codex/earthquake-validation && MPLCONFIGDIR=/tmp/eqval/mpl .venv/bin/python -c '\nimport urllib.request, json\nu = \"https://earthquake.usgs.gov/fdsnws/event/1/query?eventid=uw61900332&format=geojson\"\nd = json.load(urllib.request.urlopen(u, timeout=120))\nprint(d[\"id\"], d[\"properties\"][\"time\"], d[\"properties\"][\"mag\"], d[\"properties\"][\"magType\"], d[\"properties\"][\"place\"], d[\"properties\"][\"status\"], d[\"geometry\"][\"coordinates\"])\n'",
+    "cd /Users/baoxiaopai/Project/黑客松/codex/earthquake-validation && MPLCONFIGDIR=/tmp/eqval/mpl .venv/bin/python -c '\nimport urllib.request\nfrom obspy import read_inventory\nu = \"https://service.earthscope.org/fdsnws/station/1/query?net=UW&sta=OLGA,TURTL,RNWY,LOPEZ&level=response&format=xml&starttime=2023-03-01T10:00:00&endtime=2023-03-01T13:00:00\"\ninv = read_inventory(urllib.request.urlopen(u, timeout=180).read())\nfor n in inv:\n    for s in n:\n        print(n.code + \".\" + s.code, round(s.latitude,5), round(s.longitude,5), sorted((c.code, c.sample_rate) for c in s if c.code.startswith(\"HH\")))\n'",
+    "cd /Users/baoxiaopai/Project/黑客松/codex/earthquake-validation && MPLCONFIGDIR=/tmp/eqval/mpl .venv/bin/python -c '\nimport urllib.request, io\nfrom obspy import read\nu = \"https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=TURTL,RNWY,OLGA,LOPEZ&loc=--&cha=HH?&starttime=2023-03-01T11:34:43&endtime=2023-03-01T11:36:43&format=miniseed\"\nb = urllib.request.urlopen(u, timeout=180).read()\nst = read(io.BytesIO(b))\nprint(\"bytes\", len(b), \"traces\", len(st), sorted({(t.stats.network, t.stats.station, t.stats.channel) for t in st}))\n'",
+    "cd /Users/baoxiaopai/Project/黑客松/codex/earthquake-validation && MPLCONFIGDIR=/tmp/eqval/mpl .venv/bin/python -c '\nimport urllib.request, io, numpy as np\nfrom obspy import read, UTCDateTime\nDS = \"https://service.earthscope.org/fdsnws/dataselect/1/query\"\nT = UTCDateTime(\"2023-03-01T11:35:43.850Z\")\ndef m(t0, t1, sta):\n    u = DS + \"?net=UW&sta=\" + sta + \"&loc=--&cha=HHZ&starttime=\" + t0.strftime(\"%Y-%m-%dT%H:%M:%S\") + \"&endtime=\" + t1.strftime(\"%Y-%m-%dT%H:%M:%S\") + \"&format=miniseed\"\n    tr = read(io.BytesIO(urllib.request.urlopen(u, timeout=180).read()))[0]\n    tr.detrend(\"linear\"); tr.taper(0.05)\n    tr.filter(\"bandpass\", freqmin=1.0, freqmax=20.0, corners=2, zerophase=True)\n    return float(np.max(np.abs(tr.data)))\nfor s in [\"TURTL\",\"RNWY\",\"OLGA\",\"LOPEZ\"]:\n    e = m(T-60, T+60, s); q = m(T-60-10800, T+60-10800, s)\n    print(\"UW.\" + s + \" HHZ event_max=%.4f quiet_max=%.4f ratio=%.2f\" % (e, q, e/q))\n'",
+    "# quiet-window URLs are identical to the event-window URLs with starttime/endtime shifted -3 h (08:34:43 / 08:36:43)."
+  ],
+  "verification_commands_expected_output": {
+    "catalog_command": "uw61900332 1677670543850 2.67 ml 6 km WNW of Orcas, Washington reviewed [-123.03433333333334, 48.61266666666667, 12.82]",
+    "station_command": "UW.LOPEZ 48.43658 -122.88702 [('HHE', 100.0), ('HHN', 100.0), ('HHZ', 100.0)] | UW.OLGA 48.60493 -122.80341 [...] | UW.RNWY 48.61206 -123.1263 [...] | UW.TURTL 48.62279 -123.01346 [...]",
+    "dataselect_command": "bytes 166912 traces 12 (UW.TURTL/RNWY/OLGA/LOPEZ x HHZ/HHN/HHE)",
+    "metric_command": "UW.TURTL HHZ event_max=44215.1208 quiet_max=6.3278 ratio=6987.40\nUW.RNWY HHZ event_max=59490.1233 quiet_max=32.7854 ratio=1814.53\nUW.OLGA HHZ event_max=12996.7547 quiet_max=10.1284 ratio=1283.20\nUW.LOPEZ HHZ event_max=12690.2502 quiet_max=6.7847 ratio=1870.42",
+    "gaps_command": "obspy Stream.get_gaps() -> 0 gaps, no flat channels, 12001 samples on all 12 channel-windows"
+  },
+
+  "requirement_status": {
+    "requirement_1_catalog": "PASS - event uw61900332, reviewed ANSS/ComCat earthquake, origin 2023-03-01T11:35:43.850Z, 48.61267 N / -123.03433 W, depth 12.82 km, M2.67 ml; fields read directly from the FDSN event geojson.",
+    "requirement_2_waveforms": "PASS - 2-minute window 2023-03-01T11:34:43.850Z .. 11:36:43.850Z downloads as miniSEED from EarthScope FDSN dataselect for 4 stations (UW.OLGA plus TURTL, RNWY, LOPEZ), each 3-component HH? at 100 Hz, all inside the orcas box, all with zero gaps.",
+    "requirement_3_real_signal": "PASS - HHZ event/quiet max-amplitude ratio 1283x-6987x across the four stations; in-window pre-event-noise SNR 533x-2089x (max/max) and 1489x-7681x (max/rms); automatic onsets reproduce USGS analyst P picks to 0.00-0.02 s."
+  },
+
+  "caveats": [
+    "UW.OLGA's authoritative coordinates from the EarthScope FDSN station service are 48.60493 N, -122.80341 W (epoch 2021-10-23 to present). The task brief states UW.OLGA is at 48.6 N, -122.98 W; -122.98 is ~13 km too far west and does not match any current UW station metadata. All distances here use the authoritative coordinates. The orcas box centre longitude (-122.805) is consistent with the real OLGA longitude, so the box itself is fine.",
+    "UW.MCW, named in the task brief as a nearby station, currently reports only a single vertical channel (EHZ at 100 Hz) over this epoch, so it cannot supply 3-component data. The three additional 3-component stations used instead (TURTL, RNWY, LOPEZ) are all inside the orcas box.",
+    "The event is small (M2.67 local, ML) and located 12.8 km deep. Amplitudes are reported as raw int32 digital counts; the instrument response was fetched (level=response) but NOT removed, so the numbers are not ground-motion units. The event/quiet ratio is unaffected by this.",
+    "The 1 s/10 s STA-LTA peak for the event is ~10.0 on every channel because that is the mathematical ceiling for a short impulsive source (all LTA-window energy inside the STA window). The discriminating statistic is the quiet-window STA-LTA of 2.6-3.7; a plain STA-LTA ratio of ~2.7x understates how obvious the onset is. The max-amplitude and in-window SNR figures are the meaningful ones.",
+    "service.earthscope.org returned intermittent SSL 'UNEXPECTED_EOF_WHILE_READING' errors during this session (roughly 1 in 10 requests); every request succeeded on retry. Anyone reproducing this should add retry logic.",
+    "Sub-second origin precision: ComCat stores 1677670543850 ms = 11:35:43.850Z. Rounded to the nearest second the origin is 2023-03-01T11:35:44Z; truncated it is 11:35:43Z. Both are given above.",
+    "The event window used is nominal (origin +/- 60 s). The miniSEED that EarthScope actually returns starts at ...:43.000Z (0.85 s before the nominal start) and is 120.01 s long, so it fully contains the nominal window.",
+    "No instrument-response deconvolution, no rotation to ZNE beyond the native HH? components, and no magnitude re-estimation was performed; this file verifies data existence, provenance and signal-to-noise only."
+  ],
+  "unverified": [
+    "Ground motion in physical units (nm/s) was not computed - response removal was out of scope and is not needed for the signal/quiet comparison.",
+    "No moment-tensor / focal-mechanism product exists for this event in ComCat, so source parameters other than the reported ML were not checked.",
+    "The event was not tested against the project's own pipeline/cache (main/cache) - only against live public FDSN services, as required."
+  ]
+}

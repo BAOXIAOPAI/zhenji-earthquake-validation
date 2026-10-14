@@ -1,4 +1,4 @@
-"""Per-run records bound to one unique run id (G0-1, G0-2, G0-8).
+"""Per-run records bound to one unique run id.
 
 Every run gets its own directory under `main/runlog/<run_id>/`. Historical runs
 under `main/runs/` are never touched. Files that describe what happened are
@@ -17,13 +17,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-# Relocatable run store. `RUNLOG_DIR` lets an independent environment (G3 clean-env
+# Relocatable run store. `RUNLOG_DIR` lets an independent environment (clean-env
 # reproduction) or a test put its run records somewhere else. core.py reads the
 # same variable, so the raw/derived files and the run records can never diverge.
 RUNLOG = Path(os.environ.get("RUNLOG_DIR") or (ROOT / "main/runlog"))
 LEDGER = ROOT / "runs/model-budget-ledger.json"
 
-# Failure kinds for G0-2. `succeeded` is the only non-failure status.
+# Failure kinds for. `succeeded` is the only non-failure status.
 SUCCEEDED = "succeeded"
 FAILURE_KINDS = (
     "discovery_failure",  # station discovery failed before the model was started

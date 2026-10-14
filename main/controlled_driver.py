@@ -1,34 +1,6 @@
-"""Scripted, no-pay scenarios driven through the production MCP tool layer.
+"""Controlled driver for tool failures, recovery and saved outcome verification.
 
-Used by `main/controlled_driver.mjs` so `run_agent_arm._execute` can be
-exercised end to end (real subprocess, real tools, real validator, real
-outcome record) without a paid model call — the review-4 guide §2.2 requires
-the recovery/terminal-state regressions to go through the production
-execution path, not helper-level checks.
-
-Scenarios (each writes `model_response.json` into the run folder, exactly the
-record `_execute` reads for a local-record driver):
-
-  acquire_error_unrecovered
-      every acquisition raises inside the tool; nothing valid is acquired and
-      the driver exits normally -> terminal case 1 (failed / tool_failure).
-  error_then_ok_same_target
-      the first acquisition of the target candidate is forced to raise once,
-      the retry succeeds from the seeded cache -> terminal case 2 (succeeded,
-      error history kept, recovery proven by event order).
-  ok_then_error_incomplete
-      an acquisition completes as a data fact (dead proxy: no metadata), then
-      a later forced key error is never recovered and the field stays
-      unsettled -> terminal case 3 (failed; never "其后恢复").
-  independent_evidence_ok
-      acquiring candidate A is forced to fail and is never retried, candidate
-      B succeeds from the cache and settles the asked field -> terminal case 4
-      (succeeded; completion and the unrecovered exception reported
-      separately).
-
-Everything is offline: successes are served from the cache the calling test
-seeds; failures are forced in-process. No network, no model, no AGH session.
-"""
+Invokes the production MCP layer without a paid model call."""
 from __future__ import annotations
 
 import json
@@ -37,11 +9,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "main"))
-sys.path.insert(0, str(ROOT / "explore/probes"))
-sys.path.insert(0, str(ROOT / "prototype"))
+sys.path.insert(0, str(ROOT / "analysis"))
 
-# `main/core.py` puts `prototype/` ahead of `main/` on sys.path, and prototype
-# ships its own `mcp_server.py`; select the current production MCP explicitly.
+# Select the main tool server explicitly rather than relying on module order.
 sys.path.insert(0, str(ROOT / "main"))
 import mcp_server  # noqa: E402
 
