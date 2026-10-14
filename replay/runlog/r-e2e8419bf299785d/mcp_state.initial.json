@@ -1,0 +1,131 @@
+{
+  "task_id": "t-da53ba3dd12b119e",
+  "user_question": "这段观测能不能用来做 1–12 Hz 的 P/S 拾取？",
+  "window_start": "2023-12-24T10:00:00",
+  "window_end": "2023-12-24T10:02:00",
+  "region": {
+    "kind": "stations",
+    "stations": [
+      "CHIMA"
+    ],
+    "networks": []
+  },
+  "target_band_hz": [
+    1.0,
+    12.0
+  ],
+  "method_goal": "three_component_pick",
+  "allowed_actions": [
+    "discover",
+    "acquire",
+    "onset_check",
+    "read_evidence"
+  ],
+  "operational_standard": null,
+  "question_id": "Q_usable",
+  "scope": null,
+  "diagnostic_bands_hz": [
+    [
+      1.0,
+      8.0
+    ],
+    [
+      3.0,
+      12.0
+    ],
+    [
+      5.0,
+      20.0
+    ]
+  ],
+  "acquisition_allowed": true,
+  "excluded_candidate_ids": [],
+  "max_unique_candidates_episode": 6,
+  "run_id": "r-e2e8419bf299785d",
+  "method_band_hz": [
+    1.0,
+    8.0
+  ],
+  "method_applicability_goal": "three_component_pick",
+  "requested_conditions": {
+    "schema": "seismic-execution-conditions/v1",
+    "question_id": "Q_usable",
+    "required_field": "method_applicability",
+    "scope": {
+      "scope_kind": "explicit_candidates",
+      "stations": [
+        "CHIMA"
+      ],
+      "candidate_ids": [
+        "409dfad13970"
+      ]
+    },
+    "method_goal": "three_component_pick",
+    "target_band_hz": [
+      1.0,
+      12.0
+    ],
+    "onset_method_band_hz": [
+      1.0,
+      8.0
+    ],
+    "diagnostic_bands_hz": [
+      [
+        1.0,
+        8.0
+      ],
+      [
+        3.0,
+        12.0
+      ],
+      [
+        5.0,
+        20.0
+      ]
+    ],
+    "acquisition_allowed": true,
+    "excluded_candidate_ids": [],
+    "max_unique_candidates_episode": 6,
+    "requested_changes": [],
+    "condition_id": "25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511"
+  },
+  "analysis_level": "quality_only",
+  "exclusions": [],
+  "attempted_candidate_ids_episode": [],
+  "condition_applications": [],
+  "stability_checks": {},
+  "derived_evidence_checks": {},
+  "discovery": {
+    "n_eligible": 1,
+    "eligible": [
+      {
+        "candidate_id": "409dfad13970",
+        "network": "UW",
+        "station": "CHIMA",
+        "distance_km": null,
+        "family": "EN",
+        "analysis_eligible": true,
+        "three_component": true,
+        "vertical_only": false,
+        "band_support": {
+          "supported": true,
+          "sampling_rate_hz": 100.0,
+          "nyquist_hz": 50.0,
+          "target_band_hz": [
+            1.0,
+            12.0
+          ],
+          "required_rate_hz": 24.0,
+          "reason": "ok"
+        },
+        "reason": "满足目标条件"
+      }
+    ]
+  },
+  "acquired": [],
+  "requests": 0,
+  "http_attempts": 0,
+  "logical_acquisitions": 0,
+  "cache_hits": 0,
+  "bytes": 0
+}

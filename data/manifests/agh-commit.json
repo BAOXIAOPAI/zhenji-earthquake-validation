@@ -1,0 +1,305 @@
+{
+  "sha": "349309a719b7a16462b9f3ebcf923683f8de5365",
+  "node_id": "C_kwDOUl_ywtoAKDM0OTMwOWE3MTliN2ExNjQ2MmI5ZjNlYmNmOTIzNjgzZjhkZTUzNjU",
+  "commit": {
+    "author": {
+      "name": "whj-agnes",
+      "email": "47054061+lookfree@users.noreply.github.com",
+      "date": "2026-10-02T09:39:13Z"
+    },
+    "committer": {
+      "name": "GitHub",
+      "email": "noreply@github.com",
+      "date": "2026-10-02T09:39:13Z"
+    },
+    "message": "feat(tools): let the model ask for more foreground shell time up to a deployment limit (#97)\n\n* feat(tools): let the model ask for more foreground time up to a deployment limit\n\nThere is no background mode for shell in this build, so a command that really\nneeds longer than the 120 s default had no way to get it: timeoutMs could only\nshorten the call. shell now runs for the preset default unless the caller asks,\ngrants a request up to the call's limit and caps anything above, and says so in\nthe timeout text (\"requested Rms, capped\").\n\nThe limit is the existing per-tool preset key tools.timeouts.shell, which the\nbase preset sets to 600000, so no preset key or protocol schema is added.\nToolContext gains the optional read-only defaultTimeoutMs, filled from\ntools.timeout_ms; a host that states none leaves shell on the 120 s it always\nhad. The frozen minimal-rl preset does not extend base and keeps 120 s.\n\nThis raises the longest foreground shell command from 120 s to 600 s on the base\npreset. The shell description names no number, so its hash fixture is\nregenerated for the new wording only. The configuration reference now documents\ntools.timeout_ms and tools.timeouts, which had no description.\n\n* test(daemon): re-pin the model-visible tool schema hash for the reworded shell timeout description\n\nThe shell description changed again to describe the longer foreground limit, so\nthe hash pinned by the worker Skill e2e test is updated to the computed value.",
+    "tree": {
+      "sha": "58d2c0cf8d1a9b8e4caf1b2946ea1295db2e205f",
+      "url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/git/trees/58d2c0cf8d1a9b8e4caf1b2946ea1295db2e205f"
+    },
+    "url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/git/commits/349309a719b7a16462b9f3ebcf923683f8de5365",
+    "comment_count": 0,
+    "verification": {
+      "verified": true,
+      "reason": "valid",
+      "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqv3vBCRC1aQ7uu5UhlAAAoxEQAKApEfYnuQILIh4HROHNMYqP\nHr550z6eif2e77XYlAtRABXVw6X0DrlmgxXiXeakPtt2Jo9MMUEACP16N+uCjvWt\nXizGUaE3RnxgAPqUDErxCV36op2nPXl+GYAl8ClQsqis3h7xa/Okp1JpiLb0iIH3\nOXH2HbKraH4/BBofOnRpZhbTu+qgQIgVvmzCKIGypqtNxo9R2cRHYGV9cN5SYUPK\nqZi8G5NIKvDgdFtM9sqDUU6jJp9Jn1wHnzLZnXTYVjqjI/1ABuHKPZ0vuzxpGtEk\nNZ6dpT4n2C2aOrpNAC7bJpDejjqfEzAeAot6LwqKyQGv5HWrp/EE5zA44lckzNwX\nUrXqZVh5m8gK7992+Jp1omMo2EpnQIBeySdHjfCRRI8RVrPAHp6AWHNV8et5KN/6\ns5zJnnkjv26ngCkZIFtXoDOFNYHe6QXwJuktf13hQXPLOuNZ9hcPvSS04M/rWtVJ\nI+OiIivjvBETwSJ5z7Sw+HAoeCFsx5iWhMrNKn8COK91GO6oSaxki8dBs1yhSv3L\n0lU7Z6uR3iOn7/iDFM9E7HYa/3clg+/tmqfz2OE9ly/CdcX1sXSdipWe/fl92FvL\n8VC1w0KJXXnkuVHlW1+w2HDz9pbQy4tmYBCK29Cj/8kwmY4Z5Uay6KOiuUPsIeii\n4QfHCCzyEdsBcyTYxHZE\n=ytfU\n-----END PGP SIGNATURE-----\n",
+      "payload": "tree 58d2c0cf8d1a9b8e4caf1b2946ea1295db2e205f\nparent 9a53ba6125517ec4e1af909391b6f6c23525f6ac\nauthor whj-agnes <47054061+lookfree@users.noreply.github.com> 1790933953 +0800\ncommitter GitHub <noreply@github.com> 1790933953 +0800\n\nfeat(tools): let the model ask for more foreground shell time up to a deployment limit (#97)\n\n* feat(tools): let the model ask for more foreground time up to a deployment limit\n\nThere is no background mode for shell in this build, so a command that really\nneeds longer than the 120 s default had no way to get it: timeoutMs could only\nshorten the call. shell now runs for the preset default unless the caller asks,\ngrants a request up to the call's limit and caps anything above, and says so in\nthe timeout text (\"requested Rms, capped\").\n\nThe limit is the existing per-tool preset key tools.timeouts.shell, which the\nbase preset sets to 600000, so no preset key or protocol schema is added.\nToolContext gains the optional read-only defaultTimeoutMs, filled from\ntools.timeout_ms; a host that states none leaves shell on the 120 s it always\nhad. The frozen minimal-rl preset does not extend base and keeps 120 s.\n\nThis raises the longest foreground shell command from 120 s to 600 s on the base\npreset. The shell description names no number, so its hash fixture is\nregenerated for the new wording only. The configuration reference now documents\ntools.timeout_ms and tools.timeouts, which had no description.\n\n* test(daemon): re-pin the model-visible tool schema hash for the reworded shell timeout description\n\nThe shell description changed again to describe the longer foreground limit, so\nthe hash pinned by the worker Skill e2e test is updated to the computed value.",
+      "verified_at": "2026-10-02T09:39:13Z"
+    }
+  },
+  "url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/commits/349309a719b7a16462b9f3ebcf923683f8de5365",
+  "html_url": "https://github.com/AgnesAI-Labs/agnes-harness/commit/349309a719b7a16462b9f3ebcf923683f8de5365",
+  "comments_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/commits/349309a719b7a16462b9f3ebcf923683f8de5365/comments",
+  "author": {
+    "login": "lookfree",
+    "id": 47054061,
+    "node_id": "MDQ6VXNlcjQ3MDU0MDYx",
+    "avatar_url": "https://avatars.githubusercontent.com/u/47054061?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/lookfree",
+    "html_url": "https://github.com/lookfree",
+    "followers_url": "https://api.github.com/users/lookfree/followers",
+    "following_url": "https://api.github.com/users/lookfree/following{/other_user}",
+    "gists_url": "https://api.github.com/users/lookfree/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/lookfree/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/lookfree/subscriptions",
+    "organizations_url": "https://api.github.com/users/lookfree/orgs",
+    "repos_url": "https://api.github.com/users/lookfree/repos",
+    "events_url": "https://api.github.com/users/lookfree/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/lookfree/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "web-flow",
+    "id": 19864447,
+    "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+    "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/web-flow",
+    "html_url": "https://github.com/web-flow",
+    "followers_url": "https://api.github.com/users/web-flow/followers",
+    "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+    "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+    "organizations_url": "https://api.github.com/users/web-flow/orgs",
+    "repos_url": "https://api.github.com/users/web-flow/repos",
+    "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/web-flow/received_events",
+    "type": "User",
+    "user_view_type": "public",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "9a53ba6125517ec4e1af909391b6f6c23525f6ac",
+      "url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/commits/9a53ba6125517ec4e1af909391b6f6c23525f6ac",
+      "html_url": "https://github.com/AgnesAI-Labs/agnes-harness/commit/9a53ba6125517ec4e1af909391b6f6c23525f6ac"
+    }
+  ],
+  "stats": {
+    "total": 165,
+    "additions": 142,
+    "deletions": 23
+  },
+  "files": [
+    {
+      "sha": "e280fd3498db8c1ee6224a81cfd5f537d11797b9",
+      "filename": "docs/reference/configuration.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0,
+      "changes": 2,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/docs%2Freference%2Fconfiguration.md",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/docs%2Freference%2Fconfiguration.md",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/docs%2Freference%2Fconfiguration.md?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -70,6 +70,8 @@ An exported [preset definition](../../packages/protocol/schema/preset.json) may\n \n A preset's `tools.output_max_bytes` (integer, 4096 to 1048576, default 32768) sets how much of one tool result the model sees before the output guard cuts it. The guard keeps the first half and the last eighth of that budget; the full text is stored, and the cut result names it by an `artifact://…` path that `read` and `grep` accept, so the rest can be read back. `read` pages by the same limit. A larger value gives the model more per result and puts more into the context and the session ledger until compaction, so raise it deliberately; a smaller one, down to the 4096 floor, keeps results short. Sessions that are already open keep the value they resolved at the start.\n \n+A preset's `tools.timeout_ms` (integer, at least 1000, default 120000) is how long one tool call may run before the kernel cuts it off, and `tools.timeouts` (a map from tool name to milliseconds, each at least 1000) overrides it for the named tools. The shipped `base` preset sets `timeouts.shell: 600000`. The `shell` tool runs for `tools.timeout_ms` unless the model passes `timeoutMs`; it may ask for more, up to the `shell` limit, and anything above is capped there, so 600000 is the longest foreground command and `tools.timeout_ms` stays the default. The tool is told a limit a short grace (the smaller of 2000 ms and a tenth of the limit) before the kernel's own cut-off, so a command that overruns is killed by the executor and the model gets its captured output and a `[timed out after Nms: ...]` line rather than an unknown outcome. Background shell jobs are not available in this build, so a longer limit is the only way to give one command more time. A longer limit holds the turn, and its writer lease, for that long: raise it deliberately. Sessions that are already open keep the values they resolved at the start.\n+\n For the official Agnes China gateway, the adapter explicitly sends the built-in models' catalog allowance of 65536 as `max_tokens` when no request override is present. Official specifications list 65536 for [3.0 Flash](https://agnes-ai.com/zh-Hans/docs/agnes-30-flash), [2.5 Pro](https://agnes-ai.com/zh-Hans/docs/agnes-25-pro), and [Pro Alpha](https://agnes-ai.com/zh-Hans/docs/agnes-25-pro-alpha). [Pro Beta](https://agnes-ai.com/en/docs/agnes-25-pro-beta) uses the Pro family allowance of 65536; its gateway capacity has not been independently verified. The [2.5 Flash](https://agnes-ai.com/zh-Hans/docs/agnes-25-flash) and [2.0 Flash](https://agnes-ai.com/zh-Hans/docs/agnes-20-flash) docs publish a rounded 65.5K, interpreted here as 65536. Deprecated models remain registered for configuration compatibility; gateway availability still applies. Explicit request allowances take precedence. Catalog metadata alone does not set the raw OpenAI-compatible stream's request allowance. Large generated files should still be built across multiple small write/edit calls; the default is an allowance, not a guarantee that an arbitrarily large call completes.\n \n ## Task step limits"
+    },
+    {
+      "sha": "0970d4c2ef9dc4dba1731e9d4e644995a829b57c",
+      "filename": "docs/reference/configuration.zh-CN.md",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0,
+      "changes": 2,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/docs%2Freference%2Fconfiguration.zh-CN.md",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/docs%2Freference%2Fconfiguration.zh-CN.md",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/docs%2Freference%2Fconfiguration.zh-CN.md?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -62,6 +62,8 @@ API 客户端可通过 `_agnes/v1/session.setModel` 传入可选的 `thinking`\n \n 预设的 `tools.output_max_bytes`（整数，4096 到 1048576，默认 32768）决定模型最多能看到一条工具结果的多少，超过就由输出守卫截断：保留预算的前一半和最后八分之一，完整内容另存，被截断的结果会给出 `read` 与 `grep` 都认的 `artifact://…` 路径，用来读回其余部分；`read` 的分页也按同一上限。值越大，模型每条结果看到的越多，上下文和会话账本里留到压缩前的内容也越多，调大要慎重；调小最低到 4096。已经打开的会话沿用开始时解析的值。\n \n+预设的 `tools.timeout_ms`（整数，至少 1000，默认 120000）是一次工具调用在被内核强制截止之前最多能跑多久，`tools.timeouts`（工具名到毫秒数的映射，每项至少 1000）为指名的工具覆盖这个值。随包的 `base` 预设设有 `timeouts.shell: 600000`。`shell` 工具在模型不传 `timeoutMs` 时按 `tools.timeout_ms` 运行；模型可以申请更长，直到 `shell` 的上限，超出的部分按上限截断，所以前台命令最长 600000，而 `tools.timeout_ms` 仍是默认值。内核会在自己的强制截止之前一小段宽限（2000 毫秒与上限十分之一中的较小者）就把上限告知工具，因此超时的命令由执行器杀死，模型拿到的是已捕获的输出和一行 `[timed out after Nms: ...]`，而不是\"结果未知\"。当前构建没有可用的 shell 后台作业，所以调大上限是让一条命令获得更多时间的唯一办法。更长的上限会让这一轮及其写者租约占用同样长的时间，调大要慎重。已经打开的会话沿用开始时解析的值。\n+\n 使用 Agnes 中国官方网关时，若请求未覆盖额度，adapter 会明确将内置模型的目录额度 65536 作为 `max_tokens` 发送。[3.0 Flash](https://agnes-ai.com/zh-Hans/docs/agnes-30-flash)、[2.5 Pro](https://agnes-ai.com/zh-Hans/docs/agnes-25-pro)和 [Pro Alpha](https://agnes-ai.com/zh-Hans/docs/agnes-25-pro-alpha) 的官方规格为 65536；[Pro Beta](https://agnes-ai.com/en/docs/agnes-25-pro-beta) 按 Pro 同系额度配置为 65536，尚未单独验证网关容量；[2.5 Flash](https://agnes-ai.com/zh-Hans/docs/agnes-25-flash) 和 [2.0 Flash](https://agnes-ai.com/zh-Hans/docs/agnes-20-flash) 的官方说明使用约数 65.5K，此处按 65536 配置。已废弃模型保留注册以兼容现有配置，其可用性取决于网关。请求中明确设置的额度仍优先。仅修改目录元数据不会设置底层 OpenAI 兼容流请求的额度。大文件仍应通过多次小型 write/edit 调用分段构建；默认额度不能保证任意大的单次调用都能完成。\n \n ## 任务步数限制"
+    },
+    {
+      "sha": "556f017124a32b2ad8332cdbaff74ef8db3c80a4",
+      "filename": "packages/base/extensions/tools-core/src/tools/shell.ts",
+      "status": "modified",
+      "additions": 16,
+      "deletions": 13,
+      "changes": 29,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Fextensions%2Ftools-core%2Fsrc%2Ftools%2Fshell.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Fextensions%2Ftools-core%2Fsrc%2Ftools%2Fshell.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fbase%2Fextensions%2Ftools-core%2Fsrc%2Ftools%2Fshell.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -9,10 +9,13 @@ import { ShellParams } from './schemas.js'\n // exactly as the model wrote it, so what the policy layer inspects is what runs.\n export const SHELL_SENTINEL = '$SHELL'\n \n+// Used only when the host states no default, so an older host keeps the default it always had.\n+const DEFAULT_FOREGROUND_MS = 120_000\n+\n export const shellTool = defineTool({\n   name: 'shell',\n   description:\n-    'Run a command line in the session shell (the runtime context tells you which shell dialect is active). Output is captured; long output is stored as an artifact. timeoutMs may shorten the call but not extend it beyond the session limit. The background option is unavailable: run long commands in the foreground, in shorter steps.',\n+    'Run a command line in the session shell (the runtime context tells you which shell dialect is active). Output is captured; long output is stored as an artifact. timeoutMs sets how long the call may run: without it a default applies, a longer value is granted up to a maximum the deployment sets, and a larger request is capped there. The background option is unavailable: run long commands in the foreground, in shorter steps.',\n   parameters: ShellParams,\n   meta: {\n     isReadOnly: false,\n@@ -51,18 +54,18 @@ export const shellTool = defineTool({\n         }\n       }\n     }\n-    // A caller-supplied timeout can only shorten the call. Letting it raise the ceiling would hand\n-    // the model a way to hold a session open for as long as it likes; a genuinely long command goes\n-    // through background instead.\n-    // Only a positive whole number is a shortening request: `Math.min(NaN, ceiling)` is `NaN`, and\n-    // zero or a negative would ask for no time at all. The parameter schema rejects all three, but\n-    // this clamp exists precisely because the host is not trusted to have bounded the model before\n-    // `execute` runs, so it has to hold on its own.\n+    // The call runs for the preset default unless the caller asks for time, and a caller may ask for\n+    // up to the call's limit (`ctx.timeoutMs`, which the deployment sets for this tool); a request\n+    // beyond it is capped, never refused. There is no background mode to fall back on, so this is\n+    // how a long command gets its time, and the limit is what keeps one command from holding a\n+    // session open for as long as the model likes.\n+    // Only a positive whole number is a request: `Math.min(NaN, limit)` is `NaN`, and zero or a\n+    // negative would ask for no time at all. The parameter schema rejects all three, but this clamp\n+    // exists precisely because the host is not trusted to have bounded the model before `execute`\n+    // runs, so it has to hold on its own.\n     const asked = args.timeoutMs\n-    const timeoutMs =\n-      typeof asked === 'number' && Number.isInteger(asked) && asked > 0\n-        ? Math.min(asked, ctx.timeoutMs)\n-        : ctx.timeoutMs\n+    const requested = typeof asked === 'number' && Number.isInteger(asked) && asked > 0 ? asked : undefined\n+    const timeoutMs = Math.min(requested ?? ctx.defaultTimeoutMs ?? DEFAULT_FOREGROUND_MS, ctx.timeoutMs)\n     let r: Awaited<ReturnType<typeof ctx.exec>>\n     const startedAt = Date.now()\n     try {\n@@ -86,7 +89,7 @@ export const shellTool = defineTool({\n       // reads an `[exit N]` line only when it ends the text.\n       if (r.truncated) parts.push('[output truncated by sandbox]')\n       parts.push(\n-        `[timed out after ${timeoutMs}ms: the command and the processes in its process group were killed; the output above is what was captured, and the command may have taken partial effect. Check the current state before retrying, and split the work into shorter steps or ask for a longer timeoutMs (capped by the deployment).]`,\n+        `[timed out after ${timeoutMs}ms${requested !== undefined && requested > timeoutMs ? ` (requested ${requested}ms, capped)` : ''}: the command and the processes in its process group were killed; the output above is what was captured, and the command may have taken partial effect. Check the current state before retrying, and split the work into shorter steps or ask for a longer timeoutMs (capped by the deployment).]`,\n       )\n       return { ...(await guardedResult(ctx, parts.join('\\n'))), isError: true }\n     }"
+    },
+    {
+      "sha": "f683cb34f2af46361d99da0eeebe518d855866d9",
+      "filename": "packages/base/extensions/tools-core/test/shell.test.ts",
+      "status": "modified",
+      "additions": 63,
+      "deletions": 0,
+      "changes": 63,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Fextensions%2Ftools-core%2Ftest%2Fshell.test.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Fextensions%2Ftools-core%2Ftest%2Fshell.test.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fbase%2Fextensions%2Ftools-core%2Ftest%2Fshell.test.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -168,6 +168,69 @@ describe('shell does not widen what it executes', () => {\n   })\n })\n \n+// How long a foreground call may run: the preset default unless the caller asks, a caller may ask for\n+// more up to the call's limit, and what it asked for beyond that is capped. There is no background\n+// mode to fall back on, so this is how a long command gets its time.\n+describe('shell foreground time', () => {\n+  const asked = async (opts: Parameters<typeof fakeToolContext>[0], args: { timeoutMs?: number }) => {\n+    const ctx = fakeToolContext(opts)\n+    await shellTool.execute({ command: 'x', ...args }, ctx)\n+    return ctx.calls.execOpts[0]?.timeoutMs\n+  }\n+  it.each([\n+    [\n+      'uses the preset default when the caller asks for nothing',\n+      { timeoutMs: 598_000, defaultTimeoutMs: 100_000 },\n+      {},\n+      100_000,\n+    ],\n+    [\n+      'grants a request between the default and the limit as asked',\n+      { timeoutMs: 598_000, defaultTimeoutMs: 100_000 },\n+      { timeoutMs: 300_000 },\n+      300_000,\n+    ],\n+    [\n+      'caps a request above the limit at the limit',\n+      { timeoutMs: 598_000, defaultTimeoutMs: 100_000 },\n+      { timeoutMs: 86_400_000 },\n+      598_000,\n+    ],\n+    ['falls back to 120000 when the host states no default', { timeoutMs: 598_000 }, {}, 120_000],\n+    [\n+      'never gives a default longer than the limit',\n+      { timeoutMs: 30_000, defaultTimeoutMs: 120_000 },\n+      {},\n+      30_000,\n+    ],\n+    [\n+      'ignores a request that is not a positive whole number',\n+      { timeoutMs: 598_000, defaultTimeoutMs: 100_000 },\n+      { timeoutMs: 1.5 },\n+      100_000,\n+    ],\n+  ] as const)('%s', async (_name, opts, args, expected) => {\n+    expect(await asked(opts, args)).toBe(expected)\n+  })\n+\n+  it('says in the timeout text that the request was capped, and only then', async () => {\n+    const exec = () => ({ code: -1, stdout: '', stderr: '', timedOut: true })\n+    const capped = fakeToolContext({ timeoutMs: 598_000, defaultTimeoutMs: 100_000, exec })\n+    expect(textOf(await shellTool.execute({ command: 'x', timeoutMs: 86_400_000 }, capped))).toContain(\n+      '[timed out after 598000ms (requested 86400000ms, capped): ',\n+    )\n+    const granted = fakeToolContext({ timeoutMs: 598_000, defaultTimeoutMs: 100_000, exec })\n+    expect(textOf(await shellTool.execute({ command: 'x', timeoutMs: 300_000 }, granted))).toContain(\n+      '[timed out after 300000ms: ',\n+    )\n+  })\n+\n+  it('does not promise an extension beyond a deployment maximum in a number', () => {\n+    expect(shellTool.description).not.toMatch(/\\d{4,}/)\n+    expect(shellTool.description).toMatch(/longer timeoutMs|timeoutMs.*up to/i)\n+  })\n+})\n+\n // The executor's own deadline is the first cause when it says so. The model is told what was captured,\n // how long the limit was, that the processes were killed, and what it can do about it; there is no\n // exit line, because the exit code of a killed command says nothing and the UI reads `[exit N]` last."
+    },
+    {
+      "sha": "f89cf1f2eaa36a769c153741f801ae09537cb3e7",
+      "filename": "packages/base/fixtures/tool-schemas/HASH",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Ffixtures%2Ftool-schemas%2FHASH",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Ffixtures%2Ftool-schemas%2FHASH",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fbase%2Ffixtures%2Ftool-schemas%2FHASH?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -1 +1 @@\n-908adf0bfe8d031155f3309b939d296fd86c21671511849becce5ca572a1a7c2\n+e4cbf00158c987646f0d174579c479008096d2956c85359c5f935c1ac66e753c"
+    },
+    {
+      "sha": "c28495582e694142e5735df29e4ddfe7e9072ae6",
+      "filename": "packages/base/presets/base.yaml",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Fpresets%2Fbase.yaml",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Fpresets%2Fbase.yaml",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fbase%2Fpresets%2Fbase.yaml?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -6,7 +6,7 @@\n # any test that only reads the resolved view, so nothing below should be read as evidence that\n # inheritance ran. What this file settles is the keys the kernel has no default for at all.\n name: base\n-tools: { core: [read, write, edit, shell, grep, find, ls, todo, web_fetch], timeout_ms: 120000, output_max_bytes: 32768, timeouts: { web_fetch: 30000, skill_helper_import: 240000 } }\n+tools: { core: [read, write, edit, shell, grep, find, ls, todo, web_fetch], timeout_ms: 120000, output_max_bytes: 32768, timeouts: { web_fetch: 30000, skill_helper_import: 240000, shell: 600000 } }\n mcp: { servers: [], defer: true }\n # Written unexpanded on purpose: a `~` here is the operator's home, and whoever reads this key is\n # the one that knows whose home that is. Nothing expands it yet, so nothing may join these onto a"
+    },
+    {
+      "sha": "a755e18aba3e6957131b046fef8087190771604e",
+      "filename": "packages/base/test/preset.test.ts",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 1,
+      "changes": 5,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Ftest%2Fpreset.test.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Ftest%2Fpreset.test.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fbase%2Ftest%2Fpreset.test.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -143,7 +143,10 @@ describe('every key the kernel reads is spelled the way the kernel spells it', (\n     expect(fromDoc).toEqual({\n       ...fromNothing,\n       isolation: 'worktree',\n-      tools: { ...fromNothing.tools, timeouts: { web_fetch: 30000, skill_helper_import: 240000 } },\n+      tools: {\n+        ...fromNothing.tools,\n+        timeouts: { web_fetch: 30000, skill_helper_import: 240000, shell: 600000 },\n+      },\n     })\n   })\n })"
+    },
+    {
+      "sha": "935919f0dc7664a9eb10415f57ab8fe20a9ed9a0",
+      "filename": "packages/base/testkit/tool-context.ts",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 0,
+      "changes": 3,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Ftestkit%2Ftool-context.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fbase%2Ftestkit%2Ftool-context.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fbase%2Ftestkit%2Ftool-context.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -45,6 +45,8 @@ export type FakeToolContextOpts = {\n   exec?: ExecFn\n   invoke?: (name: string, args: JsonValue) => Promise<ToolResult>\n   timeoutMs?: number\n+  /** The preset-wide default a tool may use when the caller asks for no time; omitted leaves the field absent. */\n+  defaultTimeoutMs?: number\n   /** The `tools.output_max_bytes` a tool sees; a test that needs a small page or cut sets it. */\n   outputMaxBytes?: number\n   /** Makes `artifacts.put` fail, which is how a tool's behaviour with no artifact store is tested. */\n@@ -227,6 +229,7 @@ export function fakeToolContext(opts: FakeToolContextOpts = {}): FakeToolContext\n     progress: () => undefined,\n     signal: new AbortController().signal,\n     timeoutMs: opts.timeoutMs ?? 120000,\n+    ...(opts.defaultTimeoutMs === undefined ? {} : { defaultTimeoutMs: opts.defaultTimeoutMs }),\n     outputMaxBytes: opts.outputMaxBytes ?? DEFAULT_OUTPUT_MAX_BYTES,\n     lease: { expiresAt: '2999-01-01T00:00:00Z', scope: {}, budget: { remaining: 1e9 } },\n     log: { debug() {}, info() {}, warn() {}, error() {} },"
+    },
+    {
+      "sha": "ac0fb6e4ccf59266d354055d19aac80bce079e70",
+      "filename": "packages/code/test/matrix.test.ts",
+      "status": "modified",
+      "additions": 3,
+      "deletions": 1,
+      "changes": 4,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fcode%2Ftest%2Fmatrix.test.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fcode%2Ftest%2Fmatrix.test.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fcode%2Ftest%2Fmatrix.test.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -98,7 +98,7 @@ describe('preset matrix through the host resolver', () => {\n       core: ['read', 'write', 'edit', 'shell', 'grep', 'find', 'ls', 'todo', 'web_fetch'],\n       timeout_ms: 120000,\n       output_max_bytes: 32768,\n-      timeouts: { web_fetch: 30000, skill_helper_import: 240000 },\n+      timeouts: { web_fetch: 30000, skill_helper_import: 240000, shell: 600000 },\n     })\n   })\n \n@@ -112,6 +112,8 @@ describe('preset matrix through the host resolver', () => {\n     for (const key of ['checkpoint', 'loop', 'repair', 'recovery', 'ext'])\n       expect(r.doc, key).not.toHaveProperty(key)\n     expect(toPresetView(r.doc).depthLimit).toBe(1)\n+    // The frozen baseline keeps the 120 s every tool had: base's longer shell limit does not leak in.\n+    expect(toPresetView(r.doc).tools.timeouts).toEqual({})\n   })\n \n   // Hard rule: the frozen baseline may not be extended. A recipe that did would change what the"
+    },
+    {
+      "sha": "ef5b411279a25db64312b706b7e812ca0f9e704e",
+      "filename": "packages/core/src/effects/tool-context.ts",
+      "status": "modified",
+      "additions": 9,
+      "deletions": 1,
+      "changes": 10,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fcore%2Fsrc%2Feffects%2Ftool-context.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fcore%2Fsrc%2Feffects%2Ftool-context.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fcore%2Fsrc%2Feffects%2Ftool-context.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -116,7 +116,14 @@ export type ToolContextDeps = {\n  */\n export function buildToolContext(\n   d: ToolContextDeps,\n-  call: { toolUseId: string; name: string; signal: AbortSignal; timeoutMs: number; outputMaxBytes: number },\n+  call: {\n+    toolUseId: string\n+    name: string\n+    signal: AbortSignal\n+    timeoutMs: number\n+    defaultTimeoutMs?: number\n+    outputMaxBytes: number\n+  },\n ): ToolContext {\n   const stepId = `${d.turn}/${d.step}`\n   const publicFetch = d.publicFetch\n@@ -324,6 +331,7 @@ export function buildToolContext(\n     progress: (note) => d.progress(note),\n     signal: call.signal,\n     timeoutMs: call.timeoutMs,\n+    ...(call.defaultTimeoutMs === undefined ? {} : { defaultTimeoutMs: call.defaultTimeoutMs }),\n     outputMaxBytes: call.outputMaxBytes,\n     lease: {\n       expiresAt: new Date(Date.now() + d.lease.remainingMs()).toISOString(),"
+    },
+    {
+      "sha": "c2b606fdccf1c820106781191d9d8b5f60e87fb4",
+      "filename": "packages/core/src/step/tools.ts",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fcore%2Fsrc%2Fstep%2Ftools.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fcore%2Fsrc%2Fstep%2Ftools.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fcore%2Fsrc%2Fstep%2Ftools.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -1016,6 +1016,7 @@ export async function approveAndExecute(\n           name: call.name,\n           signal: ac.signal,\n           timeoutMs: softTimeoutMs,\n+          defaultTimeoutMs: s.preset.tools.timeoutMs,\n           outputMaxBytes: s.preset.tools.outputMaxBytes,\n         },\n       )"
+    },
+    {
+      "sha": "7f2921aa5e38f8cae89b3b58d8e34a9b17f0dbc5",
+      "filename": "packages/core/test/tools-phase.test.ts",
+      "status": "modified",
+      "additions": 21,
+      "deletions": 0,
+      "changes": 21,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fcore%2Ftest%2Ftools-phase.test.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fcore%2Ftest%2Ftools-phase.test.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fcore%2Ftest%2Ftools-phase.test.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -563,6 +563,27 @@ describe('tools phase', () => {\n     })\n   })\n \n+  // A tool with its own limit (preset tools.timeouts) is cut off at that limit, is told a limit a grace\n+  // short of it, and is also told the preset-wide default so it can tell \"no request\" from \"the most\".\n+  it('tells a tool its own soft limit and the preset-wide default', async () => {\n+    let seen: { limit: number; byDefault: number | undefined } | undefined\n+    const s = await atTools(\n+      [toolTurn('shell', { command: 'x' })],\n+      withTool(\n+        shellTool(async (_args, ctx) => {\n+          seen = { limit: ctx.timeoutMs, byDefault: ctx.defaultTimeoutMs }\n+          return { content: [{ type: 'text' as const, text: 'ok' }] }\n+        }),\n+      ),\n+    )\n+    s.session.preset = {\n+      ...s.session.preset,\n+      tools: { ...s.session.preset.tools, timeoutMs: 400, timeouts: { shell: 1000 } },\n+    }\n+    await s.session.runToolsPhase()\n+    expect(seen).toEqual({ limit: 900, byDefault: 400 })\n+  })\n+\n   it('hands ctx.exec results to the tool untouched, including the executor timedOut fact', async () => {\n     const s = await atTools(\n       [toolTurn('shell', { command: 'x' })],"
+    },
+    {
+      "sha": "743777d2f07a5ddf4757a5926e6648faef771c24",
+      "filename": "packages/daemon/test/worker-skill-context.e2e.test.ts",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "changes": 2,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fdaemon%2Ftest%2Fworker-skill-context.e2e.test.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fdaemon%2Ftest%2Fworker-skill-context.e2e.test.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fdaemon%2Ftest%2Fworker-skill-context.e2e.test.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -17,7 +17,7 @@ const roots: string[] = []\n // discovery and read tools remain available for the loaded and generic turns alike.\n // Pagination changes both read-tool schemas; pin the merged, model-visible tool set.\n // The write description also includes the incremental-generation guidance shipped with the tools.\n-const EXPECTED_SKILL_TOOL_SCHEMA_HASH = '57e3ba3c3970361eb45deda61e96602fdae891311f04fc658db5d1bebff24ee5'\n+const EXPECTED_SKILL_TOOL_SCHEMA_HASH = '1f38d67cc65637ee005dcc05a2c2c7fa25a1eefa03431da132655c898da82a80'\n const expectedToolNames = [\n   'compact',\n   'edit',"
+    },
+    {
+      "sha": "c79b76d893de688f70e0656c7f514529575ed4db",
+      "filename": "packages/extension-api/docs/CHANGELOG.md",
+      "status": "modified",
+      "additions": 6,
+      "deletions": 0,
+      "changes": 6,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fextension-api%2Fdocs%2FCHANGELOG.md",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fextension-api%2Fdocs%2FCHANGELOG.md",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fextension-api%2Fdocs%2FCHANGELOG.md?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -4,6 +4,12 @@ API additions require a minor version; removals or semantic changes require a ma\n \n ## Unreleased\n \n+`ToolContext` gains the optional read-only `defaultTimeoutMs`: the preset-wide default for a tool call\n+(`tools.timeout_ms`), next to `timeoutMs`, which is this call's own limit. A tool that lets a caller ask for\n+more time uses the default when asked for nothing and caps a request at `timeoutMs`; the `shell` tool does.\n+It is optional so code that builds a `ToolContext` itself keeps compiling, and a tool must cope with its\n+absence.\n+\n `ExecResult` gains the optional `timedOut`: true when the executor's own deadline was the first cause to cut\n the command short, so the process was killed and the output is what it had printed so far. It is mutually\n exclusive with a caller cancel (whichever came first is the cause), and absent means the executor did not"
+    },
+    {
+      "sha": "13e9a29da36ebe9d13a5dae3ebb01c62229e1adb",
+      "filename": "packages/extension-api/src/tool.ts",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 0,
+      "changes": 2,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fextension-api%2Fsrc%2Ftool.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fextension-api%2Fsrc%2Ftool.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fextension-api%2Fsrc%2Ftool.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -242,6 +242,8 @@ export interface ToolContext {\n   readonly signal: AbortSignal\n   /** Soft deadline for this call; the kernel cuts the call off a short grace later (see CHANGELOG). */\n   readonly timeoutMs: number\n+  /** The preset-wide default (`tools.timeout_ms`), for a tool that lets a caller ask for more time up to `timeoutMs`. */\n+  readonly defaultTimeoutMs?: number\n   /** Bytes of one result's text the model sees before the output guard cuts it (preset `tools.output_max_bytes`). */\n   readonly outputMaxBytes: number\n   readonly lease: LeaseView"
+    },
+    {
+      "sha": "6485751ff29876e806c3252e7adfc2ec645b070c",
+      "filename": "packages/extension-api/test/tool.test-d.ts",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 0,
+      "changes": 1,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fextension-api%2Ftest%2Ftool.test-d.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/packages%2Fextension-api%2Ftest%2Ftool.test-d.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/packages%2Fextension-api%2Ftest%2Ftool.test-d.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -200,6 +200,7 @@ describe('tool types', () => {\n       | 'progress'\n       | 'signal'\n       | 'timeoutMs'\n+      | 'defaultTimeoutMs'\n       | 'outputMaxBytes'\n       | 'lease'\n       | 'log'"
+    },
+    {
+      "sha": "26d62d4c81ed11b7f2ce5b86fc5d568dd332592e",
+      "filename": "tools/guards/ratchet.json",
+      "status": "modified",
+      "additions": 2,
+      "deletions": 2,
+      "changes": 4,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/tools%2Fguards%2Fratchet.json",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/tools%2Fguards%2Fratchet.json",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/tools%2Fguards%2Fratchet.json?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -7,13 +7,13 @@\n   \"packages/web-slots/src\": 605,\n   \"packages/web-ui/src\": 4891,\n   \"packages/web-units/src\": 4646,\n-  \"packages/core/src\": 25742,\n+  \"packages/core/src\": 25751,\n   \"packages/ai/src\": 3892,\n   \"packages/host/src/assemble\": 4193,\n   \"packages/protocol/src\": 2204,\n   \"packages/cli/src/tui\": 4000,\n   \"packages/cli-tui/src\": 4232,\n-  \"packages/extension-api/src\": 987,\n+  \"packages/extension-api/src\": 988,\n   \"packages/sdk/src\": 5130,\n   \"packages/sdk/src/extensions.node\": 21,\n   \"packages/sdk/src/package-admin.node\": 147,"
+    },
+    {
+      "sha": "d7318a877d4cd5f2ca8b443c7e8f280a7c3a795a",
+      "filename": "tools/guards/src/ratchet.test.ts",
+      "status": "modified",
+      "additions": 4,
+      "deletions": 2,
+      "changes": 6,
+      "blob_url": "https://github.com/AgnesAI-Labs/agnes-harness/blob/349309a719b7a16462b9f3ebcf923683f8de5365/tools%2Fguards%2Fsrc%2Fratchet.test.ts",
+      "raw_url": "https://github.com/AgnesAI-Labs/agnes-harness/raw/349309a719b7a16462b9f3ebcf923683f8de5365/tools%2Fguards%2Fsrc%2Fratchet.test.ts",
+      "contents_url": "https://api.github.com/repos/AgnesAI-Labs/agnes-harness/contents/tools%2Fguards%2Fsrc%2Fratchet.test.ts?ref=349309a719b7a16462b9f3ebcf923683f8de5365",
+      "patch": "@@ -943,7 +943,8 @@ const INITIAL_CEILING: Record<string, number> = {\n   // A mutating tool cut short by its deadline or a cancel names that cause in its unknown-outcome result\n   // text instead of reading as a lost transport. Measured 25741 (+18), exact cap.\n   // The soft deadline handed to a tool is a grace short of the kernel cut-off. Measured 25742 (+1), exact cap.\n-  'packages/core/src': 25742,\n+  // The preset-wide default timeout reaches a tool as ctx.defaultTimeoutMs. Measured 25751 (+9), exact cap.\n+  'packages/core/src': 25751,\n   // 2026-09-15: DeepSeek V4 Pro/Flash ship a known-thinking-corrections table (new file) so the\n   // product corrects pi-ai's verified-wrong reasoning_effort data out of the box, instead of\n   // requiring every deployment to hand-edit thinkingEfforts once they notice. Measured 3347.\n@@ -1367,7 +1368,8 @@ const INITIAL_CEILING: Record<string, number> = {\n   // `ToolContext.outputMaxBytes` and the three bounds of the Preset key `tools.output_max_bytes`,\n   // exported as constants. Measured 981 (+3), exact, no spare.\n   // Optional ExecResult.timedOut and the soft-deadline note on timeoutMs. Measured 987 (+6), exact cap.\n-  'packages/extension-api/src': 987, // SKILL-INSTALL-CORE: optional request port and bounded DTO, no admin grant.\n+  // Optional ToolContext.defaultTimeoutMs. Measured 988 (+1), exact cap.\n+  'packages/extension-api/src': 988, // SKILL-INSTALL-CORE: optional request port and bounded DTO, no admin grant.\n   // Optional author fixture entry; no production runtime code belongs here.\n   // B1-A: measured 229 lines on the shared tree; public transport contract, config and wiring/testkit.\n   // B1 review repair: exact measured 246; startup cancellation / cwd contract coverage."
+    }
+  ]
+}

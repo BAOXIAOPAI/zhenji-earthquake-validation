@@ -1,0 +1,11 @@
+{
+  "run_id": "r-e2e8419bf299785d",
+  "task_id": "t-da53ba3dd12b119e",
+  "arm": "adaptive_agent_a1",
+  "variant": null,
+  "model": null,
+  "provider": null,
+  "started_at": "2026-10-12T04:01:12Z",
+  "task_sha256": "09eab933fe950b807827333ad2fc23d6591f3328203cd7d52655426b4c96d539",
+  "demo_case_ref": null
+}

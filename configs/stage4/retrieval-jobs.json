@@ -1,0 +1,63 @@
+[
+  {
+    "id": "uw61221842-UO-ROGE",
+    "case_id": "case_9c9387780d7c133b",
+    "net": "UO",
+    "sta": "ROGE",
+    "cha": "HH",
+    "start": "2016-12-05T06:41:10.930",
+    "end": "2016-12-05T06:43:40.930",
+    "requested_date": "2026-10-04",
+    "waveform_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UO&sta=ROGE&loc=--&cha=HH%3F&start=2016-12-05T06:41:10.930&end=2016-12-05T06:43:40.930&format=miniseed&nodata=404",
+    "station_url": "https://service.earthscope.org/fdsnws/station/1/query?net=UO&sta=ROGE&loc=--&cha=HH%3F&starttime=2016-12-05T06:41:10.930&endtime=2016-12-05T06:43:40.930&level=response&format=xml&nodata=404"
+  },
+  {
+    "id": "uw61563717-UW-YPT",
+    "case_id": "case_1d64ae79e19bda55",
+    "net": "UW",
+    "sta": "YPT",
+    "cha": "HH",
+    "start": "2019-12-11T18:03:19.950",
+    "end": "2019-12-11T18:05:49.950",
+    "requested_date": "2026-10-04",
+    "waveform_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=YPT&loc=--&cha=HH%3F&start=2019-12-11T18:03:19.950&end=2019-12-11T18:05:49.950&format=miniseed&nodata=404",
+    "station_url": "https://service.earthscope.org/fdsnws/station/1/query?net=UW&sta=YPT&loc=--&cha=HH%3F&starttime=2019-12-11T18:03:19.950&endtime=2019-12-11T18:05:49.950&level=response&format=xml&nodata=404"
+  },
+  {
+    "id": "uw60652962-UW-RADR",
+    "case_id": "case_a04231b22b41be6b",
+    "net": "UW",
+    "sta": "RADR",
+    "cha": "BH",
+    "start": "2013-12-17T21:47:57.970",
+    "end": "2013-12-17T21:50:27.970",
+    "requested_date": "2026-10-04",
+    "waveform_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=RADR&loc=--&cha=BH%3F&start=2013-12-17T21:47:57.970&end=2013-12-17T21:50:27.970&format=miniseed&nodata=404",
+    "station_url": "https://service.earthscope.org/fdsnws/station/1/query?net=UW&sta=RADR&loc=--&cha=BH%3F&starttime=2013-12-17T21:47:57.970&endtime=2013-12-17T21:50:27.970&level=response&format=xml&nodata=404"
+  },
+  {
+    "id": "uw60540367-UW-LVP",
+    "case_id": "case_e16458b4dfa36bc1",
+    "net": "UW",
+    "sta": "LVP",
+    "cha": "EH",
+    "start": "2013-06-13T22:09:21.950",
+    "end": "2013-06-13T22:11:51.950",
+    "requested_date": "2026-10-04",
+    "waveform_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=LVP&loc=--&cha=EH%3F&start=2013-06-13T22:09:21.950&end=2013-06-13T22:11:51.950&format=miniseed&nodata=404",
+    "station_url": "https://service.earthscope.org/fdsnws/station/1/query?net=UW&sta=LVP&loc=--&cha=EH%3F&starttime=2013-06-13T22:09:21.950&endtime=2013-06-13T22:11:51.950&level=response&format=xml&nodata=404"
+  },
+  {
+    "id": "uw60540367-TA-F04D",
+    "case_id": "case_e16458b4dfa36bc1",
+    "net": "TA",
+    "sta": "F04D",
+    "cha": "BH",
+    "start": "2013-06-13T22:09:21.950",
+    "end": "2013-06-13T22:11:51.950",
+    "requested_date": "2026-10-04",
+    "waveform_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=TA&sta=F04D&loc=--&cha=BH%3F&start=2013-06-13T22:09:21.950&end=2013-06-13T22:11:51.950&format=miniseed&nodata=404",
+    "station_url": "https://service.earthscope.org/fdsnws/station/1/query?net=TA&sta=F04D&loc=--&cha=BH%3F&starttime=2013-06-13T22:09:21.950&endtime=2013-06-13T22:11:51.950&level=response&format=xml&nodata=404",
+    "amendment": "pilot-amendment-01.json"
+  }
+]

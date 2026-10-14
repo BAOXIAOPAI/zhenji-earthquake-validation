@@ -1,0 +1,490 @@
+{
+  "schema": "review9-functional-ABC/v1",
+  "network_or_model_calls": 0,
+  "positive_quality_applicability_without_onset": {
+    "claim": {
+      "conclusion": "pick_applicable",
+      "field": "method_applicability",
+      "condition_id": "25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511",
+      "scope_candidate_ids": [
+        "55881be1192c"
+      ],
+      "evidence_refs": [
+        "quality:55881be1192c",
+        "applicability:55881be1192c"
+      ],
+      "stop_reason_code": "public_criterion_satisfied"
+    },
+    "accepted": true,
+    "fallback_used": false,
+    "task_completed": true,
+    "result_determined": null,
+    "audit_outcome": "determined_answer",
+    "can_finish": true,
+    "stop_bases": [
+      "public_criterion_satisfied",
+      "scope_exhausted"
+    ],
+    "unmet": [],
+    "acceptance": {
+      "conclusion_matches_validator": true,
+      "outcome_acceptable": true,
+      "field_matches": true,
+      "condition_matches": true,
+      "stop_basis_legal": true,
+      "scope_valid": true,
+      "evidence_refs_resolve": true,
+      "asked_field_settled": true
+    },
+    "evidence": {
+      "all_valid": true,
+      "resolved": [
+        "quality:55881be1192c",
+        "applicability:55881be1192c"
+      ],
+      "unknown": [],
+      "stale": [],
+      "unverified": [],
+      "detail": null
+    },
+    "scope": {
+      "declared": [
+        "55881be1192c"
+      ],
+      "permitted": [
+        "55881be1192c"
+      ],
+      "participating": [
+        "55881be1192c"
+      ],
+      "excluded": [],
+      "remaining_acquirable": [],
+      "remaining_detail": {
+        "scope_kind": "explicit_candidates",
+        "in_scope": 1,
+        "attempted_episode": 1,
+        "ceiling": 6,
+        "untried_in_scope": 0,
+        "reason": null
+      },
+      "valid": true,
+      "reason": null
+    }
+  },
+  "negative_uncomputed_onset": {
+    "claim": {
+      "conclusion": "pick_applicable",
+      "field": "method_applicability",
+      "condition_id": "25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511",
+      "scope_candidate_ids": [
+        "55881be1192c"
+      ],
+      "evidence_refs": [
+        "onset:55881be1192c"
+      ],
+      "stop_reason_code": "public_criterion_satisfied"
+    },
+    "accepted": false,
+    "fallback_used": true,
+    "task_completed": true,
+    "result_determined": null,
+    "audit_outcome": "determined_answer",
+    "can_finish": true,
+    "stop_bases": [
+      "public_criterion_satisfied",
+      "scope_exhausted"
+    ],
+    "unmet": [],
+    "acceptance": {
+      "conclusion_matches_validator": true,
+      "outcome_acceptable": true,
+      "field_matches": true,
+      "condition_matches": true,
+      "stop_basis_legal": true,
+      "scope_valid": true,
+      "evidence_refs_resolve": false,
+      "asked_field_settled": true
+    },
+    "evidence": {
+      "all_valid": false,
+      "resolved": [],
+      "unknown": [],
+      "stale": [],
+      "unverified": [
+        "onset:55881be1192c"
+      ],
+      "detail": "unverified=['onset:55881be1192c']"
+    },
+    "scope": {
+      "declared": [
+        "55881be1192c"
+      ],
+      "permitted": [
+        "55881be1192c"
+      ],
+      "participating": [
+        "55881be1192c"
+      ],
+      "excluded": [],
+      "remaining_acquirable": [],
+      "remaining_detail": {
+        "scope_kind": "explicit_candidates",
+        "in_scope": 1,
+        "attempted_episode": 1,
+        "ceiling": 6,
+        "untried_in_scope": 0,
+        "reason": null
+      },
+      "valid": true,
+      "reason": null
+    }
+  },
+  "negative_fabricated_scope": {
+    "claim": {
+      "conclusion": "pick_applicable",
+      "field": "method_applicability",
+      "condition_id": "25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511",
+      "scope_candidate_ids": [
+        "invented-id"
+      ],
+      "evidence_refs": [
+        "quality:55881be1192c"
+      ],
+      "stop_reason_code": "public_criterion_satisfied"
+    },
+    "accepted": false,
+    "fallback_used": true,
+    "task_completed": true,
+    "result_determined": null,
+    "audit_outcome": "determined_answer",
+    "can_finish": true,
+    "stop_bases": [
+      "public_criterion_satisfied",
+      "scope_exhausted"
+    ],
+    "unmet": [],
+    "acceptance": {
+      "conclusion_matches_validator": true,
+      "outcome_acceptable": true,
+      "field_matches": true,
+      "condition_matches": true,
+      "stop_basis_legal": true,
+      "scope_valid": false,
+      "evidence_refs_resolve": true,
+      "asked_field_settled": true
+    },
+    "evidence": {
+      "all_valid": true,
+      "resolved": [
+        "quality:55881be1192c"
+      ],
+      "unknown": [],
+      "stale": [],
+      "unverified": [],
+      "detail": null
+    },
+    "scope": {
+      "declared": [
+        "invented-id"
+      ],
+      "permitted": [
+        "55881be1192c"
+      ],
+      "participating": [
+        "55881be1192c"
+      ],
+      "excluded": [],
+      "remaining_acquirable": [],
+      "remaining_detail": {
+        "scope_kind": "explicit_candidates",
+        "in_scope": 1,
+        "attempted_episode": 1,
+        "ceiling": 6,
+        "untried_in_scope": 0,
+        "reason": null
+      },
+      "valid": false,
+      "reason": "scope_unknown_candidate_ids",
+      "unknown": [
+        "invented-id"
+      ]
+    }
+  },
+  "negative_missing_stop_code": {
+    "claim": {
+      "conclusion": "pick_applicable",
+      "field": "method_applicability",
+      "condition_id": "25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511",
+      "scope_candidate_ids": [
+        "55881be1192c"
+      ],
+      "evidence_refs": [
+        "quality:55881be1192c"
+      ]
+    },
+    "accepted": false,
+    "fallback_used": true,
+    "task_completed": true,
+    "result_determined": null,
+    "audit_outcome": "determined_answer",
+    "can_finish": true,
+    "stop_bases": [
+      "public_criterion_satisfied",
+      "scope_exhausted"
+    ],
+    "unmet": [],
+    "acceptance": {
+      "conclusion_matches_validator": true,
+      "outcome_acceptable": true,
+      "field_matches": true,
+      "condition_matches": true,
+      "stop_basis_legal": false,
+      "scope_valid": true,
+      "evidence_refs_resolve": true,
+      "asked_field_settled": true
+    },
+    "evidence": {
+      "all_valid": true,
+      "resolved": [
+        "quality:55881be1192c"
+      ],
+      "unknown": [],
+      "stale": [],
+      "unverified": [],
+      "detail": null
+    },
+    "scope": {
+      "declared": [
+        "55881be1192c"
+      ],
+      "permitted": [
+        "55881be1192c"
+      ],
+      "participating": [
+        "55881be1192c"
+      ],
+      "excluded": [],
+      "remaining_acquirable": [],
+      "remaining_detail": {
+        "scope_kind": "explicit_candidates",
+        "in_scope": 1,
+        "attempted_episode": 1,
+        "ceiling": 6,
+        "untried_in_scope": 0,
+        "reason": null
+      },
+      "valid": true,
+      "reason": null
+    }
+  },
+  "positive_unique_excluded_legal_unknown": {
+    "claim": {
+      "conclusion": "pick_unknown",
+      "field": "method_applicability",
+      "condition_id": "b81d44bf6a034bb0c9194df0201c5c82f3a24bdf03e4735fc94e2c0e1098a3a5",
+      "scope_candidate_ids": [],
+      "evidence_refs": [],
+      "stop_reason_code": "scope_exhausted"
+    },
+    "accepted": true,
+    "fallback_used": false,
+    "task_completed": false,
+    "result_determined": null,
+    "audit_outcome": "legal_unknown",
+    "can_finish": true,
+    "stop_bases": [
+      "scope_exhausted"
+    ],
+    "unmet": [],
+    "acceptance": {
+      "conclusion_matches_validator": true,
+      "outcome_acceptable": true,
+      "field_matches": true,
+      "condition_matches": true,
+      "stop_basis_legal": true,
+      "scope_valid": true,
+      "evidence_refs_resolve": true,
+      "asked_field_settled": false
+    },
+    "evidence": {
+      "all_valid": true,
+      "detail": "empty scope: no evidence to cite",
+      "resolved": [],
+      "unknown": [],
+      "stale": [],
+      "unverified": []
+    },
+    "scope": {
+      "declared": [],
+      "permitted": [],
+      "participating": [
+        "55881be1192c"
+      ],
+      "excluded": [
+        "55881be1192c"
+      ],
+      "remaining_acquirable": [],
+      "remaining_detail": {
+        "scope_kind": "explicit_candidates",
+        "in_scope": 1,
+        "attempted_episode": 1,
+        "ceiling": 6,
+        "untried_in_scope": 0,
+        "reason": "acquisition_not_allowed"
+      },
+      "valid": true,
+      "reason": null
+    }
+  },
+  "negative_excluded_reference": {
+    "all_valid": false,
+    "resolved": [],
+    "unknown": [],
+    "stale": [],
+    "unverified": [
+      "quality:55881be1192c"
+    ],
+    "detail": "unverified=['quality:55881be1192c']"
+  },
+  "unstarted_explicit_scope_unknown": {
+    "claim": {
+      "conclusion": "pick_unknown",
+      "field": "method_applicability",
+      "condition_id": "25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511",
+      "scope_candidate_ids": [],
+      "evidence_refs": [],
+      "stop_reason_code": "scope_exhausted"
+    },
+    "accepted": false,
+    "fallback_used": true,
+    "task_completed": false,
+    "result_determined": null,
+    "audit_outcome": "strategy_insufficient",
+    "can_finish": false,
+    "stop_bases": [],
+    "unmet": [
+      {
+        "kind": "no_legal_stop_basis"
+      }
+    ],
+    "acceptance": {
+      "conclusion_matches_validator": true,
+      "outcome_acceptable": false,
+      "field_matches": true,
+      "condition_matches": true,
+      "stop_basis_legal": false,
+      "scope_valid": false,
+      "evidence_refs_resolve": true,
+      "asked_field_settled": false
+    },
+    "evidence": {
+      "all_valid": true,
+      "detail": "empty scope: no evidence to cite",
+      "resolved": [],
+      "unknown": [],
+      "stale": [],
+      "unverified": []
+    },
+    "scope": {
+      "declared": [],
+      "permitted": [],
+      "participating": [],
+      "excluded": [],
+      "remaining_acquirable": [
+        "55881be1192c"
+      ],
+      "remaining_detail": {
+        "scope_kind": "explicit_candidates",
+        "in_scope": 1,
+        "attempted_episode": 0,
+        "ceiling": 6,
+        "untried_in_scope": 1,
+        "reason": "in_scope_candidates_untried"
+      },
+      "valid": false,
+      "reason": "empty_scope_but_actions_remain"
+    },
+    "entry_level": "production prepare_agent.model_state + production validate",
+    "acquisition_allowed": true,
+    "explicit_requested_ids": [
+      "55881be1192c"
+    ],
+    "eligible_count": 73
+  },
+  "positive_real_three_of_three_stop": {
+    "source": "r-c8f9ca0979c35163",
+    "attempted": 3,
+    "cap": 3,
+    "outcome": "legal_unknown",
+    "can_finish": true,
+    "stop_basis": "resource_limited"
+  },
+  "feedback_default_and_cap": {
+    "parent_cap": 3,
+    "child_task_cap": 3,
+    "child_state_cap": 3,
+    "child_permission": false,
+    "attempts": [
+      "55881be1192c",
+      "failed-2",
+      "failed-3"
+    ],
+    "allowed_new": false,
+    "refusal": {
+      "status": "refused",
+      "reason": "acquisition_not_allowed",
+      "detail": "用户本轮明确要求不新增取数；只能复用已有观测。",
+      "candidate_id": "new-4",
+      "http_issued": false
+    }
+  },
+  "feedback_cap_with_explicit_permission": {
+    "allowed_new": false,
+    "refusal": {
+      "status": "refused",
+      "reason": "candidate_ceiling",
+      "detail": "本轮独立候选尝试上限为 3，再加该候选会超出。",
+      "candidate_id": "new-4",
+      "attempted": 4,
+      "ceiling": 3,
+      "http_issued": false
+    }
+  },
+  "product_launch_parameters_no_driver_launched": [
+    {
+      "driver_script": "agent_run_optimization.mjs",
+      "profile": "A1"
+    },
+    {
+      "driver_script": "agent_run_optimization.mjs",
+      "profile": "A1",
+      "analysis_level": "quality_only",
+      "inherited_from": true,
+      "decision": "inherited_from_parent_config"
+    }
+  ],
+  "watchdog_run_identity_no_daemon_launched": {
+    "owner-match": {
+      "response": {
+        "run_id": "owner-match",
+        "stopped": true,
+        "detail": "stopped",
+        "agh_home": "/var/folders/34/4266s5xd2fv9h81rp2kzs79w0000gn/T/review9-abc-g4sbc8_t/owner-match-home",
+        "owner_id": "owner-match-owner",
+        "scope": "this run's recorded AGH_HOME only"
+      },
+      "stop_invoked": true,
+      "only_expected_home": true
+    },
+    "owner-mismatch": {
+      "response": {
+        "stopped": false,
+        "reason": "runtime_owner_run_mismatch",
+        "run_id": "owner-mismatch",
+        "recorded_run_id": "another-run"
+      },
+      "stop_invoked": false,
+      "only_expected_home": true
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+ "date":"2026-10-04",
+ "reason":"Actual UW.LVP retrieval and StationXML expose only EHZ, insufficient for a three-component comparison",
+ "change":"One additional 150-second station retrieval, TA.F04D.BH?, for the same training event; no fabricated failure",
+ "total_waveform_request_limit":5,
+ "selection":"Manually selected from remaining catalogue-index candidates; not an Agent decision",
+ "future_comparison_requirement":"Do not force methods to try the vertical-only station when channel metadata already supports skipping it"
+}

@@ -1,0 +1,13 @@
+{
+  "run_id": "r-3ae9c6948c2f8967",
+  "profile": "A1",
+  "policy": "main/prompts/agent_policy_v1.txt",
+  "policy_sha256": "83e61308df2fcfe76994ed3ef1fc2a621f3ceee7261ab0e6b289186a132d6531",
+  "prompt_sha256": "a7c5218be4e112af95c8ed9216ca4f549b56870853b8ccaa597e0ec0b0be0358",
+  "thinking": {
+    "enabled": false,
+    "effort": null
+  },
+  "mcp_state_sha256": "b11ea4ab851b7bf636f271e49e5e71e69f578791acc7c570ff1887af25faab41",
+  "bound_at": "2026-10-12T04:02:08.911Z"
+}

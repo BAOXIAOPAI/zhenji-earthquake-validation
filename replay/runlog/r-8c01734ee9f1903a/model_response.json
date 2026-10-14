@@ -1,0 +1,162 @@
+{
+  "RUN": "r-8c01734ee9f1903a",
+  "RUN_ID": "r-8c01734ee9f1903a",
+  "profile": "A1",
+  "policy": "main/prompts/agent_policy_v1.txt",
+  "thinking": {
+    "enabled": false,
+    "effort": null
+  },
+  "model": "deepseek-flash",
+  "sessionId": "agnes:local:local-dev:cli:workspace:7e1af144af71b2d5",
+  "fatal": null,
+  "failure_kind": null,
+  "status": "succeeded",
+  "answer": "{\"field\":\"method_applicability\",\"conclusion\":\"pick_unknown\",\"condition_id\":\"686f64a5c10d904cd7276988a5c86069aaa52b10d936abb71086fd9f0999401c\",\"scope_candidate_ids\":[\"cf3bfe63e905\"],\"evidence_refs\":[\"quality:cf3bfe63e905\",\"applicability:cf3bfe63e905\",\"onset:cf3bfe63e905\",\"stability:cf3bfe63e905\"],\"stop_reason_code\":\"scope_exhausted\",\"limitations\":[\"No new acquisition was permitted this round, so the scope stayed at the single already-acquired station CHIMA (cf3bfe63e905); no network-wide conclusion is possible.\",\"Stability was run on this round's declared grid [[3,12]] Hz and returned stability=insufficient_configurations: only 1 of 13 grid configurations produced a pick (4 Z STA/LTA configs gave no pick), so the automatic onset at ~2.53 s is not reproducible and cannot be treated as confirmed.\",\"The 1-8 Hz onset check for CHIMA returned no pick time (onset_utc=null) with no channel-integrity flags; a null onset is not proof that no arrival exists.\",\"Band support for 1-12 Hz is satisfied (100 Hz sampling, Nyquist 50 Hz, 3 aligned components Z/N/E), so this answer does not rule out usability on band grounds alone; it says the pick behaviour is undetermined from the stored data.\",\"The requested 1-12 Hz band was not rewritten by the 3-12 Hz diagnostic grid change; the quizzed band remains 1-12 Hz, and the wider requested band was not independently tested.\"]}",
+  "model_requests": 6,
+  "tool_proposals": 6,
+  "reasoning_restored": 0,
+  "protocol_events": [
+    {
+      "seq": 1,
+      "request_id": "345ccd49-9928-49b8-b14c-8b83a4773813",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_task_status",
+        "mcp_seismic_review_018df23d_get_evidence"
+      ],
+      "tool_args_sha256": "09cb85b478b86eb6338d1bd7a79ff808e877fda73eaf0fc130615b5ce53fd8a1",
+      "content_sha256": "9779742d1eed7764d1b5ea208eee290cfd09047d61b2c06aef5ab7a2a86cfe44",
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 4064,
+      "completion_tokens": 84
+    },
+    {
+      "seq": 2,
+      "request_id": "bfe101af-f233-4b89-9c99-9ddc5fd772fe",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_run_stability_check"
+      ],
+      "tool_args_sha256": "e5ba30641b5c8d88694fdbb25a4687250a27eccfe0344657be0f990a5b9cbc24",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 6464,
+      "completion_tokens": 58
+    },
+    {
+      "seq": 3,
+      "request_id": "eefbc4c8-9733-402e-bce8-09aea5ed7bb8",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_run_onset_check"
+      ],
+      "tool_args_sha256": "e5ba30641b5c8d88694fdbb25a4687250a27eccfe0344657be0f990a5b9cbc24",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 7515,
+      "completion_tokens": 58
+    },
+    {
+      "seq": 4,
+      "request_id": "359dee0b-6756-492e-aa82-e845dbf02cfb",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_get_evidence"
+      ],
+      "tool_args_sha256": "06d303a9b27b9a13deb84c837b84a50d7d4423393aae3f9b03a73543785ee0b3",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 7772,
+      "completion_tokens": 33
+    },
+    {
+      "seq": 5,
+      "request_id": "c0b31baa-f468-46e9-9dab-64fd3b42c5f6",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_task_status"
+      ],
+      "tool_args_sha256": "6389ef6679f187860d30bb0e7a37a65a89ca402974828d3964862391e8fb71ee",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 9552,
+      "completion_tokens": 49
+    },
+    {
+      "seq": 6,
+      "request_id": "3c55f707-a888-4c16-b2fa-8eedfc06b9a3",
+      "model_requests": 1,
+      "tool_names": [],
+      "tool_args_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "content_sha256": "9d9e080f729da72b38b9efd085ce0cb9411e39ef061debe7727b1555d84f8a83",
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 10471,
+      "completion_tokens": 381
+    },
+    {
+      "seq": 7,
+      "kind": "bridge_summary",
+      "reasoning_restored": 0,
+      "errors": [],
+      "elapsed_ms": 6956
+    }
+  ],
+  "cleanup": {
+    "already": false,
+    "reason": "normal",
+    "log": [
+      {
+        "step": "abort_inflight",
+        "ok": true,
+        "detail": "aborted"
+      },
+      {
+        "step": "detach_session",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "step": "close_client",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "step": "stop_daemon",
+        "ok": true,
+        "detail": "stopped\n"
+      },
+      {
+        "step": "close_bridge",
+        "ok": true,
+        "detail": {
+          "already": false
+        }
+      },
+      {
+        "step": "remove_root",
+        "ok": true,
+        "detail": null
+      }
+    ],
+    "cleanup_errors": [],
+    "stop_confirmed": true,
+    "root_removed": true,
+    "cleanup_needed": false,
+    "cleanup_ok": true
+  },
+  "cleanup_ok": true,
+  "cleanup_needed": false,
+  "owned_home": "/tmp/eq-opt-1847Yd/h",
+  "root_removed": true,
+  "session_timeout_ms": 540000,
+  "session_timed_out": false,
+  "native_agh_evidence": 105,
+  "elapsed_ms": 10101
+}

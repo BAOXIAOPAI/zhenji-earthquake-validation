@@ -1,0 +1,9 @@
+numpy
+pandas
+scipy
+h5py
+matplotlib
+scikit-learn
+obspy
+pytest
+mcp==2.2.0

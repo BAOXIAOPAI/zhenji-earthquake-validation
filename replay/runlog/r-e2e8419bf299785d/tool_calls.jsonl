@@ -1,0 +1,14 @@
+{"at": "2026-10-12T04:01:16Z", "run_id": "r-e2e8419bf299785d", "tool": "task_status", "arguments": {"stage": "progress"}, "phase": "start"}
+{"at": "2026-10-12T04:01:16Z", "run_id": "r-e2e8419bf299785d", "tool": "task_status", "arguments": {"stage": "progress"}, "phase": "ok", "result": {"can_finish": null}}
+{"at": "2026-10-12T04:01:16Z", "run_id": "r-e2e8419bf299785d", "tool": "list_candidates", "arguments": {"limit": 20}, "phase": "start"}
+{"at": "2026-10-12T04:01:16Z", "run_id": "r-e2e8419bf299785d", "tool": "list_candidates", "arguments": {"limit": 20}, "phase": "ok", "result": {"shown": 1}}
+{"at": "2026-10-12T04:01:16Z", "run_id": "r-e2e8419bf299785d", "tool": "acquire_station", "arguments": {"candidate_id": "409dfad13970"}, "phase": "start"}
+{"at": "2026-10-12T04:01:16Z", "run_id": "r-e2e8419bf299785d", "tool": "acquire_station", "arguments": {"candidate_id": "409dfad13970"}, "phase": "ok", "result": {"station": "CHIMA", "status": "analysed", "failed_request": null, "metadata_available": null, "waveform_available": null}}
+{"at": "2026-10-12T04:01:17Z", "run_id": "r-e2e8419bf299785d", "tool": "get_evidence", "arguments": {}, "phase": "start"}
+{"at": "2026-10-12T04:01:17Z", "run_id": "r-e2e8419bf299785d", "tool": "get_evidence", "arguments": {}, "phase": "ok", "result": {"stations_acquired": 1}}
+{"at": "2026-10-12T04:01:18Z", "run_id": "r-e2e8419bf299785d", "tool": "run_onset_check", "arguments": {"candidate_id": "409dfad13970"}, "phase": "start"}
+{"at": "2026-10-12T04:01:18Z", "run_id": "r-e2e8419bf299785d", "tool": "run_onset_check", "arguments": {"candidate_id": "409dfad13970"}, "phase": "ok", "result": {"onset_utc": null, "source": "compute"}}
+{"at": "2026-10-12T04:01:19Z", "run_id": "r-e2e8419bf299785d", "tool": "run_stability_check", "arguments": {"candidate_id": "409dfad13970"}, "phase": "start"}
+{"at": "2026-10-12T04:01:19Z", "run_id": "r-e2e8419bf299785d", "tool": "run_stability_check", "arguments": {"candidate_id": "409dfad13970"}, "phase": "ok", "result": {"stability": "insufficient_configurations", "spread_s": 0.0, "bands_evaluated": [[1.0, 8.0], [3.0, 12.0], [5.0, 20.0]], "full_grid": true}}
+{"at": "2026-10-12T04:01:20Z", "run_id": "r-e2e8419bf299785d", "tool": "task_status", "arguments": {"stage": "finish"}, "phase": "start"}
+{"at": "2026-10-12T04:01:20Z", "run_id": "r-e2e8419bf299785d", "tool": "task_status", "arguments": {"stage": "finish"}, "phase": "ok", "result": {"can_finish": true}}

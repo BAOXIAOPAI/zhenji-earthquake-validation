@@ -1,0 +1,77 @@
+SEISMIC_REVIEW_RUN={{RUN}}
+TASK_ID={{TASK_ID}}
+
+You are reviewing one seismic candidate window for a colleague. Their question is:
+
+  "{{QUESTION}}"
+{{FOLLOW_UP_SECTION}}
+The window under review is {{WINDOW_START}} to {{WINDOW_END}} UTC.
+The band they asked about is {{TARGET_BAND}} Hz.
+The analysis goal they asked for is {{METHOD_GOAL}} — {{GOAL_LABEL}}.
+{{STANDARD_SECTION}}
+Judge each station's input conditions against THAT goal: a bad horizontal channel
+fails a three-component pick but can still satisfy a vertical onset check; a bad
+or constant Z channel satisfies neither. Presence of a channel is not its health.
+{{CARRIED_SECTION}}
+Answer it using only the {{SLUG}} tools. Do not use shell, files, web, skills or delegation.
+
+Tools and what each costs:
+{{TOOLS_SECTION}}
+{{SCOPE_SECTION}}
+{{CONDITIONS_SECTION}}
+Work from what is missing, not from a fixed ritual. Choose the tool that closes the
+current gap; do not call a tool just to lengthen the trace.
+
+| the task you are on | act first on | keep going while | you may stop when |
+| --- | --- | --- | --- |
+| method applicability | the named goal, sample rate, band support and required component health; reuse already-acquired stations | the named scope is not covered, or no usable evidence exists yet and a permitted alternative remains | the scope has a valid applicability result, or you can state an explicit, checkable reason it is unavailable |
+| channel / metadata anomaly | the quality and anomaly flags of in-scope observations | the target observation failed and supplementing is still allowed, or the user's scope is not covered | the defined anomaly was or was not found in the delivered scope; an empty scope gets a correct unknown |
+| onset clustering under the public standard | independent stations that meet the input conditions; run the necessary onset checks | valid stations are still short and permitted candidates remain, or the current result does not meet the stop rule | the public sufficiency condition holds, or permitted actions are exhausted with a stated reason |
+| user-specified diagnostic | the diagnostic grid over the requested scope, reusing the stored waveforms | a requested station has no current result, or its old result is still stale | the specified obligation is satisfied, or you state precisely which stations cannot be computed and why |
+| user exclusion / goal change | the current scope and goal first, then the dependent results | old-condition evidence is not yet invalidated or re-judged, or the current scope is short and supplementing is allowed | the current conditions have a valid result or a correct unknown |
+
+Fixed rules:
+1. Start by reading the task status; query candidates when the first round needs to
+   choose a station. Reuse evidence already in hand before re-fetching the same
+   station.
+2. Choose the action the missing evidence calls for; do not call unrelated tools to
+   lengthen the trace. A user-specified diagnostic is owed; with no diagnostic
+   request there is no need to run the full grid on every station.
+3. Prefer candidates that satisfy the method's channel and sample-rate needs; give
+   lower priority to objects that already failed. Rank on public facts only — never
+   on a case id or a hidden answer.
+4. Reaching the public 3-station / 3-second standard for a propagating signal is a
+   valid stop for a bounded task. While permitted candidates remain, a few observed
+   quiet stations do not justify asserting that no cluster exists in the whole scope.
+5. Before finishing, read `task_status(stage="finish")`, deal with any unmet
+   obligation, then submit the required field, scope and evidence references. That
+   tool never performs a missing check for you.
+
+General behaviours you should handle:
+  * A station with a bad horizontal component but a healthy Z is not applicable to a
+    three-component pick at that goal, yet it remains a valid vertical onset check;
+    say which condition failed instead of calling the whole station unusable.
+  * If the user excludes the only station you have, the scope becomes empty: report
+    the correct unknown for the current scope, and do not keep the earlier
+    determined conclusion.
+  * A user-narrowed diagnostic grid changes which automatic-onset configurations are
+    evaluated. That result is not by itself a method-applicability verdict: answer
+    the asked field from its own input conditions (channel health, sample rate, band
+    support) and report the grid's instability as a limitation.
+  * A station whose metadata request returns 404 has no measured channel condition:
+    record the interface failure as such, and move to the next permitted candidate
+    rather than asserting there was no data.
+  * When no new acquisition is permitted, work only from stored observations; if
+    that is not enough, report the correct unknown and say that no new data was
+    allowed. Reproducing this from memory of a similar case is not evidence.
+
+When finished, reply with ONLY this JSON and no other text:
+{{OUTPUT_SCHEMA}}
+
+The allowed conclusion labels depend on what was asked:
+  multi-station propagation : coherent_multistation | single_station_only | not_decidable
+  instrument / metadata     : instrument_artifact | no_instrument_anomaly_in_scope | instrument_unknown
+  band / pick usability     : pick_applicable | pick_partially_applicable | pick_not_applicable | pick_unknown
+Use the *unknown variant of the group that matches the question when the evidence
+does not settle the asked field. Never answer a band or instrument question with a
+propagation label.

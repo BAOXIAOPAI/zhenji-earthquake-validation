@@ -1,0 +1,12 @@
+{"at": "2026-10-12T03:57:42Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "task_status", "arguments": {"stage": "progress"}, "phase": "start"}
+{"at": "2026-10-12T03:57:42Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "task_status", "arguments": {"stage": "progress"}, "phase": "ok", "result": {"can_finish": null}}
+{"at": "2026-10-12T03:57:42Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "get_evidence", "arguments": {}, "phase": "start"}
+{"at": "2026-10-12T03:57:42Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "get_evidence", "arguments": {}, "phase": "ok", "result": {"stations_acquired": 1}}
+{"at": "2026-10-12T03:57:42Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "run_stability_check", "arguments": {"candidate_id": "cf3bfe63e905"}, "phase": "start"}
+{"at": "2026-10-12T03:57:43Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "run_stability_check", "arguments": {"candidate_id": "cf3bfe63e905"}, "phase": "ok", "result": {"stability": "insufficient_configurations", "spread_s": 0.0, "bands_evaluated": [[3.0, 12.0]], "full_grid": false}}
+{"at": "2026-10-12T03:57:43Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "run_onset_check", "arguments": {"candidate_id": "cf3bfe63e905"}, "phase": "start"}
+{"at": "2026-10-12T03:57:43Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "run_onset_check", "arguments": {"candidate_id": "cf3bfe63e905"}, "phase": "ok", "result": {"onset_utc": null, "source": "compute"}}
+{"at": "2026-10-12T03:57:44Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "get_evidence", "arguments": {}, "phase": "start"}
+{"at": "2026-10-12T03:57:44Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "get_evidence", "arguments": {}, "phase": "ok", "result": {"stations_acquired": 1}}
+{"at": "2026-10-12T03:57:44Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "task_status", "arguments": {"stage": "finish"}, "phase": "start"}
+{"at": "2026-10-12T03:57:44Z", "run_id": "r-8f2eb7e2a2e7333f", "tool": "task_status", "arguments": {"stage": "finish"}, "phase": "ok", "result": {"can_finish": true}}

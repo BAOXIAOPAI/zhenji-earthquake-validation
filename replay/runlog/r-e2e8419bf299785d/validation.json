@@ -1,0 +1,315 @@
+{
+  "run_id": "r-e2e8419bf299785d",
+  "task_id": "t-da53ba3dd12b119e",
+  "question": "这段观测能不能用来做 1–12 Hz 的 P/S 拾取？",
+  "question_id": "Q_usable",
+  "requested_conditions": {
+    "schema": "seismic-execution-conditions/v1",
+    "question_id": "Q_usable",
+    "required_field": "method_applicability",
+    "scope": {
+      "scope_kind": "explicit_candidates",
+      "stations": [
+        "CHIMA"
+      ],
+      "candidate_ids": [
+        "409dfad13970"
+      ]
+    },
+    "method_goal": "three_component_pick",
+    "target_band_hz": [
+      1.0,
+      12.0
+    ],
+    "onset_method_band_hz": [
+      1.0,
+      8.0
+    ],
+    "diagnostic_bands_hz": [
+      [
+        1.0,
+        8.0
+      ],
+      [
+        3.0,
+        12.0
+      ],
+      [
+        5.0,
+        20.0
+      ]
+    ],
+    "acquisition_allowed": true,
+    "excluded_candidate_ids": [],
+    "max_unique_candidates_episode": 6,
+    "requested_changes": [],
+    "condition_id": "25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511"
+  },
+  "finish_audit": {
+    "schema": "agent-finish-audit/v1",
+    "can_finish": true,
+    "outcome": "determined_answer",
+    "required_field": "method_applicability",
+    "delivered_field": "method_applicability",
+    "field_settled": true,
+    "verdict": "pick_applicable",
+    "reason": "input_conditions_met",
+    "condition_id": "25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511",
+    "conditions_match": {
+      "method_goal": true,
+      "target_band_hz": true,
+      "onset_method_band_hz": true,
+      "acquisition_allowed": true,
+      "excluded_candidate_ids": true,
+      "diagnostic_bands_hz": true,
+      "all": true
+    },
+    "scope": {
+      "scope_kind": "explicit_candidates",
+      "stations": [
+        "CHIMA"
+      ],
+      "candidate_ids": [
+        "409dfad13970"
+      ]
+    },
+    "scope_kind": "explicit_candidates",
+    "participating_candidate_ids": [
+      "409dfad13970"
+    ],
+    "excluded_candidate_ids": [],
+    "obligations": [
+      {
+        "kind": "goal_recheck",
+        "candidate_id": "409dfad13970",
+        "state": "satisfied"
+      }
+    ],
+    "obligation_summary": {
+      "pending": 0,
+      "satisfied": 1,
+      "blocked": 0,
+      "total": 1
+    },
+    "unmet": [],
+    "stop_basis": "public_criterion_satisfied",
+    "stop_bases": [
+      "public_criterion_satisfied",
+      "scope_exhausted"
+    ],
+    "model_declared_stop_basis": "public_criterion_satisfied",
+    "model_stop_basis_supported": true,
+    "legal_stop_bases": [
+      "unanswered_no_data",
+      "coherence",
+      "public_criterion_not_met",
+      "scope_exhausted",
+      "material_missing",
+      "resource_limited",
+      "public_criterion_satisfied"
+    ],
+    "resources": {
+      "unique_candidates_attempted": 1,
+      "unique_candidates_ceiling": 6,
+      "model_requests": null,
+      "model_requests_known": false,
+      "model_requests_limit": 12,
+      "tool_calls_executed": 7,
+      "tool_calls_limit": 32
+    },
+    "note": "本审计只读取本轮实际状态；它不补做检查、不发请求、不调用模型，也不会把缺失的完成标志补成成功。"
+  },
+  "acceptance_checks": {
+    "conclusion_matches_validator": true,
+    "outcome_acceptable": true,
+    "field_matches": true,
+    "condition_matches": true,
+    "stop_basis_legal": true,
+    "scope_valid": true,
+    "evidence_refs_resolve": true,
+    "asked_field_settled": true
+  },
+  "evidence_ref_report": {
+    "all_valid": true,
+    "resolved": [
+      "quality:409dfad13970",
+      "applicability:409dfad13970",
+      "onset:409dfad13970",
+      "stability:409dfad13970"
+    ],
+    "unknown": [],
+    "stale": [],
+    "unverified": [],
+    "detail": null
+  },
+  "scope_report": {
+    "declared": [
+      "409dfad13970"
+    ],
+    "permitted": [
+      "409dfad13970"
+    ],
+    "participating": [
+      "409dfad13970"
+    ],
+    "excluded": [],
+    "remaining_acquirable": [],
+    "remaining_detail": {
+      "scope_kind": "explicit_candidates",
+      "in_scope": 1,
+      "attempted_episode": 1,
+      "ceiling": 6,
+      "untried_in_scope": 0,
+      "reason": null
+    },
+    "valid": true,
+    "reason": null
+  },
+  "acquisition": {
+    "stations_acquired": 1,
+    "stations_analysed": 1,
+    "sufficient_for_asked_field": true,
+    "next_action": {
+      "stop": true,
+      "needs": "none identified",
+      "why": "1 station(s) carry measurable band data, so the asked band question is answerable for the reviewed set (stations not acquired remain unknown)"
+    },
+    "tool_errors": 0,
+    "tools_with_errors": [],
+    "interface_failure": false,
+    "tool_attempts": {
+      "task_status": {
+        "start": 2,
+        "ok": 2,
+        "error": 0
+      },
+      "list_candidates": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      },
+      "acquire_station": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      },
+      "get_evidence": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      },
+      "run_onset_check": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      },
+      "run_stability_check": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      }
+    },
+    "recovery": {
+      "order_known": true,
+      "recovered": [],
+      "unrecovered": []
+    }
+  },
+  "model_claim": {
+    "conclusion": "pick_applicable",
+    "stop_reason": "public_criterion_satisfied",
+    "stations_used": null,
+    "field": "method_applicability",
+    "condition_id": "25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511",
+    "scope_candidate_ids": [
+      "409dfad13970"
+    ],
+    "evidence_refs": [
+      "quality:409dfad13970",
+      "applicability:409dfad13970",
+      "onset:409dfad13970",
+      "stability:409dfad13970"
+    ],
+    "stop_reason_code": "public_criterion_satisfied",
+    "limitations": [
+      "Scope was the single named station CHIMA (candidate 409dfad13970); no whole-network conclusion is claimed.",
+      "Applicability rests on input conditions only: 3 healthy components (ENE/ENN/ENZ, no integrity flags, 0 gaps) and 100 Hz sampling (Nyquist 50 Hz, > 24 Hz required) fully covering the requested 1-12 Hz band.",
+      "The onset check in the method band 1-8 Hz returned no pick (onset_utc null), and the declared diagnostic grid [[1,8],[3,12],[5,20]] yielded only 1 valid configuration of 13 (12 stalta_z configurations produced no pick; 1 ar_aic_3c configuration at 1-20 Hz gave 2.53 s), so automatic pick stability is insufficient_configurations and no stability claim is made.",
+      "This does not establish that an event exists in the window, nor that a human P/S pick would be reliable at this station.",
+      "No independent stations were acquired, so no multi-station propagation conclusion is offered."
+    ]
+  },
+  "validator_verdict": {
+    "verdict": "pick_applicable",
+    "reason": "input_conditions_met",
+    "statement": "Method applicability was judged against the goal the user asked for (三分量 P/S 拾取), not by the band count alone. 三分量 P/S 拾取：1/1 个可判断台站满足输入条件. Input conditions met is not the same as a P/S arrival being identifiable.",
+    "statement_zh": "这次是按你要求的目标（三分量 P/S 拾取）判断方法是否适用，不是只看频带数量。三分量 P/S 拾取：1/1 个可判断台站满足输入条件。输入条件满足 ≠ 已经识别出 P/S 震相。",
+    "terminated_by": "band_check",
+    "coincidence": 0,
+    "eligible_stations": 1,
+    "integrity_flag": false,
+    "answered": true,
+    "field_answered": "method_applicability",
+    "field": "method_applicability"
+  },
+  "agreement": true,
+  "delivered": {
+    "field": "method_applicability",
+    "value": true,
+    "field_value": true,
+    "answer_kind": "positive",
+    "scope": {
+      "goal": "three_component_pick",
+      "goal_label": "三分量 P/S 拾取",
+      "stations_supporting": [
+        "CHIMA"
+      ],
+      "stations_not_supporting": [],
+      "stations_with_unknown_support": [],
+      "target_band_hz": [
+        1.0,
+        12.0
+      ],
+      "stations_input_met": [
+        "CHIMA"
+      ],
+      "stations_input_not_met": [],
+      "stations_input_unknown": [],
+      "band_summary": "1 站支持 1-12 Hz 频带（有数据的 1 站中）",
+      "goal_summary": "三分量 P/S 拾取：1/1 个可判断台站满足输入条件"
+    },
+    "verdict": "pick_applicable",
+    "task_completed": true,
+    "condition_id": "25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511",
+    "scope_candidate_ids": [
+      "409dfad13970"
+    ],
+    "evidence_refs": [
+      "quality:409dfad13970",
+      "applicability:409dfad13970",
+      "onset:409dfad13970",
+      "stability:409dfad13970"
+    ],
+    "declared_evidence_refs": [
+      "quality:409dfad13970",
+      "applicability:409dfad13970",
+      "onset:409dfad13970",
+      "stability:409dfad13970"
+    ],
+    "stop_reason_code": "public_criterion_satisfied",
+    "limitations": [
+      "Scope was the single named station CHIMA (candidate 409dfad13970); no whole-network conclusion is claimed.",
+      "Applicability rests on input conditions only: 3 healthy components (ENE/ENN/ENZ, no integrity flags, 0 gaps) and 100 Hz sampling (Nyquist 50 Hz, > 24 Hz required) fully covering the requested 1-12 Hz band.",
+      "The onset check in the method band 1-8 Hz returned no pick (onset_utc null), and the declared diagnostic grid [[1,8],[3,12],[5,20]] yielded only 1 valid configuration of 13 (12 stalta_z configurations produced no pick; 1 ar_aic_3c configuration at 1-20 Hz gave 2.53 s), so automatic pick stability is insufficient_configurations and no stability claim is made.",
+      "This does not establish that an event exists in the window, nor that a human P/S pick would be reliable at this station.",
+      "No independent stations were acquired, so no multi-station propagation conclusion is offered."
+    ],
+    "statement": "Method applicability was judged against the goal the user asked for (三分量 P/S 拾取), not by the band count alone. 三分量 P/S 拾取：1/1 个可判断台站满足输入条件. Input conditions met is not the same as a P/S arrival being identifiable.",
+    "statement_zh": "这次是按你要求的目标（三分量 P/S 拾取）判断方法是否适用，不是只看频带数量。三分量 P/S 拾取：1/1 个可判断台站满足输入条件。输入条件满足 ≠ 已经识别出 P/S 震相。",
+    "model_claim_accepted": true,
+    "origin": "agent_validated",
+    "audit_outcome": "determined_answer",
+    "fallback_used": false,
+    "rejection_reason": null
+  }
+}

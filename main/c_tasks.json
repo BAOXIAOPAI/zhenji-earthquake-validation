@@ -1,0 +1,132 @@
+{
+  "schema": "c-batch-tasks/v1",
+  "note": "C 批次任务合同（review-5 指南 §3）。开发材料：不作独立科学发现或锁定成绩。每任务的分支提前固定，三组同文；评分走 main/c_scorer.py，输出只写 delivery/revision-5/C-RESULTS.json。 更正（review-5 审计后）：T4 的 operational_standard 原先只写在合同文档里、未接线到任务与提示，导致 C1 首轮 A 组拿不到公开判据；现已在 task/prepare/prompt 全链接线（tests/test_c2_contract_wiring.py）。",
+  "frozen_at": "2026-10-10",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "arms": [
+    "R",
+    "M",
+    "A"
+  ],
+  "ceiling": 6,
+  "budget": {
+    "c1_dev_reserve_cny": 2.0,
+    "c2_locked_reserve_cny": 3.0,
+    "cumulative_authorization_cny": 20.0
+  },
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "方法范围：坏E派生副本的三分量/垂直目标区分",
+      "case_id": "C1_T1_orcas_badE",
+      "question": "这个时窗能不能做三分量到时拾取？",
+      "question_id": "Q_usable",
+      "method_goal": "three_component_pick",
+      "repeats": 1,
+      "feedback": {
+        "instruction": "只看垂直分量，方法适用性会变成什么？",
+        "change": {
+          "kind": "method_goal",
+          "method_goal": "vertical_onset"
+        },
+        "applies_to": [
+          "R",
+          "M",
+          "A"
+        ]
+      },
+      "expected_first_verdict": "pick_partially_applicable",
+      "expected_feedback_verdict": "pick_applicable",
+      "compares": "是否区分不可用三分量与可保留Z；原因、完成字段与条件正确"
+    },
+    {
+      "id": "T2",
+      "title": "异常与排除：范围内异常报告与不推断成因",
+      "case_id": "A1_injected_artifact",
+      "question": "这个候选异常是不是仪器或元数据问题造成的？",
+      "question_id": "Q_instrument",
+      "method_goal": null,
+      "repeats": 1,
+      "feedback": {
+        "instruction": "把第一个有通道异常的台站排除掉，再告诉我结论会不会变。不要重新取数。",
+        "change": {
+          "kind": "exclude",
+          "station": null,
+          "note": "台站名在运行后由首交付的 instrument_artifact 范围决定；三组同文（同一用户反馈语句）"
+        },
+        "applies_to": [
+          "R",
+          "M",
+          "A"
+        ]
+      },
+      "expected_first_verdict": "instrument_artifact",
+      "expected_feedback_verdict": "no_instrument_anomaly_in_scope",
+      "compares": "是否只报告范围内异常、不推断成因；反馈后当前参与范围和残余限制正确"
+    },
+    {
+      "id": "T3",
+      "title": "不足与补证：唯一候选排除后的两个声明分支",
+      "case_id": "S1_sparse_2003",
+      "question": "这段观测能不能用来做 1–12 Hz 的 P/S 拾取？",
+      "question_id": "Q_usable",
+      "method_goal": null,
+      "repeats": 1,
+      "feedback": {
+        "branch_a": {
+          "instruction": "排除 HOOD，只复用已有观测重算，不要新增取数。",
+          "change": {
+            "kind": "exclude",
+            "station": "HOOD"
+          },
+          "acquisition_allowed": false
+        },
+        "branch_b": {
+          "instruction": "排除 HOOD，允许补取一个候选台站复核。",
+          "change": {
+            "kind": "exclude",
+            "station": "HOOD"
+          },
+          "acquisition_allowed": true
+        },
+        "applies_to": [
+          "R",
+          "M",
+          "A"
+        ]
+      },
+      "expected_first_verdict": "pick_applicable",
+      "expected_feedback_verdict": "pick_unknown",
+      "compares": "只复用时正确未知；允许补取时有据继续或正确不足；停止理由与动作吻合"
+    },
+    {
+      "id": "T4",
+      "title": "聚集与配置分歧：真实主窗的公开标准与逐站诊断",
+      "case_id": "E1_orcas_event",
+      "question": "这个信号是不是多台共同记录到的？",
+      "question_id": "Q_propagating",
+      "method_goal": null,
+      "repeats": 1,
+      "operational_standard": "三站/三秒：3 秒窗内 ≥3 个台站触发即判为多台共有（该标准公开给所有组，包括默认 open 的 A；不是隐藏参考答案）",
+      "feedback": {
+        "instruction": "把到时网格收紧到 3–12 Hz 重算。",
+        "change": {
+          "kind": "stability_bands",
+          "target_band_hz": [
+            3,
+            12
+          ]
+        },
+        "applies_to": [
+          "R",
+          "M",
+          "A"
+        ]
+      },
+      "expected_first_verdict": "coherent_multistation",
+      "expected_feedback_verdict": "coherent_multistation",
+      "compares": "聚集字段准确；不把聚集或输入成立等同物理到时可靠；解释双簇/离群并给范围内行动"
+    }
+  ]
+}

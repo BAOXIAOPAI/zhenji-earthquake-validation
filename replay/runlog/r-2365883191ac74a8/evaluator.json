@@ -1,0 +1,18 @@
+{
+  "task_id": "t-c045b200e5d60711",
+  "demo_case_ref": null,
+  "acceptance": {
+    "source": "user_spec",
+    "question_ids": [
+      "Q_usable"
+    ],
+    "injected": false,
+    "inject_station": null
+  },
+  "kind": null,
+  "split": null,
+  "inject_first": false,
+  "inject_station": null,
+  "note": "evaluator-side only; never served through an MCP tool",
+  "parent_run_id": "r-40183b72e23b844f"
+}

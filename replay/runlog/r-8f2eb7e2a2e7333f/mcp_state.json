@@ -1,0 +1,846 @@
+{
+  "task_id": "t-48bca06a5a01532b",
+  "user_question": "这段观测能不能用来做 1–12 Hz 的 P/S 拾取？",
+  "window_start": "2023-12-24T10:00:00",
+  "window_end": "2023-12-24T10:02:00",
+  "region": {
+    "kind": "stations",
+    "stations": [
+      "CHIMA"
+    ],
+    "networks": []
+  },
+  "target_band_hz": [
+    1.0,
+    12.0
+  ],
+  "method_goal": "three_component_pick",
+  "allowed_actions": [
+    "discover",
+    "acquire",
+    "onset_check",
+    "read_evidence"
+  ],
+  "operational_standard": null,
+  "question_id": "Q_usable",
+  "scope": {
+    "scope_kind": "explicit_candidates",
+    "stations": [
+      "CHIMA"
+    ],
+    "candidate_ids": [
+      "cf3bfe63e905"
+    ],
+    "unmatched_stations": []
+  },
+  "diagnostic_bands_hz": [
+    [
+      3.0,
+      12.0
+    ]
+  ],
+  "acquisition_allowed": false,
+  "excluded_candidate_ids": [],
+  "max_unique_candidates_episode": 6,
+  "run_id": "r-8f2eb7e2a2e7333f",
+  "method_band_hz": [
+    1.0,
+    8.0
+  ],
+  "method_applicability_goal": "three_component_pick",
+  "requested_conditions": {
+    "schema": "seismic-execution-conditions/v1",
+    "question_id": "Q_usable",
+    "required_field": "method_applicability",
+    "scope": {
+      "scope_kind": "explicit_candidates",
+      "stations": [
+        "CHIMA"
+      ],
+      "candidate_ids": [
+        "cf3bfe63e905"
+      ]
+    },
+    "method_goal": "three_component_pick",
+    "target_band_hz": [
+      1.0,
+      12.0
+    ],
+    "onset_method_band_hz": [
+      1.0,
+      8.0
+    ],
+    "diagnostic_bands_hz": [
+      [
+        3.0,
+        12.0
+      ]
+    ],
+    "acquisition_allowed": false,
+    "excluded_candidate_ids": [],
+    "max_unique_candidates_episode": 6,
+    "requested_changes": [
+      {
+        "kind": "stability_bands",
+        "target_band_hz": [
+          3.0,
+          12.0
+        ],
+        "bands_hz": [
+          [
+            3.0,
+            12.0
+          ]
+        ]
+      }
+    ],
+    "condition_id": "686f64a5c10d904cd7276988a5c86069aaa52b10d936abb71086fd9f0999401c"
+  },
+  "analysis_level": "quality_only",
+  "exclusions": [],
+  "attempted_candidate_ids_episode": [
+    "cf3bfe63e905"
+  ],
+  "condition_applications": [
+    {
+      "actor": "deterministic_guard",
+      "change": {
+        "kind": "stability_bands",
+        "target_band_hz": [
+          3.0,
+          12.0
+        ],
+        "bands_hz": [
+          [
+            3.0,
+            12.0
+          ]
+        ]
+      },
+      "before": null,
+      "after": {
+        "schema": "seismic-execution-conditions/v1",
+        "question_id": "Q_usable",
+        "required_field": "method_applicability",
+        "scope": {
+          "scope_kind": "explicit_candidates",
+          "stations": [
+            "CHIMA"
+          ],
+          "candidate_ids": [
+            "cf3bfe63e905"
+          ]
+        },
+        "method_goal": "three_component_pick",
+        "target_band_hz": [
+          1.0,
+          12.0
+        ],
+        "onset_method_band_hz": [
+          1.0,
+          8.0
+        ],
+        "diagnostic_bands_hz": [
+          [
+            3.0,
+            12.0
+          ]
+        ],
+        "acquisition_allowed": false,
+        "excluded_candidate_ids": [],
+        "max_unique_candidates_episode": 6,
+        "requested_changes": [
+          {
+            "kind": "stability_bands",
+            "target_band_hz": [
+              3.0,
+              12.0
+            ],
+            "bands_hz": [
+              [
+                3.0,
+                12.0
+              ]
+            ]
+          }
+        ],
+        "condition_id": "686f64a5c10d904cd7276988a5c86069aaa52b10d936abb71086fd9f0999401c"
+      },
+      "recomputed": 0,
+      "stale_evidence": [],
+      "source": "feedback_guard"
+    }
+  ],
+  "stability_checks": {
+    "cf3bfe63e905": {
+      "station": "CHIMA",
+      "at": "2026-10-12T03:57:43Z",
+      "stability": "insufficient_configurations",
+      "spread_s": 0.0,
+      "n_valid": 1,
+      "statement": "只有 1 个配置给出了到时，少于判断稳定性所需的 3 个，因此无法判断它稳不稳。",
+      "next_step": "不要把这个到时当作已确认：可以换采样率更高的台站，或直接报告为无法确定。",
+      "clusters": [
+        {
+          "values": [
+            2.5299999713897705
+          ],
+          "n": 1,
+          "onset_s": 2.5299999713897705
+        }
+      ],
+      "grid_size": 13,
+      "condition_ref": "686f64a5c10d904cd7276988a5c86069aaa52b10d936abb71086fd9f0999401c",
+      "effective_parameters": {
+        "bands_hz": [
+          [
+            3.0,
+            12.0
+          ]
+        ],
+        "detector_bands": {
+          "stalta_z": {
+            "bands_hz": [
+              [
+                3.0,
+                12.0
+              ]
+            ],
+            "n_configurations": 4,
+            "n_ok": 0,
+            "n_no_pick": 4,
+            "n_not_applicable": 0,
+            "n_error": 0
+          },
+          "ar_aic_3c": {
+            "bands_hz": [
+              [
+                1.0,
+                20.0
+              ]
+            ],
+            "n_configurations": 1,
+            "n_ok": 1,
+            "n_no_pick": 0,
+            "n_not_applicable": 0,
+            "n_error": 0
+          }
+        },
+        "grid_size": 13,
+        "thresholds": [
+          3.0,
+          3.5,
+          4.0,
+          5.0
+        ],
+        "target_band_hz": [
+          1.0,
+          12.0
+        ]
+      },
+      "aggregate_parameters": {
+        "onsets_min_s": 2.5299999713897705,
+        "onsets_max_s": 2.5299999713897705,
+        "onsets_median_s": 2.5299999713897705,
+        "mad_s": 0.0,
+        "n_configurations": 5,
+        "n_configurations_error": 0,
+        "n_configurations_not_applicable": 0,
+        "detectors": {
+          "stalta_z": {
+            "bands_hz": [
+              [
+                3.0,
+                12.0
+              ]
+            ],
+            "n_configurations": 4,
+            "n_ok": 0,
+            "n_no_pick": 4,
+            "n_not_applicable": 0,
+            "n_error": 0
+          },
+          "ar_aic_3c": {
+            "bands_hz": [
+              [
+                1.0,
+                20.0
+              ]
+            ],
+            "n_configurations": 1,
+            "n_ok": 1,
+            "n_no_pick": 0,
+            "n_not_applicable": 0,
+            "n_error": 0
+          }
+        },
+        "alignment": {
+          "checked_components": [
+            {
+              "component": "Z",
+              "sampling_rate_hz": 100.0,
+              "starttime": "2023-12-24T10:00:00.000000Z",
+              "n_samples": 12001,
+              "endtime": "2023-12-24T10:02:00.000000Z"
+            },
+            {
+              "component": "N",
+              "sampling_rate_hz": 100.0,
+              "starttime": "2023-12-24T10:00:00.000000Z",
+              "n_samples": 12001,
+              "endtime": "2023-12-24T10:02:00.000000Z"
+            },
+            {
+              "component": "E",
+              "sampling_rate_hz": 100.0,
+              "starttime": "2023-12-24T10:00:00.000000Z",
+              "n_samples": 12001,
+              "endtime": "2023-12-24T10:02:00.000000Z"
+            }
+          ],
+          "aligned": true,
+          "reason": "aligned",
+          "common_coverage": {
+            "start": "2023-12-24T10:00:00.000000Z",
+            "end": "2023-12-24T10:02:00.000000Z"
+          }
+        }
+      },
+      "participating_candidate_ids": [
+        "cf3bfe63e905"
+      ],
+      "freshness": "valid",
+      "check_status": "ok",
+      "tool_event_ref": "run_stability_check:cf3bfe63e905",
+      "actor": "agent"
+    }
+  },
+  "derived_evidence_checks": {
+    "stability:cf3bfe63e905": {
+      "evidence_id": "stability:cf3bfe63e905",
+      "evidence_kind": "stability",
+      "source_sha256": "1670a2e99a5bb723dbe9ee2870ba716e430fe9e189919d429031fd67cb223f15",
+      "condition_ref": "686f64a5c10d904cd7276988a5c86069aaa52b10d936abb71086fd9f0999401c",
+      "effective_parameters": {
+        "bands_hz": [
+          [
+            3.0,
+            12.0
+          ]
+        ],
+        "detector_bands": {
+          "stalta_z": {
+            "bands_hz": [
+              [
+                3.0,
+                12.0
+              ]
+            ],
+            "n_configurations": 4,
+            "n_ok": 0,
+            "n_no_pick": 4,
+            "n_not_applicable": 0,
+            "n_error": 0
+          },
+          "ar_aic_3c": {
+            "bands_hz": [
+              [
+                1.0,
+                20.0
+              ]
+            ],
+            "n_configurations": 1,
+            "n_ok": 1,
+            "n_no_pick": 0,
+            "n_not_applicable": 0,
+            "n_error": 0
+          }
+        },
+        "grid_size": 13,
+        "thresholds": [
+          3.0,
+          3.5,
+          4.0,
+          5.0
+        ],
+        "target_band_hz": [
+          1.0,
+          12.0
+        ]
+      },
+      "participating_candidate_ids": [
+        "cf3bfe63e905"
+      ],
+      "dependency_fields": {
+        "diagnostic_bands_hz": [
+          [
+            3.0,
+            12.0
+          ]
+        ],
+        "scope": {
+          "scope_kind": "explicit_candidates",
+          "stations": [
+            "CHIMA"
+          ],
+          "candidate_ids": [
+            "cf3bfe63e905"
+          ]
+        }
+      },
+      "freshness": "valid",
+      "check_status": "ok",
+      "tool_event_ref": "run_stability_check:cf3bfe63e905",
+      "actor": "agent"
+    },
+    "onset:cf3bfe63e905": {
+      "evidence_id": "onset:cf3bfe63e905",
+      "evidence_kind": "onset",
+      "source_sha256": "1670a2e99a5bb723dbe9ee2870ba716e430fe9e189919d429031fd67cb223f15",
+      "condition_ref": "686f64a5c10d904cd7276988a5c86069aaa52b10d936abb71086fd9f0999401c",
+      "effective_parameters": {
+        "band_hz": [
+          1.0,
+          8.0
+        ],
+        "algorithm": "stalta_z"
+      },
+      "participating_candidate_ids": [
+        "cf3bfe63e905"
+      ],
+      "dependency_fields": {
+        "onset_method_band_hz": [
+          1.0,
+          8.0
+        ],
+        "scope": {
+          "scope_kind": "explicit_candidates",
+          "stations": [
+            "CHIMA"
+          ],
+          "candidate_ids": [
+            "cf3bfe63e905"
+          ]
+        }
+      },
+      "freshness": "valid",
+      "check_status": "ok",
+      "tool_event_ref": "run_onset_check:cf3bfe63e905",
+      "actor": "agent"
+    }
+  },
+  "discovery": {
+    "n_eligible": 1,
+    "eligible": [
+      {
+        "candidate_id": "cf3bfe63e905",
+        "network": "UW",
+        "station": "CHIMA",
+        "distance_km": null,
+        "family": "EN",
+        "analysis_eligible": true,
+        "three_component": true,
+        "vertical_only": false,
+        "band_support": {
+          "supported": true,
+          "sampling_rate_hz": 100.0,
+          "nyquist_hz": 50.0,
+          "target_band_hz": [
+            1.0,
+            12.0
+          ],
+          "required_rate_hz": 24.0,
+          "reason": "ok"
+        },
+        "reason": "满足目标条件"
+      }
+    ]
+  },
+  "acquired": [
+    {
+      "candidate_id": "cf3bfe63e905",
+      "network": "UW",
+      "station": "CHIMA",
+      "distance_km": null,
+      "family": "EN",
+      "window_start": "2023-12-24T10:00:00",
+      "window_end": "2023-12-24T10:02:00",
+      "target_band_hz": [
+        1.0,
+        12.0
+      ],
+      "method_band_hz": [
+        1.0,
+        8.0
+      ],
+      "waveform_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=CHIMA&loc=--&cha=EN%3F&start=2023-12-24T10%3A00%3A00&end=2023-12-24T10%3A02%3A00&format=miniseed&nodata=404",
+      "metadata_url": "https://service.earthscope.org/fdsnws/station/1/query?net=UW&sta=CHIMA&loc=--&cha=EN%3F&starttime=2023-12-24T10%3A00%3A00&endtime=2023-12-24T10%3A02%3A00&level=response&format=xml&nodata=404",
+      "parent_record_id": null,
+      "status": "analysed",
+      "acquisition_status": "ok",
+      "raw_waveform_sha256": "1670a2e99a5bb723dbe9ee2870ba716e430fe9e189919d429031fd67cb223f15",
+      "raw_metadata_sha256": "29787f0de6d42c5dde2f3ff546488d32fe07a888f88baee38c2d04cc37bd6025",
+      "waveform_sha256": "1670a2e99a5bb723dbe9ee2870ba716e430fe9e189919d429031fd67cb223f15",
+      "metadata_sha256": "29787f0de6d42c5dde2f3ff546488d32fe07a888f88baee38c2d04cc37bd6025",
+      "channels": [
+        "UW.CHIMA..ENE",
+        "UW.CHIMA..ENN",
+        "UW.CHIMA..ENZ"
+      ],
+      "gaps": 0,
+      "channel_integrity_flags": [],
+      "channel_integrity_ok": true,
+      "three_component_ok": true,
+      "vertical_ok": true,
+      "vertical_health": {
+        "ok": true,
+        "channels_present": [
+          "UW.CHIMA..ENZ"
+        ],
+        "channels_healthy": [
+          "UW.CHIMA..ENZ"
+        ],
+        "problems": {},
+        "problem_text": {}
+      },
+      "sampling_rate_hz": 100.0,
+      "band_support": {
+        "supported": true,
+        "sampling_rate_hz": 100.0,
+        "nyquist_hz": 50.0,
+        "target_band_hz": [
+          1.0,
+          12.0
+        ],
+        "required_rate_hz": 24.0,
+        "reason": "ok"
+      },
+      "method_applicability": {
+        "three_component_pick": true,
+        "vertical_onset": true
+      },
+      "method_applicability_goal": "three_component_pick",
+      "onset_utc": null,
+      "onset_computed": true,
+      "onset_source": "compute",
+      "stability": null,
+      "stability_computed": false,
+      "analysis_level": "quality_only",
+      "onset_condition_ref": "686f64a5c10d904cd7276988a5c86069aaa52b10d936abb71086fd9f0999401c",
+      "onset_band_hz": [
+        1.0,
+        8.0
+      ],
+      "stability_bands_hz": [
+        [
+          3.0,
+          12.0
+        ]
+      ]
+    }
+  ],
+  "requests": 0,
+  "http_attempts": 0,
+  "logical_acquisitions": 0,
+  "cache_hits": 0,
+  "bytes": 0,
+  "parent_run_id": "r-40183b72e23b844f",
+  "follow_up": "把到时诊断网格收紧到 3–12 Hz，不要新增取数",
+  "change": {
+    "kind": "stability_bands",
+    "target_band_hz": [
+      3.0,
+      12.0
+    ],
+    "bands_hz": [
+      [
+        3.0,
+        12.0
+      ]
+    ]
+  },
+  "carried_forward": [
+    "cf3bfe63e905"
+  ],
+  "rejudged_for_child_conditions": [],
+  "passed_forward": null,
+  "parent_history": {
+    "tool_errors": 0,
+    "tool_attempts": {
+      "task_status": {
+        "start": 2,
+        "ok": 2,
+        "error": 0
+      },
+      "get_evidence": {
+        "start": 2,
+        "ok": 2,
+        "error": 0
+      },
+      "acquire_station": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      },
+      "run_onset_check": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      },
+      "run_stability_check": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      }
+    },
+    "requests": 2,
+    "failure_kind": null
+  },
+  "tool_attempts": {
+    "task_status": {
+      "start": 2,
+      "ok": 2,
+      "error": 0
+    },
+    "get_evidence": {
+      "start": 2,
+      "ok": 2,
+      "error": 0
+    },
+    "run_stability_check": {
+      "start": 1,
+      "ok": 1,
+      "error": 0
+    },
+    "run_onset_check": {
+      "start": 1,
+      "ok": 1,
+      "error": 0
+    }
+  },
+  "tool_events": [
+    {
+      "at": "2026-10-12T03:57:42Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "task_status",
+      "arguments": {
+        "stage": "progress"
+      },
+      "phase": "start"
+    },
+    {
+      "at": "2026-10-12T03:57:42Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "task_status",
+      "arguments": {
+        "stage": "progress"
+      },
+      "phase": "ok",
+      "result": {
+        "can_finish": null
+      }
+    },
+    {
+      "at": "2026-10-12T03:57:42Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "get_evidence",
+      "arguments": {},
+      "phase": "start"
+    },
+    {
+      "at": "2026-10-12T03:57:42Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "get_evidence",
+      "arguments": {},
+      "phase": "ok",
+      "result": {
+        "stations_acquired": 1
+      }
+    },
+    {
+      "at": "2026-10-12T03:57:42Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "run_stability_check",
+      "arguments": {
+        "candidate_id": "cf3bfe63e905"
+      },
+      "phase": "start"
+    },
+    {
+      "at": "2026-10-12T03:57:43Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "run_stability_check",
+      "arguments": {
+        "candidate_id": "cf3bfe63e905"
+      },
+      "phase": "ok",
+      "result": {
+        "stability": "insufficient_configurations",
+        "spread_s": 0.0,
+        "bands_evaluated": [
+          [
+            3.0,
+            12.0
+          ]
+        ],
+        "full_grid": false
+      }
+    },
+    {
+      "at": "2026-10-12T03:57:43Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "run_onset_check",
+      "arguments": {
+        "candidate_id": "cf3bfe63e905"
+      },
+      "phase": "start"
+    },
+    {
+      "at": "2026-10-12T03:57:43Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "run_onset_check",
+      "arguments": {
+        "candidate_id": "cf3bfe63e905"
+      },
+      "phase": "ok",
+      "result": {
+        "onset_utc": null,
+        "source": "compute"
+      }
+    },
+    {
+      "at": "2026-10-12T03:57:44Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "get_evidence",
+      "arguments": {},
+      "phase": "start"
+    },
+    {
+      "at": "2026-10-12T03:57:44Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "get_evidence",
+      "arguments": {},
+      "phase": "ok",
+      "result": {
+        "stations_acquired": 1
+      }
+    },
+    {
+      "at": "2026-10-12T03:57:44Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "task_status",
+      "arguments": {
+        "stage": "finish"
+      },
+      "phase": "start"
+    },
+    {
+      "at": "2026-10-12T03:57:44Z",
+      "run_id": "r-8f2eb7e2a2e7333f",
+      "tool": "task_status",
+      "arguments": {
+        "stage": "finish"
+      },
+      "phase": "ok",
+      "result": {
+        "can_finish": true
+      }
+    }
+  ],
+  "computation_counts": {
+    "stability_computed": 1,
+    "onsets_computed": 1
+  },
+  "finish_audit": {
+    "schema": "agent-finish-audit/v1",
+    "can_finish": true,
+    "outcome": "determined_answer",
+    "required_field": "method_applicability",
+    "delivered_field": "method_applicability",
+    "field_settled": true,
+    "verdict": "pick_applicable",
+    "reason": "input_conditions_met",
+    "condition_id": "686f64a5c10d904cd7276988a5c86069aaa52b10d936abb71086fd9f0999401c",
+    "conditions_match": {
+      "method_goal": true,
+      "target_band_hz": true,
+      "onset_method_band_hz": true,
+      "acquisition_allowed": true,
+      "excluded_candidate_ids": true,
+      "diagnostic_bands_hz": true,
+      "all": true
+    },
+    "scope": {
+      "scope_kind": "explicit_candidates",
+      "stations": [
+        "CHIMA"
+      ],
+      "candidate_ids": [
+        "cf3bfe63e905"
+      ]
+    },
+    "scope_kind": "explicit_candidates",
+    "participating_candidate_ids": [
+      "cf3bfe63e905"
+    ],
+    "excluded_candidate_ids": [],
+    "obligations": [
+      {
+        "kind": "no_new_acquisition",
+        "state": "satisfied",
+        "new_acquisitions": 0,
+        "reason": null
+      },
+      {
+        "kind": "diagnostic",
+        "candidate_id": "cf3bfe63e905",
+        "state": "satisfied",
+        "grid": [
+          [
+            3.0,
+            12.0
+          ]
+        ],
+        "actor": "agent"
+      },
+      {
+        "kind": "goal_recheck",
+        "candidate_id": "cf3bfe63e905",
+        "state": "satisfied"
+      }
+    ],
+    "obligation_summary": {
+      "pending": 0,
+      "satisfied": 3,
+      "blocked": 0,
+      "total": 3
+    },
+    "unmet": [],
+    "stop_basis": "public_criterion_satisfied",
+    "stop_bases": [
+      "public_criterion_satisfied",
+      "scope_exhausted"
+    ],
+    "model_declared_stop_basis": null,
+    "model_stop_basis_supported": null,
+    "legal_stop_bases": [
+      "unanswered_no_data",
+      "coherence",
+      "public_criterion_not_met",
+      "scope_exhausted",
+      "material_missing",
+      "resource_limited",
+      "public_criterion_satisfied"
+    ],
+    "resources": {
+      "unique_candidates_attempted": 1,
+      "unique_candidates_ceiling": 6,
+      "model_requests": null,
+      "model_requests_known": false,
+      "model_requests_limit": 12,
+      "tool_calls_executed": 6,
+      "tool_calls_limit": 32
+    },
+    "note": "本审计只读取本轮实际状态；它不补做检查、不发请求、不调用模型，也不会把缺失的完成标志补成成功。"
+  }
+}

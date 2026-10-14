@@ -1,0 +1,9 @@
+{
+  "run_id": "r-3ae9c6948c2f8967",
+  "status": "succeeded",
+  "failure_kind": null,
+  "failure_detail": null,
+  "recorded_at": "2026-10-12T04:03:04Z",
+  "stations_acquired": 1,
+  "model_cost_known": true
+}

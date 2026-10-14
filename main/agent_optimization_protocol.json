@@ -1,0 +1,137 @@
+{
+  "schema": "agent-optimization-protocol/v1",
+  "date": "2026-10-11",
+  "output_dir": "delivery/agent-optimization-2026-10-11",
+  "resources_ref": "prototype/model-budget.json",
+  "budget": {
+    "cumulative_authorization_cny": 20.0,
+    "stage_cost_pause_cny": {"development": 1.2, "validation": 1.8, "smoke_web_fix": 0.5}
+  },
+  "profiles": {
+    "A0": {"policy": "main/prompts/agent_policy_v0.txt", "thinking": {"enabled": false, "effort": null},
+           "note": "统一公共缺陷修复后的原有行动提示策略"},
+    "A1": {"policy": "main/prompts/agent_policy_v1.txt", "thinking": {"enabled": false, "effort": null},
+           "note": "任务策略、进度反馈、必要检查选择"},
+    "AT": {"policy": "main/prompts/agent_policy_v1.txt", "thinking": {"enabled": true, "effort": "high"},
+           "note": "与 A1 同策略与工具，思考开启；失败即退出"}
+  },
+  "selection_order": [
+    "无严重条件/范围/预算违规",
+    "Agent 正确处理轮次最多",
+    "执行失败更少",
+    "相同覆盖与正确性下取证/必要重算投入更少",
+    "费用和时延更低",
+    "仍并列选 A1；AT 无实证改善时不选"
+  ],
+  "acceptance": {
+    "free_gates": ["G01", "G02", "G03", "G04", "G05", "G06", "G07", "G08",
+                   "G09", "G10", "G11", "G12", "G13", "G14", "G16"],
+    "at_extra_gate": "G15",
+    "feedback_condition_fulfilled": "6/6",
+    "severe_violations": 0,
+    "unfounded_claims_escaping": 0,
+    "evidence_traceable": "12/12",
+    "rescore_reproducible": "12/12",
+    "agent_correct_min": "11/12",
+    "execution_failure_max": "1/12",
+    "web_agent_feedback": "三类各一次"
+  },
+  "development": {
+    "batch_id": "agent-opt-dev-2026-10-11",
+    "repeats": 1,
+    "tasks": [
+      {
+        "id": "D1", "title": "范围变更：排除范围内唯一观测后交付正确未知",
+        "case_id": "E4_quilcene_event",
+        "question": "这个候选异常是不是仪器或元数据问题造成的？",
+        "question_id": "Q_instrument",
+        "method_goal": "three_component_pick",
+        "target_band_hz": [1.0, 12.0],
+        "scope": {"scope_kind": "explicit_candidates", "stations": ["EQUIL"]},
+        "acquisition_allowed": true,
+        "feedback": {"instruction": "把范围内唯一的观测 EQUIL 排除掉，然后告诉我结论变了没有。不要新增取数。",
+                     "change": {"kind": "exclude", "station": "EQUIL"},
+                     "acquisition_allowed": false},
+        "checks": ["实际排除生效", "范围为空时输出正确未知", "父结论不残留", "新取数为 0"]
+      },
+      {
+        "id": "D2", "title": "分析条件：诊断网格收紧到 3–12 Hz 且贯穿实际计算",
+        "case_id": "Q3_ptownsend_quiet",
+        "question": "这段观测能不能用来做 1–12 Hz 的 P/S 拾取？",
+        "question_id": "Q_usable",
+        "method_goal": "three_component_pick",
+        "target_band_hz": [1.0, 12.0],
+        "scope": {"scope_kind": "explicit_candidates", "stations": ["CHIMA"]},
+        "acquisition_allowed": true,
+        "feedback": {"instruction": "把到时诊断网格收紧到 3–12 Hz 重算。不要新增取数。",
+                     "change": {"kind": "stability_bands", "target_band_hz": [3, 12]},
+                     "acquisition_allowed": false},
+        "checks": ["有效网格为 3–12 Hz", "旧默认网格证据失效", "无需额外取数", "参数贯穿模型可见证据"]
+      },
+      {
+        "id": "D3", "title": "有界恢复：真实 7029 元数据失败后换站并更新范围",
+        "case_id": "Q3_ptownsend_quiet",
+        "question": "这个候选异常是不是多个台站共有的真实传播信号？",
+        "question_id": "Q_propagating",
+        "method_goal": "three_component_pick",
+        "target_band_hz": [1.0, 12.0],
+        "scope": {"scope_kind": "all_allowed"},
+        "operational_standard": "三站/三秒：3 秒窗内 ≥3 个台站触发即判为多台共有（该标准公开给所有组，包括默认 open 的 A；不是隐藏参考答案）",
+        "acquisition_allowed": true,
+        "feedback": {"instruction": "把本轮实际取得的一个观测排除掉，再告诉我结论会不会变。不要新增取数。",
+                     "change": {"kind": "exclude", "station": null,
+                                "note": "运行时解析：本轮第一个实际取得的观测"},
+                     "acquisition_allowed": false},
+        "checks": ["真实故障与换站顺序", "费用与范围更新", "停止依据", "排除后参与集合变化"]
+      }
+    ]
+  },
+  "validation": {
+    "batch_id": "agent-opt-val-2026-10-11",
+    "repeats": 2,
+    "selection_rule": "从预声明可用条件集合按固定规则选择；不得按开发失败临时挑最有利条件",
+    "tasks": [
+      {
+        "id": "V1", "title": "新条件：另一个台站的排除组合",
+        "case_id": "E4_quilcene_event",
+        "question": "这个候选异常是不是仪器或元数据问题造成的？",
+        "question_id": "Q_instrument",
+        "method_goal": "three_component_pick",
+        "target_band_hz": [1.0, 12.0],
+        "scope": {"scope_kind": "explicit_candidates", "stations": ["DOSE"]},
+        "feedback": {"instruction": "把 DOSE 排除掉，然后告诉我结论变了没有。不要新增取数。",
+                     "change": {"kind": "exclude", "station": "DOSE"},
+                     "acquisition_allowed": false},
+        "new_condition_basis": "开发未使用 DOSE 作为排除对象；与 D1 的 case 相同但对象与范围不同"
+      },
+      {
+        "id": "V2", "title": "新条件：未用于开发的 5–20 Hz 诊断网格",
+        "case_id": "Q4_quilcene_quiet",
+        "question": "这段观测能不能用来做 1–12 Hz 的 P/S 拾取？",
+        "question_id": "Q_usable",
+        "method_goal": "three_component_pick",
+        "target_band_hz": [1.0, 12.0],
+        "scope": {"scope_kind": "explicit_candidates", "stations": ["CHIMA"]},
+        "feedback": {"instruction": "把到时诊断网格收紧到 5–20 Hz 重算。不要新增取数。",
+                     "change": {"kind": "stability_bands", "target_band_hz": [5, 20]},
+                     "acquisition_allowed": false},
+        "new_condition_basis": "开发用的是 3–12 Hz / Q3；本例用 5–20 Hz / Q4，网格与窗均未用于开发"
+      },
+      {
+        "id": "V3", "title": "新条件：首个候选失败位置与候选上限 3",
+        "case_id": "F1_qgbp_metadata_gap",
+        "question": "这个候选异常是不是多个台站共有的真实传播信号？",
+        "question_id": "Q_propagating",
+        "method_goal": "three_component_pick",
+        "target_band_hz": [1.0, 12.0],
+        "scope": {"scope_kind": "all_allowed"},
+        "max_unique_candidates_episode": 3,
+        "operational_standard": "三站/三秒：3 秒窗内 ≥3 个台站触发即判为多台共有（该标准公开给所有组，包括默认 open 的 A；不是隐藏参考答案）",
+        "feedback": {"instruction": "把本轮实际取得的一个观测排除掉。不要新增取数。",
+                     "change": {"kind": "exclude", "station": null},
+                     "acquisition_allowed": false},
+        "new_condition_basis": "开发用 Q3 的 7029 失败位置；本例首个候选 QGBP 即失败，且候选上限为 3"
+      }
+    ]
+  }
+}

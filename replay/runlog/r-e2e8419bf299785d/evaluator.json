@@ -1,0 +1,17 @@
+{
+  "task_id": "t-da53ba3dd12b119e",
+  "demo_case_ref": null,
+  "acceptance": {
+    "source": "user_spec",
+    "question_ids": [
+      "Q_usable"
+    ],
+    "injected": false,
+    "inject_station": null
+  },
+  "kind": null,
+  "split": null,
+  "inject_first": false,
+  "inject_station": null,
+  "note": "evaluator-side only; never served through an MCP tool"
+}

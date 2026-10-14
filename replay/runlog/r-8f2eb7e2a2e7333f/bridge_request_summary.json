@@ -1,0 +1,79 @@
+{
+  "schema": "bridge-request-summary/v1",
+  "note": "synthesised from provider-bridge responses; not native AGH session events",
+  "run_id": "r-8f2eb7e2a2e7333f",
+  "profile": "A1",
+  "agh_session_id": "agnes:local:local-dev:cli:workspace:9b91136568a78dd7",
+  "model": "deepseek-flash",
+  "thinking": {
+    "enabled": false,
+    "effort": null
+  },
+  "reasoning_restored": 0,
+  "events": [
+    {
+      "seq": 1,
+      "request_id": "5fbaffe3-3aaf-4a3d-953e-f7ef3ab3c97d",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_task_status",
+        "mcp_seismic_review_018df23d_get_evidence"
+      ],
+      "tool_args_sha256": "09cb85b478b86eb6338d1bd7a79ff808e877fda73eaf0fc130615b5ce53fd8a1",
+      "content_sha256": "2dba03e8e256f117fa49cf72ebad01ef13335b0466a0e9970c8ae9447cd97d99",
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 4065,
+      "completion_tokens": 83
+    },
+    {
+      "seq": 2,
+      "request_id": "760d64ca-1fa7-40dd-915e-17952456d49b",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_run_stability_check",
+        "mcp_seismic_review_018df23d_run_onset_check"
+      ],
+      "tool_args_sha256": "9082c05e43dc144c5e409acc83cd253be2eff8fca2426878bbaeefa2e3b6b01e",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 6473,
+      "completion_tokens": 107
+    },
+    {
+      "seq": 3,
+      "request_id": "5da71a5e-5c0c-4e0a-82d5-c5f1909077e9",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_get_evidence",
+        "mcp_seismic_review_018df23d_task_status"
+      ],
+      "tool_args_sha256": "a13912ab8a30b0a060eb5b3ba13d67a06005bcc182f65028964ec7b300e02e9d",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 7776,
+      "completion_tokens": 73
+    },
+    {
+      "seq": 4,
+      "request_id": "cfc93d57-95f5-418c-9f68-18cd917ed7f2",
+      "model_requests": 1,
+      "tool_names": [],
+      "tool_args_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "content_sha256": "504311c978695bbc7ea047de5bfecc9d3cec5e536405e735b14d531774b471cf",
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 10470,
+      "completion_tokens": 492
+    },
+    {
+      "seq": 5,
+      "kind": "bridge_summary",
+      "reasoning_restored": 0,
+      "errors": [],
+      "elapsed_ms": 5888
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "schema": "seismic-review-task/v1",
+  "task_id": "t-1ff054f87f362a16",
+  "created_at": "2026-10-12T03:59:21Z",
+  "user_question": "这段观测能不能用来做 1–12 Hz 的 P/S 拾取？",
+  "window_start": "2023-12-24T10:00:00",
+  "window_end": "2023-12-24T10:02:00",
+  "region": {
+    "kind": "stations",
+    "stations": [
+      "CHIMA"
+    ],
+    "networks": []
+  },
+  "target_band_hz": [
+    1.0,
+    12.0
+  ],
+  "method_band_hz": [
+    1.0,
+    8.0
+  ],
+  "method_goal": "three_component_pick",
+  "allowed_actions": [
+    "discover",
+    "acquire",
+    "onset_check",
+    "read_evidence"
+  ],
+  "operational_standard": null,
+  "budget_cny": 20.0,
+  "question_id": "Q_usable",
+  "scope": {
+    "scope_kind": "explicit_candidates",
+    "stations": [
+      "CHIMA"
+    ],
+    "candidate_ids": [
+      "cf3bfe63e905"
+    ],
+    "unmatched_stations": []
+  },
+  "diagnostic_bands_hz": [
+    [
+      3.0,
+      12.0
+    ]
+  ],
+  "acquisition_allowed": false,
+  "excluded_candidate_ids": [],
+  "max_unique_candidates_episode": 6,
+  "demo_case_ref": null,
+  "acceptance": {
+    "source": "user_spec",
+    "question_ids": [
+      "Q_usable"
+    ],
+    "follow_up": "把到时诊断网格收紧到 3–12 Hz，不要新增取数",
+    "parent_run_id": "r-40183b72e23b844f",
+    "feedback_change": {
+      "kind": "stability_bands",
+      "target_band_hz": [
+        3.0,
+        12.0
+      ],
+      "bands_hz": [
+        [
+          3.0,
+          12.0
+        ]
+      ]
+    }
+  },
+  "requested_conditions": {
+    "schema": "seismic-execution-conditions/v1",
+    "question_id": "Q_usable",
+    "required_field": "method_applicability",
+    "scope": {
+      "scope_kind": "explicit_candidates",
+      "stations": [
+        "CHIMA"
+      ],
+      "candidate_ids": [
+        "cf3bfe63e905"
+      ]
+    },
+    "method_goal": "three_component_pick",
+    "target_band_hz": [
+      1.0,
+      12.0
+    ],
+    "onset_method_band_hz": [
+      1.0,
+      8.0
+    ],
+    "diagnostic_bands_hz": [
+      [
+        3.0,
+        12.0
+      ]
+    ],
+    "acquisition_allowed": false,
+    "excluded_candidate_ids": [],
+    "max_unique_candidates_episode": 6,
+    "requested_changes": [],
+    "condition_id": "e112a77631fc9d506a0e220f07df18e5f953fb53364a4bf055177d295f42a72b"
+  },
+  "task_sha256": "e6c5ecd8914533e1550cfdae46a2e738640408a61d305e3fe76145388e3b30df"
+}

@@ -1,0 +1,176 @@
+{
+  "RUN": "r-e2e8419bf299785d",
+  "RUN_ID": "r-e2e8419bf299785d",
+  "profile": "A1",
+  "policy": "main/prompts/agent_policy_v1.txt",
+  "thinking": {
+    "enabled": false,
+    "effort": null
+  },
+  "model": "deepseek-flash",
+  "sessionId": "agnes:local:local-dev:cli:workspace:63f973e04cc38e4f",
+  "fatal": null,
+  "failure_kind": null,
+  "status": "succeeded",
+  "answer": "{\n \"field\": \"method_applicability\",\n \"conclusion\": \"pick_applicable\",\n \"condition_id\": \"25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511\",\n \"scope_candidate_ids\": [\n  \"409dfad13970\"\n ],\n \"evidence_refs\": [\n  \"quality:409dfad13970\",\n  \"applicability:409dfad13970\",\n  \"onset:409dfad13970\",\n  \"stability:409dfad13970\"\n ],\n \"stop_reason_code\": \"public_criterion_satisfied\",\n \"limitations\": [\n  \"Scope was the single named station CHIMA (candidate 409dfad13970); no whole-network conclusion is claimed.\",\n  \"Applicability rests on input conditions only: 3 healthy components (ENE/ENN/ENZ, no integrity flags, 0 gaps) and 100 Hz sampling (Nyquist 50 Hz, > 24 Hz required) fully covering the requested 1-12 Hz band.\",\n  \"The onset check in the method band 1-8 Hz returned no pick (onset_utc null), and the declared diagnostic grid [[1,8],[3,12],[5,20]] yielded only 1 valid configuration of 13 (12 stalta_z configurations produced no pick; 1 ar_aic_3c configuration at 1-20 Hz gave 2.53 s), so automatic pick stability is insufficient_configurations and no stability claim is made.\",\n  \"This does not establish that an event exists in the window, nor that a human P/S pick would be reliable at this station.\",\n  \"No independent stations were acquired, so no multi-station propagation conclusion is offered.\"\n ]\n}",
+  "model_requests": 7,
+  "tool_proposals": 7,
+  "reasoning_restored": 0,
+  "protocol_events": [
+    {
+      "seq": 1,
+      "request_id": "c211f9b3-2987-456f-a104-748324cf26d2",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_task_status",
+        "mcp_seismic_review_018df23d_list_candidates"
+      ],
+      "tool_args_sha256": "9defbfdecd2ad0cbdf411ffc7418de87f9e837225620047feb00345dca42b486",
+      "content_sha256": "f05b009221c5219a0e44e1be647b4879ed3fe3b9d85002814e13a25062c3b7cb",
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 4039,
+      "completion_tokens": 100
+    },
+    {
+      "seq": 2,
+      "request_id": "e9b714ca-b08c-44e6-b6db-0f004ce23a8d",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_acquire_station"
+      ],
+      "tool_args_sha256": "9f6116ef52cd218fcde0a53d5f945d7533b2a9d29bb85a286ad17d65f947e0de",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 5107,
+      "completion_tokens": 57
+    },
+    {
+      "seq": 3,
+      "request_id": "336d0135-e4d3-4f31-abdf-a5d696cd842c",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_get_evidence"
+      ],
+      "tool_args_sha256": "06d303a9b27b9a13deb84c837b84a50d7d4423393aae3f9b03a73543785ee0b3",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 5488,
+      "completion_tokens": 33
+    },
+    {
+      "seq": 4,
+      "request_id": "0f25c0be-54be-4546-8deb-d16ba96bec41",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_run_onset_check"
+      ],
+      "tool_args_sha256": "9f6116ef52cd218fcde0a53d5f945d7533b2a9d29bb85a286ad17d65f947e0de",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 7154,
+      "completion_tokens": 56
+    },
+    {
+      "seq": 5,
+      "request_id": "4034aa92-d573-40e5-83f1-66cfb1ec8bdd",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_run_stability_check"
+      ],
+      "tool_args_sha256": "9f6116ef52cd218fcde0a53d5f945d7533b2a9d29bb85a286ad17d65f947e0de",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 7412,
+      "completion_tokens": 56
+    },
+    {
+      "seq": 6,
+      "request_id": "042bcca9-938e-4a98-bf47-5409a28520a3",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_task_status"
+      ],
+      "tool_args_sha256": "6389ef6679f187860d30bb0e7a37a65a89ca402974828d3964862391e8fb71ee",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 8548,
+      "completion_tokens": 49
+    },
+    {
+      "seq": 7,
+      "request_id": "f1742767-8c39-4e76-b041-ceee05e949d4",
+      "model_requests": 1,
+      "tool_names": [],
+      "tool_args_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "content_sha256": "436290d03eaeccd5eaf90c12f29ed61a9467893233b967112732580c22f2ef67",
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 9406,
+      "completion_tokens": 378
+    },
+    {
+      "seq": 8,
+      "kind": "bridge_summary",
+      "reasoning_restored": 0,
+      "errors": [],
+      "elapsed_ms": 7967
+    }
+  ],
+  "cleanup": {
+    "already": false,
+    "reason": "normal",
+    "log": [
+      {
+        "step": "abort_inflight",
+        "ok": true,
+        "detail": "aborted"
+      },
+      {
+        "step": "detach_session",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "step": "close_client",
+        "ok": true,
+        "detail": null
+      },
+      {
+        "step": "stop_daemon",
+        "ok": true,
+        "detail": "stopped\n"
+      },
+      {
+        "step": "close_bridge",
+        "ok": true,
+        "detail": {
+          "already": false
+        }
+      },
+      {
+        "step": "remove_root",
+        "ok": true,
+        "detail": null
+      }
+    ],
+    "cleanup_errors": [],
+    "stop_confirmed": true,
+    "root_removed": true,
+    "cleanup_needed": false,
+    "cleanup_ok": true
+  },
+  "cleanup_ok": true,
+  "cleanup_needed": false,
+  "owned_home": "/tmp/eq-opt-y0uAKU/h",
+  "root_removed": true,
+  "session_timeout_ms": 540000,
+  "session_timed_out": false,
+  "native_agh_evidence": 108,
+  "elapsed_ms": 11187
+}

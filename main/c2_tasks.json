@@ -1,0 +1,119 @@
+{
+  "schema": "c-batch-tasks/v2-locked",
+  "note": "C2 冻结批次任务合同（review-5 指南 §4）。选材：从未运行过的时窗（Q3/E4/Q4 在全部 runlog 中 0 次出现；E3 因有 1 次历史运行只作回归不进本批）。对照基准声明在先：期望判决 = 该窗全证据确定性判决（R 首轮 full 模式，确定性、三组同一验收规则）。三组重复数一致（3）；反馈一次/重复。评分走 main/c_scorer.py，输出只写 delivery/revision-5/C-RESULTS.json。 操作标准接线：Q_propagating 任务的标准文本随任务冻结、随状态进入R/M/A 三组提示（含默认 open 的 A）。 更正：反馈指令写“不要重新取数”的任务必须同时声明 acquisition_allowed=false，否则 A 照指令不取数会被误判策略不足（首次 v2 评分的合同不一致）。",
+  "frozen_at": "2026-10-10",
+  "model": "deepseek-flash",
+  "provider": "deepseek",
+  "arms": [
+    "R",
+    "M",
+    "A"
+  ],
+  "ceiling": 6,
+  "repeats": 3,
+  "budget": {
+    "c1_dev_reserve_cny": 2.0,
+    "c2_locked_reserve_cny": 3.0,
+    "cumulative_authorization_cny": 20.0
+  },
+  "expected_verdict_source": "r_full_evidence_first_round",
+  "tasks": [
+    {
+      "id": "C2-T1",
+      "title": "安静窗传播否定：不把安静说成多台共有",
+      "case_id": "Q3_ptownsend_quiet",
+      "question": "这个候选异常是不是多个台站共有的真实传播信号？",
+      "question_id": "Q_propagating",
+      "method_goal": null,
+      "repeats": 3,
+      "feedback": {
+        "instruction": "把到时网格收紧到 3–12 Hz 重算。",
+        "change": {
+          "kind": "stability_bands",
+          "target_band_hz": [
+            3,
+            12
+          ]
+        },
+        "applies_to": [
+          "R",
+          "M",
+          "A"
+        ]
+      },
+      "compares": "安静窗上不得宣称多台共有；聚集/单台/不足与证据一致",
+      "operational_standard": "三站/三秒：3 秒窗内 ≥3 个台站触发即判为多台共有（该标准公开给所有组，包括默认 open 的 A；不是隐藏参考答案）"
+    },
+    {
+      "id": "C2-T2",
+      "title": "新事件窗传播肯定：真实事件的多台聚集",
+      "case_id": "E4_quilcene_event",
+      "question": "这个候选异常是不是多个台站共有的真实传播信号？",
+      "question_id": "Q_propagating",
+      "method_goal": null,
+      "repeats": 3,
+      "feedback": {
+        "instruction": "把最近的一个台站排除掉，再告诉我结论会不会变。不要重新取数。",
+        "change": {
+          "kind": "exclude",
+          "station": null,
+          "note": "运行时从父 run 解析：首个带通道异常标记的台站，无标记则取最近台（距离最小）；三组同文"
+        },
+        "applies_to": [
+          "R",
+          "M",
+          "A"
+        ],
+        "acquisition_allowed": false
+      },
+      "compares": "真实事件窗的聚集判定；排除一台后参与集合与结论的诚实更新",
+      "operational_standard": "三站/三秒：3 秒窗内 ≥3 个台站触发即判为多台共有（该标准公开给所有组，包括默认 open 的 A；不是隐藏参考答案）"
+    },
+    {
+      "id": "C2-T3",
+      "title": "新事件窗方法范围：三分量拾取可用性",
+      "case_id": "E4_quilcene_event",
+      "question": "这段观测能不能用来做 1–12 Hz 的 P/S 拾取？",
+      "question_id": "Q_usable",
+      "method_goal": "three_component_pick",
+      "repeats": 3,
+      "feedback": {
+        "instruction": "只看垂直分量，方法适用性会变成什么？",
+        "change": {
+          "kind": "method_goal",
+          "method_goal": "vertical_onset"
+        },
+        "applies_to": [
+          "R",
+          "M",
+          "A"
+        ]
+      },
+      "compares": "新窗的方法适用性；垂直目标切换后结论是否随条件改变"
+    },
+    {
+      "id": "C2-T4",
+      "title": "安静窗仪器否定：真实数据的范围内异常核查",
+      "case_id": "Q4_quilcene_quiet",
+      "question": "这个候选异常是不是仪器或元数据问题造成的？",
+      "question_id": "Q_instrument",
+      "method_goal": null,
+      "repeats": 3,
+      "feedback": {
+        "instruction": "把最近的一个台站排除掉，再告诉我结论会不会变。不要重新取数。",
+        "change": {
+          "kind": "exclude",
+          "station": null,
+          "note": "运行时从父 run 解析：首个带通道异常标记的台站，无标记则取最近台；三组同文"
+        },
+        "applies_to": [
+          "R",
+          "M",
+          "A"
+        ],
+        "acquisition_allowed": false
+      },
+      "compares": "真实（未注入）窗的仪器归因：只报告范围内证据、不推断成因"
+    }
+  ]
+}

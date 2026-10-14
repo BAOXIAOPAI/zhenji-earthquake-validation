@@ -1,0 +1,7 @@
+{
+ "date":"2026-10-04",
+ "trigger":"TA.F04D component starts differ by 0.024998 seconds at 40 Hz, almost exactly one sample; UW.RADR S result is zero",
+ "change":"Permit lossless integer-sample cropping to common component overlap, retain residual <=0.001 sample; treat S<=P, nonfinite or out-of-window outputs as unavailable, not a valid UTC arrival",
+ "scope":"Development engineering correction after inspecting real feedback; preserve v1 results; no band or picker parameter tuning",
+ "no_interpolation":true
+}

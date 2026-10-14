@@ -1,0 +1,57 @@
+# Local credentials and environment configuration
+.env
+.env.*
+!.env.example
+!.env.sample
+deepseek_model.txt
+*_model_key*.txt
+*api_key*.txt
+*.key
+*.pem
+*.p12
+*.pfx
+/keys/
+/credentials.json
+/secrets.json
+
+# Installed dependencies, build output, and caches (keep vendor sources)
+.venv/
+venv/
+node_modules/
+modules/
+dist/
+build/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.cache/
+/cache/
+.DS_Store
+.agh/
+
+# New execution records and runtime billing data
+/main/runlog/
+/runlog/
+/runs/
+/runtime/
+/runtime-ledger/
+**/model-budget-ledger.json
+**/runtime-ledger.json
+
+# Only the five vetted replay records from the source ZIP are publishable
+/replay/runlog/*
+!/replay/runlog/r-2365883191ac74a8/
+!/replay/runlog/r-3ae9c6948c2f8967/
+!/replay/runlog/r-8c01734ee9f1903a/
+!/replay/runlog/r-8f2eb7e2a2e7333f/
+!/replay/runlog/r-e2e8419bf299785d/
+
+# Local recordings, recordings in progress, and generated distribution archives
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.zip
+*.7z
+*.tar.gz

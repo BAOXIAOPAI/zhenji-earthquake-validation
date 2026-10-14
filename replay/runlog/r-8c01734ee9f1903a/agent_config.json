@@ -1,0 +1,13 @@
+{
+  "schema": "agent-execution-config/v1",
+  "run_id": "r-8c01734ee9f1903a",
+  "driver": "agent_run_optimization.mjs",
+  "profile": "A1",
+  "analysis_level": "quality_only",
+  "model": "deepseek-flash",
+  "arm": "adaptive_agent_a1",
+  "product_profile": "A1",
+  "recorded_at": "2026-10-12T03:59:21.749157+00:00",
+  "inherited_from_parent": true,
+  "inheritance_decision": "inherited_from_parent_config"
+}

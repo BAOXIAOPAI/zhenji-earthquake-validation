@@ -1,0 +1,61 @@
+{
+  "station_query_url": "https://service.earthscope.org/fdsnws/station/1/query?starttime=2023-12-24T10%3A00%3A00&endtime=2023-12-24T10%3A02%3A00&level=channel&format=text&nodata=404&sta=CHIMA",
+  "station_rows": 23,
+  "candidates": [
+    {
+      "candidate_id": "409dfad13970",
+      "network": "UW",
+      "station": "CHIMA",
+      "distance_km": null,
+      "family": "EN",
+      "analysis_eligible": true,
+      "three_component": true,
+      "vertical_only": false,
+      "band_support": {
+        "supported": true,
+        "sampling_rate_hz": 100.0,
+        "nyquist_hz": 50.0,
+        "target_band_hz": [
+          1.0,
+          12.0
+        ],
+        "required_rate_hz": 24.0,
+        "reason": "ok"
+      },
+      "reason": "满足目标条件"
+    }
+  ],
+  "eligible": [
+    {
+      "candidate_id": "409dfad13970",
+      "network": "UW",
+      "station": "CHIMA",
+      "distance_km": null,
+      "family": "EN",
+      "analysis_eligible": true,
+      "three_component": true,
+      "vertical_only": false,
+      "band_support": {
+        "supported": true,
+        "sampling_rate_hz": 100.0,
+        "nyquist_hz": 50.0,
+        "target_band_hz": [
+          1.0,
+          12.0
+        ],
+        "required_rate_hz": 24.0,
+        "reason": "ok"
+      },
+      "reason": "满足目标条件"
+    }
+  ],
+  "n_eligible": 1,
+  "target_band_hz": [
+    1.0,
+    12.0
+  ],
+  "method_band_hz": [
+    1.0,
+    8.0
+  ]
+}

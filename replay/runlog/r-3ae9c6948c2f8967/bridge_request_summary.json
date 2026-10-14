@@ -1,0 +1,91 @@
+{
+  "schema": "bridge-request-summary/v1",
+  "note": "synthesised from provider-bridge responses; not native AGH session events",
+  "run_id": "r-3ae9c6948c2f8967",
+  "profile": "A1",
+  "agh_session_id": "agnes:local:local-dev:cli:workspace:107a63f0141976b5",
+  "model": "deepseek-flash",
+  "thinking": {
+    "enabled": false,
+    "effort": null
+  },
+  "reasoning_restored": 0,
+  "events": [
+    {
+      "seq": 1,
+      "request_id": "0ba04cd1-c7ee-4b26-954b-7bff97b83192",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_task_status",
+        "mcp_seismic_review_018df23d_get_evidence"
+      ],
+      "tool_args_sha256": "09cb85b478b86eb6338d1bd7a79ff808e877fda73eaf0fc130615b5ce53fd8a1",
+      "content_sha256": "9409360311018377699ccb09037cbf178fa6d7bcdf513f28bc2fa0da1ee0972c",
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 4126,
+      "completion_tokens": 86
+    },
+    {
+      "seq": 2,
+      "request_id": "0851e7d6-112b-4d14-9871-e83811fc5c2a",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_run_stability_check"
+      ],
+      "tool_args_sha256": "9f6116ef52cd218fcde0a53d5f945d7533b2a9d29bb85a286ad17d65f947e0de",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 6500,
+      "completion_tokens": 56
+    },
+    {
+      "seq": 3,
+      "request_id": "2ac1d941-29ed-4c4a-a149-a431de1327fd",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_get_evidence"
+      ],
+      "tool_args_sha256": "06d303a9b27b9a13deb84c837b84a50d7d4423393aae3f9b03a73543785ee0b3",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 7551,
+      "completion_tokens": 33
+    },
+    {
+      "seq": 4,
+      "request_id": "f8890a64-978a-4650-8793-abdd15e7224a",
+      "model_requests": 1,
+      "tool_names": [
+        "mcp_seismic_review_018df23d_task_status"
+      ],
+      "tool_args_sha256": "6389ef6679f187860d30bb0e7a37a65a89ca402974828d3964862391e8fb71ee",
+      "content_sha256": null,
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 9250,
+      "completion_tokens": 49
+    },
+    {
+      "seq": 5,
+      "request_id": "3d97b92c-bfaa-4353-89bf-1aa0d8eb56b8",
+      "model_requests": 1,
+      "tool_names": [],
+      "tool_args_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "content_sha256": "8b2221e92473a785da203146b2e7418437d4f280ed033487927aefc0027928cd",
+      "reasoning_present": false,
+      "reasoning_chars": 0,
+      "prompt_tokens": 10149,
+      "completion_tokens": 511
+    },
+    {
+      "seq": 6,
+      "kind": "bridge_summary",
+      "reasoning_restored": 0,
+      "errors": [],
+      "elapsed_ms": 7424
+    }
+  ]
+}

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>震迹 · 地震候选事件智能核查</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="mark" aria-hidden="true">
+      <svg viewBox="0 0 40 24" width="34" height="20" role="img" aria-label="装饰波形">
+        <polyline points="0,12 8,12 12,4 16,20 20,9 24,15 28,12 40,12"
+                  fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+      震迹
+    </span>
+    <span class="tagline">地震候选事件智能核查</span>
+  </div>
+  <div class="topmeta">
+    <span class="pill agh">智能核查</span>
+    <span class="pill" id="run-state">等待核查</span>
+  </div>
+</header>
+
+<nav class="mainnav" role="tablist" aria-label="主导航">
+  <button class="navbtn on" id="tab-workbench" data-view="workbench" role="tab" aria-selected="true" aria-controls="view-workbench" tabindex="0">核查工作台</button>
+  <button class="navbtn" id="tab-records" data-view="records" role="tab" aria-selected="false" aria-controls="view-records" tabindex="-1">核查记录</button>
+  <button class="navbtn" id="tab-about" data-view="about" role="tab" aria-selected="false" aria-controls="view-about" tabindex="-1">使用说明</button>
+</nav>
+
+<main>
+<div class="app-message" id="app-message" role="alert" hidden></div>
+<!-- ============================ 工作台 ============================ -->
+<section class="view on" id="view-workbench" role="tabpanel" aria-labelledby="tab-workbench">
+  <div class="workbench">
+    <aside class="taskcol">
+      <div class="card">
+        <h2>核查问题与条件</h2>
+        <div id="task-body" class="kvbody"><p class="hint">正在读取…</p></div>
+        <div class="runidline">
+          <span>当前记录</span>
+          <span id="current-run">—</span>
+          <button class="tiny" id="copy-run" type="button">复制链接</button>
+        </div>
+      </div>
+
+      <div class="card entry">
+        <h2>开始</h2>
+        <button class="primary" id="btn-example" type="button">查看核查示例</button>
+        <button class="ghost" id="btn-new" type="button">填写新核查</button>
+        <p class="hint">示例来自<b>已完成的核查记录</b>；查看已有结果不产生核查费用。</p>
+      </div>
+
+      <details class="card advanced" id="newtask-card">
+        <summary>填写核查条件</summary>
+        <button class="ghost example-fill" id="u-fill-example" type="button">使用示例条件</button>
+        <p class="hint">可以在示例条件上修改后再核查；填写条件不会开始核查或产生核查费用。</p>
+        <p class="note">填写下方条件后点击“开始核查”，系统会自动检查是否完整。也可先免费确认核查条件。</p>
+        <div class="form-grid">
+          <div class="form-field wide">
+            <label for="u-question"><span>你想核查什么？</span></label>
+            <textarea id="u-question" rows="3"
+              placeholder="例如：这段观测能不能用来做 1–12 Hz 的 P/S 拾取？"></textarea>
+          </div>
+          <div class="form-field wide">
+            <div class="field-heading"><label class="sr-only" for="u-period">观测时窗（UTC）</label><button class="term-help" type="button" data-term="UTC时窗" aria-label="了解 UTC 时窗">观测时窗（UTC）</button></div>
+            <select id="u-period"><option value="custom">自行填写时窗</option><option value="example">使用示例时窗</option></select>
+            <p class="note">下方时间按 UTC 解释，比北京时间慢 8 小时。</p>
+          </div>
+          <div class="form-field wide">
+            <div class="field-heading"><label class="sr-only" for="u-start">开始时间（UTC）</label><button class="term-help" type="button" data-term="UTC时窗" aria-label="了解开始时间（UTC）">开始时间（UTC）</button></div>
+            <input id="u-start" type="datetime-local" step="1">
+          </div>
+          <div class="form-field wide">
+            <div class="field-heading"><label class="sr-only" for="u-end">结束时间（UTC）</label><button class="term-help" type="button" data-term="UTC时窗" aria-label="了解结束时间（UTC）">结束时间（UTC）</button></div>
+            <input id="u-end" type="datetime-local" step="1">
+          </div>
+          <div class="form-field wide">
+            <div class="field-heading"><label class="sr-only" for="u-region">观测区域</label><button class="term-help" type="button" data-term="命名区域" aria-label="了解观测区域">观测区域</button></div>
+            <select id="u-region"><option value="">— 直接指定台站 —</option></select>
+          </div>
+          <div class="form-field wide">
+            <div class="field-heading"><label class="sr-only" for="u-station-preset">选择台站</label><button class="term-help" type="button" data-term="台站" aria-label="了解台站">选择台站</button></div>
+            <select id="u-station-preset"><option value="custom">自行填写台站</option><option value="UW.CHIMA">示例台站 UW.CHIMA</option></select>
+          </div>
+          <div class="form-field wide">
+            <label for="u-stations"><span>或直接填写台站</span></label>
+            <input id="u-stations" placeholder="如 UW.CHIMA，多个用逗号分隔" aria-describedby="u-station-note">
+            <p class="note" id="u-station-note">先填台网代码，再填台站代码，中间用点号连接，如 UW.CHIMA；多个台站用英文逗号分隔。</p>
+          </div>
+          <fieldset class="band-field wide">
+            <legend><button class="term-help" type="button" data-term="目标频带" aria-label="了解目标频带">目标频带</button></legend>
+            <div class="band-options" role="group" aria-label="常用目标频带">
+              <button type="button" data-band="1,12" aria-pressed="false">1–12 Hz</button>
+              <button type="button" data-band="3,12" aria-pressed="false">3–12 Hz</button>
+              <button type="button" data-band="5,20" aria-pressed="false">5–20 Hz</button>
+            </div>
+            <p class="note">1–12 Hz 为示例条件；其他组合仍需核查采样率与方法适用性。</p>
+            <details class="custom-band">
+              <summary>自定义频带</summary>
+              <div class="form-grid">
+                <div class="form-field"><label for="u-band-lo"><span>下限（Hz）</span></label><input id="u-band-lo" type="number" min="0.01" step="any" placeholder="1"></div>
+                <div class="form-field"><label for="u-band-hi"><span>上限（Hz）</span></label><input id="u-band-hi" type="number" min="0.01" step="any" placeholder="12"></div>
+              </div>
+            </details>
+          </fieldset>
+          <div class="form-field wide">
+            <div class="field-heading"><label class="sr-only" for="u-goal">分析目标</label><button class="term-help" type="button" data-term="分析目标" aria-label="了解分析目标">分析目标</button></div>
+            <select id="u-goal" aria-describedby="u-goal-note"><option value="">— 默认三分量拾取 —</option></select>
+            <p class="note" id="u-goal-note">选择要检查三分量 P/S 拾取，还是仅检查垂直分量到时。</p>
+          </div>
+          <div class="form-field wide">
+            <div class="field-heading"><label class="sr-only" for="u-mode">核查方式</label><button class="term-help" type="button" data-term="核查模式" aria-label="了解核查方式">核查方式</button></div>
+            <select id="u-mode" aria-describedby="u-mode-note"></select>
+            <p class="note" id="u-mode-note">智能核查按实际用量计费，标准核查免费。确认条件不会开始核查。</p>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="primary" id="u-run" type="button">开始智能核查（计费）</button>
+          <button class="ghost" id="u-parse" type="button">确认条件（免费）</button>
+          <button class="ghost" id="u-reset" type="button">清空</button>
+        </div>
+        <p class="warn" id="u-warn" role="status"></p>
+        <div id="u-parse-body" class="parsebox" hidden></div>
+      </details>
+    </aside>
+
+    <section class="resultcol">
+      <div class="card conclusion" id="conclusion-card">
+        <h2>当前核查结论</h2>
+        <p class="note run-load-note" id="run-load-note" role="status" hidden></p>
+        <div id="conclusion-body"><p class="hint">请选择示例或开始一次核查。</p></div>
+      </div>
+
+      <div class="card" id="wave-card">
+        <div class="cardhead">
+          <h2>观测波形</h2>
+          <div class="wave-tools" id="wave-toolbar"></div>
+        </div>
+        <p class="note">显示当前记录保存的观测；切换台站即可查看对应波形。</p>
+        <div class="wavewrap">
+          <canvas id="wave-canvas" aria-label="三分量观测波形包络：横轴为 UTC 时间，各分量按幅度归一化，自动到时以标记线表示。"></canvas>
+          <div class="wave-empty" id="wave-empty" role="status">
+            <strong id="wave-empty-title">等待显示观测波形</strong>
+            <p id="wave-empty-detail">选择示例或核查记录后，显示该记录保存的观测。</p>
+          </div>
+        </div>
+        <div id="wave-note" class="hint"></div>
+      </div>
+
+      <div class="card">
+        <h2>核查过程</h2>
+        <div id="guard-actions" class="guardbox" hidden></div>
+        <div id="tool-timeline"><p class="hint">尚无核查过程记录。</p></div>
+      </div>
+
+      <div class="card" id="feedback-card">
+        <h2>改条件再复核</h2>
+        <div id="compare-body"><p class="hint">选择一条已完成的核查记录后，可更改条件再次复核。</p></div>
+        <div class="fbgrid" id="fb-controls" hidden>
+          <div class="fbrow">
+            <span class="fblabel"><button class="term-help" type="button" data-term="当前排除" aria-label="了解排除台站">排除 / 恢复台站</button></span>
+            <select id="fb-station"></select>
+            <button class="ghost" id="fb-exclude" type="button">排除</button>
+            <button class="ghost" id="fb-include" type="button">恢复</button>
+          </div>
+          <div class="fbrow">
+            <span class="fblabel"><button class="term-help" type="button" data-term="三分量 P/S 拾取" aria-label="了解分析目标">更改分析目标</button></span>
+            <select id="fb-goal">
+              <option value="three_component_pick">三分量 P/S 拾取</option>
+              <option value="vertical_onset">仅垂直分量到时</option>
+            </select>
+            <button class="ghost" id="fb-goal-apply" type="button">按新目标复核</button>
+          </div>
+          <div class="fbrow">
+            <span class="fblabel"><button class="term-help" type="button" data-term="诊断网格" aria-label="了解到时检查频带">调整到时检查频带</button></span>
+            <select id="fb-grid">
+              <option value="[3,12]">3–12 Hz（收窄）</option>
+              <option value="[1,8]">1–8 Hz（收窄）</option>
+              <option value="[5,20]">5–20 Hz（收窄）</option>
+            </select>
+            <button class="ghost" id="fb-grid-apply" type="button">按新频带复核</button>
+          </div>
+          <p class="hint">复核默认<b><button class="term-help" type="button" data-term="新增取数" aria-label="了解复核使用的观测">只使用已保存的波形</button></b>；智能复核会产生费用。</p>
+        </div>
+        <p class="warn" id="fb-warn"></p>
+        <div id="fb-result" class="result-body"><p class="hint">尚未更改核查条件。</p></div>
+      </div>
+
+      <details class="card">
+        <summary>证据详情 · 核查建议 · 核对结果 · 数据来源</summary>
+        <div id="detail-body" class="detailbody"><p class="hint">—</p></div>
+      </details>
+    </section>
+  </div>
+</section>
+
+<!-- ============================ 运行记录 ============================ -->
+<section class="view" id="view-records" role="tabpanel" aria-labelledby="tab-records">
+  <div class="card">
+    <div class="cardhead">
+      <h2>核查记录</h2>
+      <span class="hint">成功与失败记录均保留；选择记录可查看证据与复核结果。</span>
+    </div>
+    <div class="records-tools">
+      <label>记录类型
+        <select id="record-filter">
+          <option value="all">全部</option>
+          <option value="demo">核查示例</option>
+          <option value="real">实际核查</option>
+          <option value="failed">失败记录</option>
+        </select>
+      </label>
+      <label class="record-search-label">搜索核查问题
+        <input id="record-search" type="search" placeholder="输入问题或条件关键词">
+      </label>
+      <button class="ghost" id="records-refresh" type="button">刷新记录</button>
+    </div>
+    <p class="note">智能建议未通过核对时，显示<button class="term-help" type="button" data-term="规则后备" aria-label="了解观测核查结果">观测核查结果</button>；分析或证据尚不完整时，显示<button class="term-help" type="button" data-term="交付待验证" aria-label="了解结果待确认">结果待确认</button>。</p>
+    <p class="hint" id="records-note" role="status"></p>
+    <div id="records-body" class="records"><p class="hint">加载中…</p></div>
+    <button class="ghost records-more" id="records-more" type="button" hidden>加载更多</button>
+  </div>
+  <details class="card" hidden>
+    <summary>历史研究资料（仅供参考）</summary>
+    <p class="hint">这里保存早期研究中的对照资料；当前条件的复核结果请在工作台查看。</p>
+    <div id="compare" class="compare-body"><p class="hint">正在读取历史对照…</p></div>
+    <div class="caselist" id="case-list"></div>
+  </details>
+</section>
+
+<!-- ============================ 项目说明 ============================ -->
+<section class="view" id="view-about" role="tabpanel" aria-labelledby="tab-about">
+  <div class="card about">
+    <h2>震迹 · 地震候选事件智能核查</h2>
+    <p class="lead">结合观测波形与分析证据，核查当前条件是否适合后续研究；改变条件后，可以继续复核并比较结果。</p>
+    <div class="about-task">
+      <p><b>提供条件：</b>一段 UTC 时窗、台站或区域、目标频带，以及你要核查的问题。</p>
+      <p><b>查看结果：</b>方法是否适用、到时诊断是否稳定、采用了哪些证据，以及需要继续核查的条件。</p>
+      <p><b>核对依据：</b>波形观测、通道条件、采样率与分析结果；每项判断均应结合对应的条件与证据理解。</p>
+    </div>
+    <h3>为什么需要条件复核</h3>
+    <p>面对一段候选事件的观测，需要判断通道是否健康、采样率是否支持目标频带、自动到时是否随分析条件变化。
+       换了台站、分析目标或频带，原来的结论也需要重新检查。</p>
+    <p><button class="term-help" type="button" data-term="Agent" aria-label="了解智能核查">智能核查</button> 会围绕你的问题分析观测。
+       更改条件后默认使用已保存的波形，保留前后两次核查的独立记录，方便核对每一项变化。</p>
+    <h3>三步了解一份核查结果</h3>
+    <p class="hint" id="about-guide-note" role="status">下面三步查看已完成的核查示例，不会开始新核查，也不产生核查费用。</p>
+    <div class="about-guide">
+      <article class="guide-step">
+        <span class="guide-number" aria-hidden="true">01</span>
+        <h4>先看结论</h4>
+        <p>查看方法是否适用，以及支持结论的条件与依据。</p>
+        <button class="ghost" id="about-show-conclusion" type="button">查看示例结论</button>
+      </article>
+      <article class="guide-step">
+        <span class="guide-number" aria-hidden="true">02</span>
+        <h4>再看证据</h4>
+        <p>对照观测波形与核查过程，查看结论依据了哪些证据。</p>
+        <button class="ghost" id="about-show-evidence" type="button">查看波形与证据</button>
+      </article>
+      <article class="guide-step">
+        <span class="guide-number" aria-hidden="true">03</span>
+        <h4>看改条件后如何复核</h4>
+        <p>查看关联的两次核查，对照条件变化与结果；条件变化不一定改变最终结论。</p>
+        <button class="ghost" id="about-show-feedback" type="button">查看复核对比</button>
+      </article>
+    </div>
+    <h3>已保存的核查示例</h3>
+    <div class="about-stats" id="about-stats" role="status">正在读取示例记录…</div>
+    <p class="note">数字来自下方示例的核查记录；每项数字均说明统计范围。</p>
+    <h3>如何理解结果</h3>
+    <p>核查建议需要与观测证据相互核对。页面保留核查进度、结果来源和证据范围，未完成与失败的核查也会明确显示。</p>
+    <div class="about-boundaries">
+      <article class="boundary-card">
+        <h4><button class="term-help" type="button" data-term="规则后备" aria-label="了解观测核查结果">观测核查结果</button></h4>
+        <p>智能建议未通过证据核对时，会说明原因，并展示依据观测与预定判据得到的结果。</p>
+      </article>
+      <article class="boundary-card">
+        <h4><button class="term-help" type="button" data-term="证据不足" aria-label="了解证据不足">证据不足</button></h4>
+        <p>已有证据不能支持判断时，保留“未知”与缺失信息。完成核查也可能得到未知结论。</p>
+      </article>
+    </div>
+    <h3>结论适用范围</h3>
+    <p>结论仅对应本次选择的时窗、台站、分析目标与频带。满足方法输入条件不等于已确认地震；到时稳定也不代表已经识别 P/S。</p>
+    <p class="disclaimer">本工作台核查当前条件下的方法适用性与到时诊断，不测定震级、不做定位、不做预警。</p>
+  </div>
+  <details class="card about">
+    <summary>开始一次核查</summary>
+    <p>在工作台选择“填写新核查”，填写问题、UTC 时窗、台站或区域，以及目标频带。也可以使用示例条件后再修改。</p>
+    <p>确认核查方式与费用提示后点击“开始核查”。完成后，查看结论、观测波形与证据；需要比较不同条件时，使用“改条件再复核”。</p>
+  </details>
+  <details class="card about developer-info">
+    <summary>费用说明</summary>
+    <p class="budget" id="budget" hidden></p>
+    <p class="hint">查看已有记录与确认条件免费；智能核查会产生费用，请以开始核查时的提示为准。</p>
+  </details>
+</section>
+</main>
+
+<footer>
+  <span>核查结论应结合当前条件与观测证据理解；证据不足时保留未知结果。</span>
+</footer>
+<div class="term-popover" id="term-popover" role="dialog" aria-label="术语说明" tabindex="-1" hidden>
+  <div class="term-popover-head"><strong id="term-popover-title"></strong><button class="tiny" id="term-close" type="button" aria-label="关闭术语说明">关闭</button></div>
+  <p id="term-popover-text"></p>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

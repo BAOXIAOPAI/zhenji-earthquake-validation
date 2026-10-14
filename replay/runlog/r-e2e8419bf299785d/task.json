@@ -1,0 +1,97 @@
+{
+  "schema": "seismic-review-task/v1",
+  "task_id": "t-da53ba3dd12b119e",
+  "created_at": "2026-10-12T04:01:12Z",
+  "user_question": "这段观测能不能用来做 1–12 Hz 的 P/S 拾取？",
+  "window_start": "2023-12-24T10:00:00",
+  "window_end": "2023-12-24T10:02:00",
+  "region": {
+    "kind": "stations",
+    "stations": [
+      "CHIMA"
+    ],
+    "networks": []
+  },
+  "target_band_hz": [
+    1.0,
+    12.0
+  ],
+  "method_band_hz": [
+    1.0,
+    8.0
+  ],
+  "method_goal": "three_component_pick",
+  "allowed_actions": [
+    "discover",
+    "acquire",
+    "onset_check",
+    "read_evidence"
+  ],
+  "operational_standard": null,
+  "budget_cny": 20.0,
+  "question_id": "Q_usable",
+  "scope": null,
+  "diagnostic_bands_hz": [
+    [
+      1.0,
+      8.0
+    ],
+    [
+      3.0,
+      12.0
+    ],
+    [
+      5.0,
+      20.0
+    ]
+  ],
+  "acquisition_allowed": true,
+  "excluded_candidate_ids": [],
+  "max_unique_candidates_episode": 6,
+  "demo_case_ref": null,
+  "acceptance": {
+    "source": "user_spec",
+    "question_ids": [
+      "Q_usable"
+    ]
+  },
+  "requested_conditions": {
+    "schema": "seismic-execution-conditions/v1",
+    "question_id": "Q_usable",
+    "required_field": "method_applicability",
+    "scope": {
+      "scope_kind": "all_allowed",
+      "stations": [],
+      "candidate_ids": []
+    },
+    "method_goal": "three_component_pick",
+    "target_band_hz": [
+      1.0,
+      12.0
+    ],
+    "onset_method_band_hz": [
+      1.0,
+      8.0
+    ],
+    "diagnostic_bands_hz": [
+      [
+        1.0,
+        8.0
+      ],
+      [
+        3.0,
+        12.0
+      ],
+      [
+        5.0,
+        20.0
+      ]
+    ],
+    "acquisition_allowed": true,
+    "excluded_candidate_ids": [],
+    "max_unique_candidates_episode": 6,
+    "requested_changes": [],
+    "condition_id": "7ecae553de9e205f9a594474d5d6b4a763c8c0485bcfaf6a37eca0c9d4699201"
+  },
+  "task_sha256": "09eab933fe950b807827333ad2fc23d6591f3328203cd7d52655426b4c96d539"
+}

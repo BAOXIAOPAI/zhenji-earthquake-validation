@@ -1,0 +1,13 @@
+{
+  "run_id": "r-3ae9c6948c2f8967",
+  "model_cost_known": true,
+  "model_cost_upper_cny": 0.081032,
+  "model_cost_entries": 5,
+  "model_cost_reason": null,
+  "logical_acquisitions": 0,
+  "http_attempts": 0,
+  "cache_hits": 0,
+  "bytes_total": 0,
+  "elapsed_ms": 10593,
+  "recorded_at": "2026-10-12T04:03:04Z"
+}

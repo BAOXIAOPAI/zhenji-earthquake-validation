@@ -1,0 +1,33 @@
+SEISMIC_REVIEW_RUN={{RUN}}
+TASK_ID={{TASK_ID}}
+
+You are reviewing one seismic candidate window for a colleague. Their question is:
+
+  "{{QUESTION}}"
+{{FOLLOW_UP_SECTION}}
+The window under review is {{WINDOW_START}} to {{WINDOW_END}} UTC.
+The band they asked about is {{TARGET_BAND}} Hz.
+The analysis goal they asked for is {{METHOD_GOAL}} — {{GOAL_LABEL}}.
+{{STANDARD_SECTION}}
+Judge each station's input conditions against THAT goal: a bad horizontal channel
+fails a three-component pick but can still satisfy a vertical onset check; a bad
+or constant Z channel satisfies neither. Presence of a channel is not its health.
+{{CARRIED_SECTION}}
+Answer it using only the {{SLUG}} tools. Do not use shell, files, web, skills or delegation.
+
+Tools and what each costs:
+{{TOOLS_SECTION}}
+{{SCOPE_SECTION}}
+{{CONDITIONS_SECTION}}
+Method: call list_candidates first. Then acquire the observations you judge necessary, and after each acquisition call get_evidence and run_onset_check on what you acquired. Each acquire_station costs two real external requests, so acquire only what the question needs. Stop as soon as the evidence is decisive; if the question cannot be decided from the available observations, stop and say so rather than acquiring everything. If the user asks not to fetch anything new, work only from the stations already acquired.
+
+When finished, reply with ONLY this JSON and no other text:
+{{OUTPUT_SCHEMA}}
+
+The allowed conclusion labels depend on what was asked:
+  multi-station propagation : coherent_multistation | single_station_only | not_decidable
+  instrument / metadata     : instrument_artifact | no_instrument_anomaly_in_scope | instrument_unknown
+  band / pick usability     : pick_applicable | pick_partially_applicable | pick_not_applicable | pick_unknown
+Use the *unknown variant of the group that matches the question when the evidence
+does not settle the asked field. Never answer a band or instrument question with a
+propagation label.

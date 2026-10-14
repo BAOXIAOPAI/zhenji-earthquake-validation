@@ -1,0 +1,10 @@
+{"at": "2026-10-12T04:02:12Z", "run_id": "r-3ae9c6948c2f8967", "tool": "task_status", "arguments": {"stage": "progress"}, "phase": "start"}
+{"at": "2026-10-12T04:02:12Z", "run_id": "r-3ae9c6948c2f8967", "tool": "task_status", "arguments": {"stage": "progress"}, "phase": "ok", "result": {"can_finish": null}}
+{"at": "2026-10-12T04:02:12Z", "run_id": "r-3ae9c6948c2f8967", "tool": "get_evidence", "arguments": {}, "phase": "start"}
+{"at": "2026-10-12T04:02:12Z", "run_id": "r-3ae9c6948c2f8967", "tool": "get_evidence", "arguments": {}, "phase": "ok", "result": {"stations_acquired": 1}}
+{"at": "2026-10-12T04:02:13Z", "run_id": "r-3ae9c6948c2f8967", "tool": "run_stability_check", "arguments": {"candidate_id": "409dfad13970"}, "phase": "start"}
+{"at": "2026-10-12T04:02:14Z", "run_id": "r-3ae9c6948c2f8967", "tool": "run_stability_check", "arguments": {"candidate_id": "409dfad13970"}, "phase": "ok", "result": {"stability": "insufficient_configurations", "spread_s": 0.0, "bands_evaluated": [[3.0, 12.0]], "full_grid": false}}
+{"at": "2026-10-12T04:02:14Z", "run_id": "r-3ae9c6948c2f8967", "tool": "get_evidence", "arguments": {}, "phase": "start"}
+{"at": "2026-10-12T04:02:14Z", "run_id": "r-3ae9c6948c2f8967", "tool": "get_evidence", "arguments": {}, "phase": "ok", "result": {"stations_acquired": 1}}
+{"at": "2026-10-12T04:02:15Z", "run_id": "r-3ae9c6948c2f8967", "tool": "task_status", "arguments": {"stage": "finish"}, "phase": "start"}
+{"at": "2026-10-12T04:02:15Z", "run_id": "r-3ae9c6948c2f8967", "tool": "task_status", "arguments": {"stage": "finish"}, "phase": "ok", "result": {"can_finish": true}}

@@ -1,0 +1,348 @@
+{
+  "task_id": "t-5caad5b5303d4e54",
+  "user_question": "这段观测能不能用来做 1–12 Hz 的 P/S 拾取？",
+  "window_start": "2023-12-24T10:00:00",
+  "window_end": "2023-12-24T10:02:00",
+  "region": {
+    "kind": "stations",
+    "stations": [
+      "CHIMA"
+    ],
+    "networks": []
+  },
+  "target_band_hz": [
+    1.0,
+    12.0
+  ],
+  "method_goal": "three_component_pick",
+  "allowed_actions": [
+    "discover",
+    "acquire",
+    "onset_check",
+    "read_evidence"
+  ],
+  "operational_standard": null,
+  "question_id": "Q_usable",
+  "scope": {
+    "scope_kind": "explicit_candidates",
+    "stations": [
+      "CHIMA"
+    ],
+    "candidate_ids": [
+      "409dfad13970"
+    ],
+    "unmatched_stations": []
+  },
+  "diagnostic_bands_hz": [
+    [
+      3.0,
+      12.0
+    ]
+  ],
+  "acquisition_allowed": false,
+  "excluded_candidate_ids": [],
+  "max_unique_candidates_episode": 6,
+  "run_id": "r-3ae9c6948c2f8967",
+  "method_band_hz": [
+    1.0,
+    8.0
+  ],
+  "method_applicability_goal": "three_component_pick",
+  "requested_conditions": {
+    "schema": "seismic-execution-conditions/v1",
+    "question_id": "Q_usable",
+    "required_field": "method_applicability",
+    "scope": {
+      "scope_kind": "explicit_candidates",
+      "stations": [
+        "CHIMA"
+      ],
+      "candidate_ids": [
+        "409dfad13970"
+      ]
+    },
+    "method_goal": "three_component_pick",
+    "target_band_hz": [
+      1.0,
+      12.0
+    ],
+    "onset_method_band_hz": [
+      1.0,
+      8.0
+    ],
+    "diagnostic_bands_hz": [
+      [
+        3.0,
+        12.0
+      ]
+    ],
+    "acquisition_allowed": false,
+    "excluded_candidate_ids": [],
+    "max_unique_candidates_episode": 6,
+    "requested_changes": [
+      {
+        "kind": "stability_bands",
+        "target_band_hz": [
+          3.0,
+          12.0
+        ],
+        "bands_hz": [
+          [
+            3.0,
+            12.0
+          ]
+        ]
+      }
+    ],
+    "condition_id": "686f64a5c10d904cd7276988a5c86069aaa52b10d936abb71086fd9f0999401c"
+  },
+  "analysis_level": "quality_only",
+  "exclusions": [],
+  "attempted_candidate_ids_episode": [
+    "409dfad13970"
+  ],
+  "condition_applications": [
+    {
+      "actor": "deterministic_guard",
+      "change": {
+        "kind": "stability_bands",
+        "target_band_hz": [
+          3.0,
+          12.0
+        ],
+        "bands_hz": [
+          [
+            3.0,
+            12.0
+          ]
+        ]
+      },
+      "before": null,
+      "after": {
+        "schema": "seismic-execution-conditions/v1",
+        "question_id": "Q_usable",
+        "required_field": "method_applicability",
+        "scope": {
+          "scope_kind": "explicit_candidates",
+          "stations": [
+            "CHIMA"
+          ],
+          "candidate_ids": [
+            "409dfad13970"
+          ]
+        },
+        "method_goal": "three_component_pick",
+        "target_band_hz": [
+          1.0,
+          12.0
+        ],
+        "onset_method_band_hz": [
+          1.0,
+          8.0
+        ],
+        "diagnostic_bands_hz": [
+          [
+            3.0,
+            12.0
+          ]
+        ],
+        "acquisition_allowed": false,
+        "excluded_candidate_ids": [],
+        "max_unique_candidates_episode": 6,
+        "requested_changes": [
+          {
+            "kind": "stability_bands",
+            "target_band_hz": [
+              3.0,
+              12.0
+            ],
+            "bands_hz": [
+              [
+                3.0,
+                12.0
+              ]
+            ]
+          }
+        ],
+        "condition_id": "686f64a5c10d904cd7276988a5c86069aaa52b10d936abb71086fd9f0999401c"
+      },
+      "recomputed": 0,
+      "stale_evidence": [],
+      "source": "feedback_guard"
+    }
+  ],
+  "stability_checks": {},
+  "derived_evidence_checks": {},
+  "discovery": {
+    "n_eligible": 1,
+    "eligible": [
+      {
+        "candidate_id": "409dfad13970",
+        "network": "UW",
+        "station": "CHIMA",
+        "distance_km": null,
+        "family": "EN",
+        "analysis_eligible": true,
+        "three_component": true,
+        "vertical_only": false,
+        "band_support": {
+          "supported": true,
+          "sampling_rate_hz": 100.0,
+          "nyquist_hz": 50.0,
+          "target_band_hz": [
+            1.0,
+            12.0
+          ],
+          "required_rate_hz": 24.0,
+          "reason": "ok"
+        },
+        "reason": "满足目标条件"
+      }
+    ]
+  },
+  "acquired": [
+    {
+      "candidate_id": "409dfad13970",
+      "network": "UW",
+      "station": "CHIMA",
+      "distance_km": null,
+      "family": "EN",
+      "window_start": "2023-12-24T10:00:00",
+      "window_end": "2023-12-24T10:02:00",
+      "target_band_hz": [
+        1.0,
+        12.0
+      ],
+      "method_band_hz": [
+        1.0,
+        8.0
+      ],
+      "waveform_url": "https://service.earthscope.org/fdsnws/dataselect/1/query?net=UW&sta=CHIMA&loc=--&cha=EN%3F&start=2023-12-24T10%3A00%3A00&end=2023-12-24T10%3A02%3A00&format=miniseed&nodata=404",
+      "metadata_url": "https://service.earthscope.org/fdsnws/station/1/query?net=UW&sta=CHIMA&loc=--&cha=EN%3F&starttime=2023-12-24T10%3A00%3A00&endtime=2023-12-24T10%3A02%3A00&level=response&format=xml&nodata=404",
+      "parent_record_id": null,
+      "status": "analysed",
+      "acquisition_status": "ok",
+      "raw_waveform_sha256": "1670a2e99a5bb723dbe9ee2870ba716e430fe9e189919d429031fd67cb223f15",
+      "raw_metadata_sha256": "29787f0de6d42c5dde2f3ff546488d32fe07a888f88baee38c2d04cc37bd6025",
+      "waveform_sha256": "1670a2e99a5bb723dbe9ee2870ba716e430fe9e189919d429031fd67cb223f15",
+      "metadata_sha256": "29787f0de6d42c5dde2f3ff546488d32fe07a888f88baee38c2d04cc37bd6025",
+      "channels": [
+        "UW.CHIMA..ENE",
+        "UW.CHIMA..ENN",
+        "UW.CHIMA..ENZ"
+      ],
+      "gaps": 0,
+      "channel_integrity_flags": [],
+      "channel_integrity_ok": true,
+      "three_component_ok": true,
+      "vertical_ok": true,
+      "vertical_health": {
+        "ok": true,
+        "channels_present": [
+          "UW.CHIMA..ENZ"
+        ],
+        "channels_healthy": [
+          "UW.CHIMA..ENZ"
+        ],
+        "problems": {},
+        "problem_text": {}
+      },
+      "sampling_rate_hz": 100.0,
+      "band_support": {
+        "supported": true,
+        "sampling_rate_hz": 100.0,
+        "nyquist_hz": 50.0,
+        "target_band_hz": [
+          1.0,
+          12.0
+        ],
+        "required_rate_hz": 24.0,
+        "reason": "ok"
+      },
+      "method_applicability": {
+        "three_component_pick": true,
+        "vertical_onset": true
+      },
+      "method_applicability_goal": "three_component_pick",
+      "onset_utc": null,
+      "onset_computed": true,
+      "onset_source": "compute",
+      "stability": null,
+      "stability_computed": false,
+      "analysis_level": "quality_only",
+      "onset_condition_ref": "25c061dd27fdabf503810490f6ad57b60c7f784169ee0dd00d75beb76c0aa511",
+      "onset_band_hz": [
+        1.0,
+        8.0
+      ],
+      "stability_bands_hz": [
+        [
+          3.0,
+          12.0
+        ]
+      ]
+    }
+  ],
+  "requests": 0,
+  "http_attempts": 0,
+  "logical_acquisitions": 0,
+  "cache_hits": 0,
+  "bytes": 0,
+  "parent_run_id": "r-e2e8419bf299785d",
+  "follow_up": "把到时诊断网格收紧到 3–12 Hz，不要新增取数",
+  "change": {
+    "kind": "stability_bands",
+    "target_band_hz": [
+      3.0,
+      12.0
+    ],
+    "bands_hz": [
+      [
+        3.0,
+        12.0
+      ]
+    ]
+  },
+  "carried_forward": [
+    "409dfad13970"
+  ],
+  "rejudged_for_child_conditions": [],
+  "passed_forward": null,
+  "parent_history": {
+    "tool_errors": 0,
+    "tool_attempts": {
+      "task_status": {
+        "start": 2,
+        "ok": 2,
+        "error": 0
+      },
+      "list_candidates": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      },
+      "acquire_station": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      },
+      "get_evidence": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      },
+      "run_onset_check": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      },
+      "run_stability_check": {
+        "start": 1,
+        "ok": 1,
+        "error": 0
+      }
+    },
+    "requests": 2,
+    "failure_kind": null
+  }
+}

@@ -1,0 +1,379 @@
+{
+  "schema": "remediation-probe/v1",
+  "network_or_model_calls": 0,
+  "checks": {
+    "A_first_round_uses_optimization_driver": {
+      "pass": true,
+      "detail": {
+        "run_user_task": {
+          "prepare_task": {
+            "arm": "adaptive_agent_a1",
+            "analysis_level": "quality_only"
+          },
+          "execute": {
+            "driver_script": "agent_run_optimization.mjs",
+            "profile": "A1"
+          }
+        },
+        "run_one": {
+          "error": "OfflineMaterialMissing: 离线模式：材料缺失（discovery）——不联网补齐。URL：https://service.earthscope.org/fdsnws/station/1/query?starttime=2003-01-19T18%3A43%3A12.000000Z&endtime=2003-01-19T18%3A45%3A12.000000Z&level=channel&format=text&nodata=404&minlatitude=44.722&maxlatitude=45.922&minlongitude=-122.251&maxlongitude=-121.051"
+        }
+      }
+    },
+    "A_followup_inherits_parent_config": {
+      "pass": true,
+      "detail": {
+        "exclude": {
+          "prepare_followup": {
+            "parent_run_id": "parent-with-config",
+            "analysis_level": "quality_only"
+          },
+          "execute": {
+            "driver_script": "agent_run_optimization.mjs",
+            "profile": "A1"
+          }
+        },
+        "stability_bands": {
+          "prepare_followup": {
+            "parent_run_id": "parent-with-config",
+            "analysis_level": "quality_only"
+          },
+          "execute": {
+            "driver_script": "agent_run_optimization.mjs",
+            "profile": "A1"
+          }
+        },
+        "method_goal": {
+          "prepare_followup": {
+            "parent_run_id": "parent-with-config",
+            "analysis_level": "quality_only"
+          },
+          "execute": {
+            "driver_script": "agent_run_optimization.mjs",
+            "profile": "A1"
+          }
+        }
+      }
+    },
+    "B_followup_defaults_to_no_new_acquisition": {
+      "pass": true,
+      "detail": {
+        "child_acquisition_allowed_state": false,
+        "child_acquisition_allowed_task": false,
+        "child_requested_acquisition_allowed": false,
+        "prompt_says_no": false
+      }
+    },
+    "B_guard_refuses_before_http": {
+      "pass": true,
+      "detail": {
+        "allowed": false,
+        "refusal": {
+          "status": "refused",
+          "reason": "acquisition_not_allowed",
+          "detail": "用户本轮明确要求不新增取数；只能复用已有观测。",
+          "candidate_id": "some-new-candidate",
+          "http_issued": false
+        }
+      }
+    },
+    "B_ceiling_refuses_extra_candidate": {
+      "pass": true,
+      "detail": {
+        "ceiling": 3,
+        "global": 6,
+        "allowed": false,
+        "refusal": {
+          "status": "refused",
+          "reason": "candidate_ceiling",
+          "detail": "本轮独立候选尝试上限为 3，再加该候选会超出。",
+          "candidate_id": "a4",
+          "attempted": 4,
+          "ceiling": 3,
+          "http_issued": false
+        }
+      }
+    },
+    "B_explicit_scope_refuses_outside_candidate": {
+      "pass": true,
+      "detail": {
+        "allowed": false,
+        "refusal": {
+          "status": "refused",
+          "reason": "outside_scope",
+          "detail": "该候选不在用户明确指定的范围内。",
+          "candidate_id": "outside-id",
+          "http_issued": false
+        }
+      }
+    },
+    "B_chained_feedback_keeps_permission_and_parent": {
+      "pass": true,
+      "detail": {
+        "grandchild_acquisition_allowed": false,
+        "grandchild_attempts": [
+          "55881be1192c"
+        ],
+        "parent_state_unchanged": true
+      }
+    },
+    "B_stored_waveform_recompute_still_works": {
+      "pass": true,
+      "detail": {
+        "onset_computed": true,
+        "onset_utc": null,
+        "onset_source": "compute",
+        "condition_id": "b81d44bf6a034bb0c9194df0201c5c82f3a24bdf03e4735fc94e2c0e1098a3a5"
+      }
+    },
+    "B_server_keeps_normalized_change": {
+      "pass": true,
+      "detail": {
+        "normalized": {
+          "kind": "exclude",
+          "candidate_id": "55881be1192c",
+          "station": "CHIMA",
+          "reason": "用户要求排除该观测"
+        },
+        "sent": {
+          "status": 202,
+          "payload": {
+            "run_id": "720119d8ffc149438d15e1774cfb35cd",
+            "mode": "agent_feedback",
+            "parent_run_id": "r-ab5d401974765197",
+            "executed_by": "agent",
+            "acquisition_allowed": false,
+            "change": {
+              "kind": "exclude",
+              "candidate_id": "55881be1192c",
+              "station": "CHIMA",
+              "reason": "用户要求排除该观测"
+            }
+          },
+          "worker_seen": {
+            "parent_run_id": "r-ab5d401974765197",
+            "change": {
+              "kind": "exclude",
+              "candidate_id": "55881be1192c",
+              "station": "CHIMA",
+              "reason": "用户要求排除该观测"
+            },
+            "instruction": null
+          }
+        }
+      }
+    },
+    "C_uncomputed_onset_ref_rejected": {
+      "pass": true,
+      "detail": {
+        "accepted": false,
+        "origin": "fallback",
+        "checks": {
+          "conclusion_matches_validator": true,
+          "outcome_acceptable": true,
+          "field_matches": true,
+          "condition_matches": true,
+          "stop_basis_legal": true,
+          "scope_valid": true,
+          "evidence_refs_resolve": false,
+          "asked_field_settled": true
+        },
+        "evidence": {
+          "all_valid": false,
+          "resolved": [],
+          "unknown": [],
+          "stale": [],
+          "unverified": [
+            "onset:55881be1192c"
+          ],
+          "detail": "unverified=['onset:55881be1192c']"
+        }
+      }
+    },
+    "C_fabricated_scope_rejected": {
+      "pass": true,
+      "detail": {
+        "accepted": false,
+        "checks": {
+          "conclusion_matches_validator": true,
+          "outcome_acceptable": true,
+          "field_matches": true,
+          "condition_matches": true,
+          "stop_basis_legal": true,
+          "scope_valid": false,
+          "evidence_refs_resolve": false,
+          "asked_field_settled": true
+        }
+      }
+    },
+    "C_excluded_ref_rejected": {
+      "pass": true,
+      "detail": {
+        "all_valid": false,
+        "resolved": [],
+        "unknown": [],
+        "stale": [],
+        "unverified": [
+          "onset:55881be1192c"
+        ],
+        "detail": "unverified=['onset:55881be1192c']"
+      }
+    },
+    "C_missing_stop_code_not_backfilled": {
+      "pass": true,
+      "detail": {
+        "accepted": false,
+        "checks": {
+          "conclusion_matches_validator": true,
+          "outcome_acceptable": true,
+          "field_matches": true,
+          "condition_matches": true,
+          "stop_basis_legal": false,
+          "scope_valid": true,
+          "evidence_refs_resolve": false,
+          "asked_field_settled": true
+        }
+      }
+    },
+    "C_stop_basis_derived_from_facts": {
+      "pass": true,
+      "detail": {
+        "attempts": 3,
+        "cap": 3,
+        "before": {
+          "outcome": "legal_unknown",
+          "unmet": []
+        },
+        "after": {
+          "outcome": "legal_unknown",
+          "stop_basis": "resource_limited",
+          "can_finish": true
+        }
+      }
+    },
+    "C_empty_scope_correct_unknown": {
+      "pass": true,
+      "detail": {
+        "outcome": "legal_unknown",
+        "can_finish": true,
+        "stop_basis": "scope_exhausted",
+        "unmet": []
+      }
+    },
+    "C_unstarted_zero_acquisition_rejected": {
+      "pass": true,
+      "detail": {
+        "accepted": false,
+        "outcome": "strategy_insufficient",
+        "can_finish": false,
+        "stop_bases": [],
+        "scope": {
+          "declared": [],
+          "permitted": [],
+          "participating": [],
+          "excluded": [],
+          "remaining_acquirable": [
+            "55881be1192c"
+          ],
+          "remaining_detail": {
+            "scope_kind": "explicit_candidates",
+            "in_scope": 1,
+            "attempted_episode": 0,
+            "ceiling": 6,
+            "untried_in_scope": 1,
+            "reason": "in_scope_candidates_untried"
+          },
+          "valid": false,
+          "reason": "empty_scope_but_actions_remain"
+        },
+        "acceptance": {
+          "conclusion_matches_validator": true,
+          "outcome_acceptable": false,
+          "field_matches": true,
+          "condition_matches": true,
+          "stop_basis_legal": false,
+          "scope_valid": false,
+          "evidence_refs_resolve": true,
+          "asked_field_settled": false
+        }
+      }
+    },
+    "C_child_task_cap_matches_state": {
+      "pass": true,
+      "detail": {
+        "child_task_cap": 3,
+        "child_state_cap": 3,
+        "attempts": [
+          "55881be1192c",
+          "failed-2",
+          "failed-3"
+        ]
+      }
+    },
+    "D_watchdog_stops_only_owned_home": {
+      "pass": true,
+      "detail": {
+        "result": {
+          "run_id": "watchdog-run",
+          "stopped": true,
+          "detail": "stopped",
+          "agh_home": "/var/folders/34/4266s5xd2fv9h81rp2kzs79w0000gn/T/remediation-k_j6kayt/owned-home",
+          "owner_id": "owner-xyz",
+          "scope": "this run's recorded AGH_HOME only"
+        },
+        "cmd": "node /Users/baoxiaopai/Project/黑客松/codex/earthquake-validation/vendor/agnes-harness/packages/cli/dist/local/agnes.mjs daemon stop",
+        "agh_home": "/var/folders/34/4266s5xd2fv9h81rp2kzs79w0000gn/T/remediation-k_j6kayt/owned-home"
+      }
+    },
+    "D_watchdog_rejects_owner_run_mismatch": {
+      "pass": true,
+      "detail": {
+        "result": {
+          "stopped": false,
+          "reason": "runtime_owner_run_mismatch",
+          "run_id": "watchdog-mismatch",
+          "recorded_run_id": "some-other-run"
+        },
+        "stop_invoked": false
+      }
+    },
+    "D_cleanup_failure_not_success": {
+      "pass": true,
+      "detail": {
+        "status": "failed",
+        "failure_kind": "cleanup_failed",
+        "cleanup": {
+          "ok": false,
+          "needed": true,
+          "stop_confirmed": false,
+          "timed_out": null,
+          "owned_home": null,
+          "watchdog_stop": null
+        },
+        "resource_cleanup": {
+          "schema": "run-resource-cleanup/v1",
+          "run_id": "r-0540432ed5d96c0c",
+          "driver": "agent_run_optimization.mjs",
+          "profile": "A1",
+          "driver_status": "failed",
+          "stop_confirmed": false,
+          "cleanup_ok": false,
+          "cleanup_needed": true,
+          "timed_out": null,
+          "owned_home": null,
+          "root_removed": null,
+          "errors": [
+            "stop_daemon: injected failure"
+          ],
+          "log": [],
+          "watchdog_stop": null
+        }
+      }
+    }
+  },
+  "summary": {
+    "total": 20,
+    "passed": 20,
+    "failed": []
+  }
+}

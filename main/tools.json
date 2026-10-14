@@ -1,0 +1,57 @@
+{
+  "note": "单一事实来源：主线 MCP 工具面。provider_bridge.mjs（计费/白名单）、permission.mjs（权限授予）、agent_run.mjs（--allow-tool）与 mcp_server.py 都以本文件为准。新增工具只改这里，避免出现'模型看得见、白名单不认'的漂移。",
+  "candidate_scoped_note": "candidate_scoped=true 的工具只接受本次运行已发现候选中的 candidate_id。",
+  "tools": [
+    {
+      "name": "list_candidates",
+      "args": [{"name": "limit", "required": false, "type": "number",
+                "min": 1, "max": 40}],
+      "candidate_scoped": false,
+      "costs_requests": false,
+      "summary": "列出最近的候选台站。免费，不发请求。"
+    },
+    {
+      "name": "get_evidence",
+      "args": [],
+      "candidate_scoped": false,
+      "costs_requests": false,
+      "summary": "返回当前已取得的证据。免费，不发请求。"
+    },
+    {
+      "name": "acquire_station",
+      "args": [{"name": "candidate_id", "required": true, "type": "string"}],
+      "candidate_scoped": true,
+      "costs_requests": true,
+      "summary": "下载、哈希并校验一个台站观测。消耗两次真实外部请求。"
+    },
+    {
+      "name": "run_onset_check",
+      "args": [{"name": "candidate_id", "required": true, "type": "string"}],
+      "candidate_scoped": true,
+      "costs_requests": false,
+      "summary": "对已取得的台站重算首个 STA/LTA 到时。本地，不发请求。"
+    },
+    {
+      "name": "run_stability_check",
+      "args": [{"name": "candidate_id", "required": true, "type": "string"}],
+      "candidate_scoped": true,
+      "costs_requests": false,
+      "summary": "在预先固定的有限网格上检查该到时是否稳定。复用已存波形，不发请求，不读参考到时。"
+    },
+    {
+      "name": "task_status",
+      "args": [{"name": "stage", "required": false, "type": "string"}],
+      "candidate_scoped": false,
+      "costs_requests": false,
+      "summary": "报告本轮进度事实、剩余额度、公开义务与结束资格。免费，不发请求，不替模型执行缺失的检查。stage 只接受 progress 或 finish。"
+    },
+    {
+      "name": "exclude_observation",
+      "args": [{"name": "candidate_id", "required": true, "type": "string"},
+               {"name": "reason", "required": false, "type": "string"}],
+      "candidate_scoped": true,
+      "costs_requests": false,
+      "summary": "排除一条已取得的观测并重算所有依赖它的检查。本地，不发请求。"
+    }
+  ]
+}
